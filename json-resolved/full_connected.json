@@ -2,14 +2,10 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "These are OIC Integration APIs for Brewer Management",
-    "version" : "1.0.0",
-    "title" : "AMP VBCS Application",
+    "version" : "1.0.1",
+    "title" : "AMP OIC APIs",
     "contact" : {
-      "email" : "ramjeee.yerneni_ex@kdrp.com"
-    },
-    "license" : {
-      "name" : "Apache 2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "email" : "bryan.arndorfer_ex@kdrp.com"
     }
   },
   "host" : "virtserver.swaggerhub.com",
