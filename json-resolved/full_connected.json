@@ -555,7 +555,7 @@
     },
     "/ic/api/AMSSubmitinstallationrequest/1.0/submitInstallationRequest" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "SubmitInstallationRequest" ],
         "summary" : "submitInstallationRequest",
         "description" : "submitInstallationRequest",
         "operationId" : "submitInstallationRequest",
