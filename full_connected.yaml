@@ -1,1494 +1,2134 @@
-swagger: '2.0'
-info:
-  description: These are OIC Integration APIs for Brewer Management
-  version: 1.0.0
-  title: AMP VBCS Application
-  # put the contact info for your development or API team
-  contact:
-    email: ramjeee.yerneni_ex@kdrp.com
-
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-
-# tags are used for organizing operations
-tags:
-- name: User Management
-  description: Integration name AMSUserlist - get, update, reset Password, deactivate user operations
-- name: Brewer Management
-  description: Operations available to regular developers
-- name: Account Management
-  description: Integration name AMSGetkadaccountnamefilter get
-- name: Consumption and Alerts
-  description: Integration covering alters functionalities
-- name: Dashboard
-  description: Integration covering Dashboard APIs
-- name: File Management
-  description: Integration covering File Management
-- name: Media Management
-  description: Integration covering Media Management
-- name: Install
-  description: Integration covering brewer installation related API's
-
-paths:
-  /ic/api/AMSUserlist/1.0/processUserRequest:
-    get:
-      tags:
-      - User Management
-      summary: get User List
-      operationId: getUserList
-      description: |
-        By passing in the appropriate options, you can search for
-        available user lsit in the system
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: KADAccountId
-        description: pass an optional KADAccountId string for looking up user
-        required: false
-        type: string
-      - in: query
-        name: UserId
-        description: pass an optional UserId string for looking up user
-        required: false
-        type: string
-      responses:
-        200:
-          description: search results matching criteria
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserList'
-        400:
-          description: bad input parameter
-    post:
-      tags:
-      - User Management
-      summary: resetPassword
-      operationId: resetPassword
-      description: Reset password for user
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: UserList
-        description: user object for reset password
-        schema:
-          $ref: '#/definitions/UserList'
-      responses:
-        200:
-          description: results for reset password
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-    patch:
-      tags:
-      - User Management
-      summary: updateUser
-      operationId: updateUser
-      description: updates for user
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: UserList
-        description: user object for update
-        schema:
-          $ref: '#/definitions/UserList'
-      responses:
-        200:
-          description: results for update user
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-    delete:
-      tags:
-      - User Management
-      summary: deactivateUser
-      operationId: deactivateUser
-      description: deactivate user
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: UserList
-        description: user object for deactivating
-        schema:
-          $ref: '#/definitions/UserList'
-      responses:
-        200:
-          description: results for deactivating user
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetPlacementLocListFilter/1.0/getPlacementLocListFilter:
-    get:
-      tags:
-      - Brewer Management
-      summary: getPlacementLocListFilter
-      operationId: getPlacementLocListFilter
-      description: |
-        By passing in the appropriate options, you can search for
-        available result in the system
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: PlacementLocationName
-        description: pass an optional PlacementLocationName string
-        required: false
-        type: string
-      responses:
-        200:
-          description: search results matching criteria
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/LocationList'
-        400:
-          description: bad input parameter
-  /ic/api/AMSGetBusinessAccountListFilter/1.0/getBusinessAccountListFilter:
-    get:
-      tags:
-      - Brewer Management
-      summary: getBusinessAccountListFilter
-      operationId: getBusinessAccountListFilter
-      description: |
-        By passing in the appropriate options, you can search for
-        available result in the system
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: PartnerId
-        description: pass an optional PartnerId string
-        required: false
-        type: string
-      - in: query
-        name: BusinessAccountName
-        description: pass an optional BusinessAccountName string
-        required: false
-        type: string
-      responses:
-        200:
-          description: search results matching criteria
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/AccountList'
-        400:
-          description: bad input parameter
-  /ic/api/AMSGetalertConsumptioncounts/1.0/getAlertConsumptionCounts:
-    get:
-      tags:
-      - Brewer Management
-      summary: getAlertConsumptionCounts
-      operationId: getAlertConsumptionCounts
-      description: |
-        By passing in the appropriate options, you can search for
-        available result in the system
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: AlertName
-        description: pass an optional AlertName string
-        required: false
-        type: string
-      responses:
-        200:
-          description: search results matching criteria
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Alerts'
-        400:
-          description: bad input parameter
-  /ic/api/AMSGetbrewerdetail/1.0/getBrewerDetail:
-    get:
-      tags:
-      - Brewer Management
-      summary: getBrewerDetail
-      operationId: getBrewerDetail
-      description: |
-        By passing in the appropriate options, you can search for
-        available result in the system
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: DeviceId
-        description: pass an optional DeviceId string
-        required: false
-        type: string
-      - in: query
-        name: SerialNumber
-        description: pass an optional DeviceId string
-        required: false
-        type: string
-      responses:
-        200:
-          description: search results matching criteria
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerDetailsList'
-        400:
-          description: bad input parameter
-  /ic/api/AMSGetbrewerlist/1.0/getBrewerList:
-    post:
-      tags:
-      - Brewer Management
-      summary: getBrewerList
-      operationId: getBrewerList
-      description: getBrewerList
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: UserList
-        description: get Brewer details list filter parameters
-        schema:
-          $ref: '#/definitions/BrewerDetailsList'
-      responses:
-        200:
-          description: results for get brewer list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetbusinessaccountcontact/1.0/getBusinessAccountContact:
-    get:
-      tags:
-      - Install
-      summary: getBusinessAccountContact
-      operationId: getBusinessAccountContact
-      description: getBusinessAccountContact
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: BusinessAccountId
-        description: pass an optional BusinessAccountId string for looking up user
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get brewer list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/AccountList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetbrewerdetailinstall/1.0/getBrewerDetailInstall:
-    get:
-      tags:
-      - Install
-      summary: getBrewerDetailInstall
-      operationId: getBrewerDetailInstall
-      description: getBrewerDetailInstall
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: SerialNumber
-        description: pass an optional SerialNumber string for looking up user
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get brewer installation details list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetuserorglist/1.0/getUserOrgList:
-    get:
-      tags:
-      - Install
-      summary: getUserOrgList
-      operationId: getUserOrgList
-      description: getUserOrgList
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: UserId
-        description: pass an optional UserId string for looking up user
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get user list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSCreateofficeaccount/1.0/createOfficeAccount:
-    post:
-      tags:
-      - Install
-      summary: createOfficeAccount
-      operationId: createOfficeAccount
-      description: createOfficeAccount
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: AccountList
-        description: create office account 
-        schema:
-          $ref: '#/definitions/AccountList'
-      responses:
-        200:
-          description: results for create office account
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/AccountList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetbrewerlocationlist/1.0/getBrewerLocationList:
-    get:
-      tags:
-      - Install
-      summary: getBrewerLocationList
-      operationId: getBrewerLocationList
-      description: getBrewerLocationList
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: BrewerDetailsList
-        description: get Brewer location details list filter parameters
-        schema:
-          $ref: '#/definitions/BrewerDetailsList'
-      responses:
-        200:
-          description: results for get brewer location list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSUpdatebrewer/1.0/updateBrewer:
-    patch:
-      tags:
-      - Install
-      summary: updateBrewer
-      operationId: updateBrewer
-      description: updateBrewer
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: BrewerDetailsList
-        description: update Brewer details parameters
-        schema:
-          $ref: '#/definitions/BrewerDetailsList'
-      responses:
-        200:
-          description: results for update brewer
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerResponseDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSSubmitinstallationrequest/1.0/submitInstallationRequest:
-    post:
-      tags:
-      - Install
-      summary: submitInstallationRequest
-      operationId: submitInstallationRequest
-      description: submitInstallationRequest
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: BrewerDetailsList
-        description: submit Brewer installation request parameters
-        schema:
-          $ref: '#/definitions/BrewerDetailsList'
-      responses:
-        200:
-          description: results for install brewer request
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSCreateuser/1.0/createUser:
-    post:
-      tags:
-      - Install
-      summary: createUser
-      operationId: createUser
-      description: createUser
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: UserList
-        description: create user  parameters
-        schema:
-          $ref: '#/definitions/UserList'
-      responses:
-        200:
-          description: results for create user 
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSUninstallbrewer/1.0/uninstallBrewer:
-    post:
-      tags:
-      - Install
-      summary: uninstallBrewer
-      operationId: uninstallBrewer
-      description: uninstallBrewer
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: BrewerDetailsList
-        description: uninstall Brewer parameters
-        schema:
-          $ref: '#/definitions/BrewerDetailsList'
-      responses:
-        200:
-          description: results for uninstall Brewerlist
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerResponseDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetmasterbrandlovs/1.0/getMasterBrandLOVs:
-    get:
-      tags:
-      - Consumption and Alerts
-      summary: getMasterBrandLOVs
-      operationId: getMasterBrandLOVs
-      description: getMasterBrandLOVs
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: MasterBrandName
-        description: pass an optional MasterBrandName string for looking up brand
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get brand list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Brands'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetbrandlovs/1.0/getBrandLOVs:
-    get:
-      tags:
-      - Consumption and Alerts
-      summary: getBrandLOVs
-      operationId: getBrandLOVs
-      description: getBrandLOVs
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: MasterBrandName
-        description: pass an optional MasterBrandName string for looking up brand
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get brand list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Brands'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetvarietyfilter/1.0/getVarietyFilter:
-    get:
-      tags:
-      - Consumption and Alerts
-      summary: getVarietyFilter
-      operationId: getVarietyFilter
-      description: getVarietyFilter
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: variety
-        description: pass an optional variety string for looking up user
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get variety list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Variety'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetalertnamefilter/1.0/getAlertNameFilter:
-    get:
-      tags:
-      - Consumption and Alerts
-      summary: getAlertNameFilter
-      operationId: getAlertNameFilter
-      description: getAlertNameFilter
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: AlertName
-        description: pass an optional AlertName string for looking up Alerts
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get alert list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Alerts'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetalertlist/1.0/getAlertList:
-    get:
-      tags:
-      - Consumption and Alerts
-      summary: getAlertList
-      operationId: getAlertList
-      description: getAlertList
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: AlertName
-        description: pass an optional AlertName string for looking up alerts
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get alert List
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Alerts'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSExportalerts/1.0/exportAlerts:
-    post:
-      tags:
-      - Consumption and Alerts
-      summary: exportAlerts
-      operationId: exportAlerts
-      description: exportAlerts
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: Alerts
-        description: Export Alerts 
-        schema:
-          $ref: '#/definitions/Alerts'
-      responses:
-        200:
-          description: results for export of alerts
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Alerts'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetmediapldetail/1.0/getMediaPLDetail:
-    get:
-      tags:
-      - Media Management
-      summary: getMediaPLDetail
-      operationId: getMediaPLDetail
-      description: getMediaPLDetail
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: MediaId
-        description: pass an optional MediaId string for looking up Media
-        required: false
-        type: string
-      - in: query
-        name: KADAccountId
-        description: pass an optional KADAccountId string for looking up Media
-        required: false
-        type: string
-      - in: query
-        name: BusinessAccountId
-        description: pass an optional BusinessAccountId string for looking up Media
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get Media list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Media'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetmediapllist/1.0/getMediaPLList:
-    get:
-      tags:
-      - Media Management
-      summary: getMediaPLList
-      operationId: getMediaPLList
-      description: getMediaPLList
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: MediaId
-        description: pass an optional MediaId string for looking up Media
-        required: false
-        type: string
-      - in: query
-        name: KADAccountId
-        description: pass an optional KADAccountId string for looking up Media
-        required: false
-        type: string
-      - in: query
-        name: BusinessAccountId
-        description: pass an optional BusinessAccountId string for looking up Media
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for get Media list
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Media'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSCreatemediaplaylist/1.0/createMediaPlayList:
-    post:
-      tags:
-      - Media Management
-      summary: createMediaPlayList
-      operationId: createMediaPlayList
-      description: createMediaPlayList
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: Media
-        description: create Media playlist
-        schema:
-          $ref: '#/definitions/Media'
-      responses:
-        200:
-          description: results for creation of media playlist
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Media'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSPublishmedia/1.0/publishMedia:
-    post:
-      tags:
-      - Media Management
-      summary: publishMedia
-      operationId: publishMedia
-      description: publishMedia
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: Media
-        description: Publish Media 
-        schema:
-          $ref: '#/definitions/Media'
-      responses:
-        200:
-          description: results for publish of media
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Media'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSUnpublishmedia/1.0/unpublishMedia:
-    post:
-      tags:
-      - Media Management
-      summary: unpublishMedia
-      operationId: unpublishMedia
-      description: unpublishMedia
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: Media
-        description: unpublish Media
-        schema:
-          $ref: '#/definitions/Media'
-      responses:
-        200:
-          description: results for unpublish of media
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Media'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetalertcountsbycriticality/1.0/getAlertCountsByCriticality:
-    get:
-      tags:
-      - Dashboard
-      summary: getAlertCountsByCriticality
-      operationId: getAlertCountsByCriticality
-      description: getAlertCountsByCriticality
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: AlertName
-        description: pass an optional AlertName string for getting count by Criticality
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for getting count by criticality
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Alerts'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetbrewerstatistics/1.0/getbrewerStatistics:
-    post:
-      tags:
-      - Dashboard
-      summary: getbrewerStatistics
-      operationId: getbrewerStatistics
-      description: getbrewerStatistics
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: Media
-        description: getbrewerStatistics
-        schema:
-          $ref: '#/definitions/BrewerDetailsList'
-      responses:
-        200:
-          description: results for getting brewer details statistic
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetaccountsbyconsumption/1.0/getAccountsByConsumption:
-    post:
-      tags:
-      - Dashboard
-      summary: getAccountsByConsumption
-      operationId: getAccountsByConsumption
-      description: getAccountsByConsumption
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: Media
-        description: get Accounts by Consumption
-        schema:
-          $ref: '#/definitions/AccountList'
-      responses:
-        200:
-          description: results for get account by consumption
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/AccountList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetavgbrewers&Consumption/1.0/getavgBrewersConsumption:
-    post:
-      tags:
-      - Dashboard
-      summary: getavgBrewersConsumption
-      operationId: getavgBrewersConsumption
-      description: getavgBrewersConsumption
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: Media
-        description: get Avg Brewers Consumption
-        schema:
-          $ref: '#/definitions/BrewerDetailsList'
-      responses:
-        200:
-          description: results get Avg Brewers Consumption
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BrewerDetailsList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetnotificationscount/1.0/getNotificationsCount:
-    get:
-      tags:
-      - Dashboard
-      summary: getNotificationsCount
-      operationId: getNotificationsCount
-      description: getNotificationsCount
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: AlertName
-        description: pass an optional AlertName string for getting Notification count
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for getting notification count
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Alerts'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-  /ic/api/AMSGetkadaccountnamefilter/1.0/getKADAccountNameFilter:
-    get:
-      tags:
-      - Account Management
-      summary: getKADAccountNameFilter
-      operationId: getKADAccountNameFilter
-      description: getKADAccountNameFilter
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: query
-        name: KADAccountName
-        description: pass an optional KADAccountName string for getting KAD account list based on account name
-        required: false
-        type: string
-      responses:
-        200:
-          description: results for getting KAD account list based on account name
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/AccountList'
-        400:
-          description: invalid input, object invalid
-        409:
-          description: an existing item already exists
-definitions:
-  BrewerDetailsList:
-    type: object
-    required:
-      - SerialNumber
-      - DeviceType
-      - PlacementLocation
-      - Status
-      - KADBusinessAccount
-      - RegistrationApprovalStatus
-      - RegistrationDate
-      - deviceId
-      - AssetId
-      - WarrantyEndDate
-      - Model
-      - Firmware
-      - BrewCount
-      - NetworkConnection
-      - BrewerPartnerId
-      - ContactId
-    properties:
-      SerialNumber:
-        type: string
-        format: uuid
-        example: abc
-      DeviceType:
-        type: string
-        format: uuid
-        example: abc
-      PlacementLocation:
-        type: string
-        format: uuid
-        example: abc
-      Status:
-        type: string
-        format: uuid
-        example: abc
-      KABBusinessAccount:
-        type: string
-        format: uuid
-        example: abc
-      RegistrationApprovalStatus:
-        type: string
-        format: uuid
-        example: abc
-      RegistrationDate:
-        type: string
-        format: uuid
-        example: abc
-      deviceId:
-        type: string
-        format: uuid
-        example: abc
-      AssetId:
-        type: string
-        format: uuid
-        example: abc
-      WarrantyEndDate:
-        type: string
-        format: date-time
-        example: 2016-08-29T09:12:33.001Z
-      Model:
-        type: string
-        format: uuid
-        example: abc
-      Firmware:
-        type: string
-        format: uuid
-        example: abc
-      BrewCount:
-        type: string
-        format: uuid
-        example: abc
-      NetworkConnection:
-        type: string
-        format: uuid
-        example: abc
-      BrewerPartnerId:
-        type: string
-        format: uuid
-        example: abc
-      ContactId:
-        type: string
-        format: uuid
-        example: abc
-  BrewerResponseDetailsList:
-    type: object
-    required:
-      - Status
-      - ErrroCode
-      - ErrorDescription
-      - SerialNumber
-      - DeviceType
-      - PlacementLocation
-      - KADBusinessAccount
-      - RegistrationApprovalStatus
-      - RegistrationDate
-      - deviceId
-      - AssetId
-      - WarrantyEndDate
-      - Model
-      - Firmware
-      - BrewCount
-      - NetworkConnection
-      - BrewerPartnerId
-      - ContactId
-    properties:
-      Status:
-        type: string
-        format: uuid
-        example: abc
-      ErrroCode:
-        type: string
-        format: uuid
-        example: abc
-      ErrorDescription:
-        type: string
-        format: uuid
-        example: abc
-      SerialNumber:
-        type: string
-        format: uuid
-        example: abc
-      DeviceType:
-        type: string
-        format: uuid
-        example: abc
-      PlacementLocation:
-        type: string
-        format: uuid
-        example: abc
-      KABBusinessAccount:
-        type: string
-        format: uuid
-        example: abc
-      RegistrationApprovalStatus:
-        type: string
-        format: uuid
-        example: abc
-      RegistrationDate:
-        type: string
-        format: uuid
-        example: abc
-      deviceId:
-        type: string
-        format: uuid
-        example: abc
-      AssetId:
-        type: string
-        format: uuid
-        example: abc
-      WarrantyEndDate:
-        type: string
-        format: date-time
-        example: 2016-08-29T09:12:33.001Z
-      Model:
-        type: string
-        format: uuid
-        example: abc
-      Firmware:
-        type: string
-        format: uuid
-        example: abc
-      BrewCount:
-        type: string
-        format: uuid
-        example: abc
-      NetworkConnection:
-        type: string
-        format: uuid
-        example: abc
-      BrewerPartnerId:
-        type: string
-        format: uuid
-        example: abc
-      ContactId:
-        type: string
-        format: uuid
-        example: abc
-  UserList:
-    type: object
-    required:
-      - FirstName
-      - LastName
-      - UserId
-      - EmailAddress
-      - Status
-      - ErrorCode
-      - ErrorMessage
-      - PartnerID
-      - PartnerName
-    properties:
-      FirstName:
-        type: string
-        format: uuid
-        example: abc
-      LastName:
-        type: string
-        format: uuid
-        example: abc
-      UserId:
-        type: string
-        format: uuid
-        example: abc
-      EmailAddress:
-        type: string
-        format: uuid
-        example: abc
-      Status:
-        type: string
-        format: SUCCESS
-        example: abc
-      ErrorCode:
-        type: string
-        format: uuid
-        example: abc
-      ErrorMessage:
-        type: string
-        format: uuid
-        example: abc
-      PartnerID:
-        type: string
-        format: uuid
-        example: abc
-      PartnerName:
-        type: string
-        format: uuid
-        example: abc
-  AccountList:
-    type: object
-    required:
-      - BusinessAccountId
-      - BusinessAccountName
-      - KADAccountName
-      - FirstName
-      - LastName
-      - EmailAddress
-      - KADAccountId
-      - PrimaryContactId
-      - PrimaryContactName
-      - ListOfContact
-      - SerialNumber
-      - ContactId
-      - BusinessId
-      - PartnerId
-    properties:
-      BusinessAccountId:
-        type: string
-        format: uuid
-        example: abc
-      BusinessAccountName:
-        type: string
-        format: uuid
-        example: abc
-      KADAccountName:
-        type: string
-        format: uuid
-        example: abc
-      FirstName:
-        type: string
-        format: uuid
-        example: abc
-      LastName:
-        type: string
-        format: uuid
-        example: abc
-      EmailAddress:
-        type: string
-        format: uuid
-        example: abc
-      KADAccountId:
-        type: string
-        format: uuid
-        example: abc
-      PrimaryContactId:
-        type: string
-        format: uuid
-        example: abc
-      PrimaryContactName:
-        type: string
-        format: uuid
-        example: abc
-      ListOfContact:
-        type: string
-        format: date-time
-        example: 2016-08-29T09:12:33.001Z
-      SerialNumber:
-        type: string
-        format: uuid
-        example: abc
-      ContactId:
-        type: string
-        format: uuid
-        example: abc
-      BusinessId:
-        type: string
-        format: uuid
-        example: abc
-      PartnerId:
-        type: string
-        format: uuid
-        example: abc
-  Media:
-    type: object
-    required:
-      - Image
-      - Title
-      - Description
-      - Type
-      - Status
-      - ErrorCode
-      - ErrorDescription
-      - NumberofBrewer
-      - LastModified
-      - MediaId
-      - KADAccountId
-      - BusinessAccountId
-      - SerialNumList
-    properties:
-      Image:
-        type: string
-        format: uuid
-        example: abc
-      Title:
-        type: string
-        format: uuid
-        example: abc
-      Description:
-        type: string
-        format: uuid
-        example: abc
-      Type:
-        type: string
-        format: uuid
-        example: abc
-      Status:
-        type: string
-        format: uuid
-        example: abc
-      ErrorCode:
-        type: string
-        format: uuid
-        example: abc
-      ErrorDescription:
-        type: string
-        format: uuid
-        example: abc
-      NumberofBrewer:
-        type: string
-        format: uuid
-        example: abc
-      LastModified:
-        type: string
-        format: uuid
-        example: abc
-      MediaId:
-        type: string
-        format: date-time
-        example: 2016-08-29T09:12:33.001Z
-      KADAccountId:
-        type: string
-        format: uuid
-        example: abc
-      BusinessAccountId:
-        type: string
-        format: uuid
-        example: abc
-      SerialNumList:
-        type: string
-        format: uuid
-        example: abc
-  Brands:
-    type: object
-    required:
-      - MasterBrandName
-      - BrandName
-    properties:
-      MasterBrandName:
-        type: string
-        format: uuid
-        example: abc
-      BrandName:
-        type: string
-        format: uuid
-        example: abc
-  Alerts:
-    type: object
-    required:
-      - AlertName
-      - AlertType
-      - Description
-      - Severity
-      - Date
-      - KADAccount
-      - BusinessAccount
-      - SerialNumber
-      - Count
-    properties:
-      AlertName:
-        type: string
-        format: uuid
-        example: abc
-      AlertType:
-        type: string
-        format: uuid
-        example: abc
-      Description:
-        type: string
-        format: uuid
-        example: abc
-      Severity:
-        type: string
-        format: uuid
-        example: abc
-      Date:
-        type: string
-        format: uuid
-        example: abc
-      KADAccount:
-        type: string
-        format: uuid
-        example: abc
-      BusinessAccount:
-        type: string
-        format: uuid
-        example: abc
-      SerialNumber:
-        type: string
-        format: uuid
-        example: abc
-      Count:
-        type: string
-        format: uuid
-        example: abc
-  Variety:
-    type: object
-    required:
-      - VarietyName
-    properties:
-      VarietyName:
-        type: string
-        format: uuid
-        example: abc
-  LocationList:
-    type: object
-    required:
-      - PlacementLocationName
-    properties:
-      PlacementLocationName:
-        type: string
-        format: uuid
-        example: abc
-# Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-# basePath: /ApexIT/BrewerManagement/1.0.0
-schemes:
- - https
-# Added by API Auto Mocking Plugin
-basePath: /barndorfer/install/1.0.0
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "These are OIC Integration APIs for Brewer Management",
+    "version": "1.0.0",
+    "title": "AMP VBCS Application",
+    "contact": {
+      "email": "ramjeee.yerneni_ex@kdrp.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/barndorfer/install/1.0.0",
+  "tags": [
+    {
+      "name": "User Management",
+      "description": "Integration name AMSUserlist - get, update, reset Password, deactivate user operations"
+    },
+    {
+      "name": "Brewer Management",
+      "description": "Operations available to regular developers"
+    },
+    {
+      "name": "Account Management",
+      "description": "Integration name AMSGetkadaccountnamefilter get"
+    },
+    {
+      "name": "Consumption and Alerts",
+      "description": "Integration covering alters functionalities"
+    },
+    {
+      "name": "Dashboard",
+      "description": "Integration covering Dashboard APIs"
+    },
+    {
+      "name": "File Management",
+      "description": "Integration covering File Management"
+    },
+    {
+      "name": "Media Management",
+      "description": "Integration covering Media Management"
+    },
+    {
+      "name": "Install",
+      "description": "Integration covering brewer installation related API's"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/ic/api/AMSUserlist/1.0/processUserRequest": {
+      "get": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "get User List",
+        "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
+        "operationId": "getUserList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KADAccountId",
+            "in": "query",
+            "description": "pass an optional KADAccountId string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "UserId",
+            "in": "query",
+            "description": "pass an optional UserId string for looking up user",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserList"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "resetPassword",
+        "description": "Reset password for user",
+        "operationId": "resetPassword",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "UserList",
+            "description": "user object for reset password",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for reset password",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "deactivateUser",
+        "description": "deactivate user",
+        "operationId": "deactivateUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "UserList",
+            "description": "user object for deactivating",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for deactivating user",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "updateUser",
+        "description": "updates for user",
+        "operationId": "updateUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "UserList",
+            "description": "user object for update",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for update user",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetPlacementLocListFilter/1.0/getPlacementLocListFilter": {
+      "get": {
+        "tags": [
+          "Brewer Management"
+        ],
+        "summary": "getPlacementLocListFilter",
+        "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
+        "operationId": "getPlacementLocListFilter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "PlacementLocationName",
+            "in": "query",
+            "description": "pass an optional PlacementLocationName string",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LocationList"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetBusinessAccountListFilter/1.0/getBusinessAccountListFilter": {
+      "get": {
+        "tags": [
+          "Brewer Management"
+        ],
+        "summary": "getBusinessAccountListFilter",
+        "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
+        "operationId": "getBusinessAccountListFilter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "PartnerId",
+            "in": "query",
+            "description": "pass an optional PartnerId string",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "BusinessAccountName",
+            "in": "query",
+            "description": "pass an optional BusinessAccountName string",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetalertConsumptioncounts/1.0/getAlertConsumptionCounts": {
+      "get": {
+        "tags": [
+          "Brewer Management"
+        ],
+        "summary": "getAlertConsumptionCounts",
+        "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
+        "operationId": "getAlertConsumptionCounts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "AlertName",
+            "in": "query",
+            "description": "pass an optional AlertName string",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Alerts"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetbrewerdetail/1.0/getBrewerDetail": {
+      "get": {
+        "tags": [
+          "Brewer Management"
+        ],
+        "summary": "getBrewerDetail",
+        "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
+        "operationId": "getBrewerDetail",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "DeviceId",
+            "in": "query",
+            "description": "pass an optional DeviceId string",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "SerialNumber",
+            "in": "query",
+            "description": "pass an optional DeviceId string",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetbrewerlist/1.0/getBrewerList": {
+      "post": {
+        "tags": [
+          "Brewer Management"
+        ],
+        "summary": "getBrewerList",
+        "description": "getBrewerList",
+        "operationId": "getBrewerList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "UserList",
+            "description": "get Brewer details list filter parameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get brewer list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetbusinessaccountcontact/1.0/getBusinessAccountContact": {
+      "get": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "getBusinessAccountContact",
+        "description": "getBusinessAccountContact",
+        "operationId": "getBusinessAccountContact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "BusinessAccountId",
+            "in": "query",
+            "description": "pass an optional BusinessAccountId string for looking up user",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get brewer list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetbrewerdetailinstall/1.0/getBrewerDetailInstall": {
+      "get": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "getBrewerDetailInstall",
+        "description": "getBrewerDetailInstall",
+        "operationId": "getBrewerDetailInstall",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "SerialNumber",
+            "in": "query",
+            "description": "pass an optional SerialNumber string for looking up user",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get brewer installation details list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetuserorglist/1.0/getUserOrgList": {
+      "get": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "getUserOrgList",
+        "description": "getUserOrgList",
+        "operationId": "getUserOrgList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "description": "pass an optional UserId string for looking up user",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get user list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSCreateofficeaccount/1.0/createOfficeAccount": {
+      "post": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "createOfficeAccount",
+        "description": "createOfficeAccount",
+        "operationId": "createOfficeAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "AccountList",
+            "description": "create office account",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for create office account",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetbrewerlocationlist/1.0/getBrewerLocationList": {
+      "get": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "getBrewerLocationList",
+        "description": "getBrewerLocationList",
+        "operationId": "getBrewerLocationList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "BrewerDetailsList",
+            "description": "get Brewer location details list filter parameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get brewer location list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSUpdatebrewer/1.0/updateBrewer": {
+      "patch": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "updateBrewer",
+        "description": "updateBrewer",
+        "operationId": "updateBrewer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "BrewerDetailsList",
+            "description": "update Brewer details parameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for update brewer",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerResponseDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSSubmitinstallationrequest/1.0/submitInstallationRequest": {
+      "post": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "submitInstallationRequest",
+        "description": "submitInstallationRequest",
+        "operationId": "submitInstallationRequest",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "BrewerDetailsList",
+            "description": "submit Brewer installation request parameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for install brewer request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSCreateuser/1.0/createUser": {
+      "post": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "createUser",
+        "description": "createUser",
+        "operationId": "createUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "UserList",
+            "description": "create user  parameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for create user",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSUninstallbrewer/1.0/uninstallBrewer": {
+      "post": {
+        "tags": [
+          "Install"
+        ],
+        "summary": "uninstallBrewer",
+        "description": "uninstallBrewer",
+        "operationId": "uninstallBrewer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "BrewerDetailsList",
+            "description": "uninstall Brewer parameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for uninstall Brewerlist",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerResponseDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetmasterbrandlovs/1.0/getMasterBrandLOVs": {
+      "get": {
+        "tags": [
+          "Consumption and Alerts"
+        ],
+        "summary": "getMasterBrandLOVs",
+        "description": "getMasterBrandLOVs",
+        "operationId": "getMasterBrandLOVs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "MasterBrandName",
+            "in": "query",
+            "description": "pass an optional MasterBrandName string for looking up brand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get brand list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Brands"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetbrandlovs/1.0/getBrandLOVs": {
+      "get": {
+        "tags": [
+          "Consumption and Alerts"
+        ],
+        "summary": "getBrandLOVs",
+        "description": "getBrandLOVs",
+        "operationId": "getBrandLOVs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "MasterBrandName",
+            "in": "query",
+            "description": "pass an optional MasterBrandName string for looking up brand",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get brand list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Brands"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetvarietyfilter/1.0/getVarietyFilter": {
+      "get": {
+        "tags": [
+          "Consumption and Alerts"
+        ],
+        "summary": "getVarietyFilter",
+        "description": "getVarietyFilter",
+        "operationId": "getVarietyFilter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "variety",
+            "in": "query",
+            "description": "pass an optional variety string for looking up user",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get variety list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Variety"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetalertnamefilter/1.0/getAlertNameFilter": {
+      "get": {
+        "tags": [
+          "Consumption and Alerts"
+        ],
+        "summary": "getAlertNameFilter",
+        "description": "getAlertNameFilter",
+        "operationId": "getAlertNameFilter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "AlertName",
+            "in": "query",
+            "description": "pass an optional AlertName string for looking up Alerts",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get alert list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Alerts"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetalertlist/1.0/getAlertList": {
+      "get": {
+        "tags": [
+          "Consumption and Alerts"
+        ],
+        "summary": "getAlertList",
+        "description": "getAlertList",
+        "operationId": "getAlertList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "AlertName",
+            "in": "query",
+            "description": "pass an optional AlertName string for looking up alerts",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get alert List",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Alerts"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSExportalerts/1.0/exportAlerts": {
+      "post": {
+        "tags": [
+          "Consumption and Alerts"
+        ],
+        "summary": "exportAlerts",
+        "description": "exportAlerts",
+        "operationId": "exportAlerts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Alerts",
+            "description": "Export Alerts",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Alerts"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for export of alerts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Alerts"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetmediapldetail/1.0/getMediaPLDetail": {
+      "get": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "getMediaPLDetail",
+        "description": "getMediaPLDetail",
+        "operationId": "getMediaPLDetail",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "MediaId",
+            "in": "query",
+            "description": "pass an optional MediaId string for looking up Media",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "KADAccountId",
+            "in": "query",
+            "description": "pass an optional KADAccountId string for looking up Media",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "BusinessAccountId",
+            "in": "query",
+            "description": "pass an optional BusinessAccountId string for looking up Media",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get Media list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Media"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetmediapllist/1.0/getMediaPLList": {
+      "get": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "getMediaPLList",
+        "description": "getMediaPLList",
+        "operationId": "getMediaPLList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "MediaId",
+            "in": "query",
+            "description": "pass an optional MediaId string for looking up Media",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "KADAccountId",
+            "in": "query",
+            "description": "pass an optional KADAccountId string for looking up Media",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "BusinessAccountId",
+            "in": "query",
+            "description": "pass an optional BusinessAccountId string for looking up Media",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get Media list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Media"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSCreatemediaplaylist/1.0/createMediaPlayList": {
+      "post": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "createMediaPlayList",
+        "description": "createMediaPlayList",
+        "operationId": "createMediaPlayList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Media",
+            "description": "create Media playlist",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Media"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for creation of media playlist",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Media"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSPublishmedia/1.0/publishMedia": {
+      "post": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "publishMedia",
+        "description": "publishMedia",
+        "operationId": "publishMedia",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Media",
+            "description": "Publish Media",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Media"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for publish of media",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Media"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSUnpublishmedia/1.0/unpublishMedia": {
+      "post": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "unpublishMedia",
+        "description": "unpublishMedia",
+        "operationId": "unpublishMedia",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Media",
+            "description": "unpublish Media",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Media"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for unpublish of media",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Media"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetalertcountsbycriticality/1.0/getAlertCountsByCriticality": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "getAlertCountsByCriticality",
+        "description": "getAlertCountsByCriticality",
+        "operationId": "getAlertCountsByCriticality",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "AlertName",
+            "in": "query",
+            "description": "pass an optional AlertName string for getting count by Criticality",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for getting count by criticality",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Alerts"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetbrewerstatistics/1.0/getbrewerStatistics": {
+      "post": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "getbrewerStatistics",
+        "description": "getbrewerStatistics",
+        "operationId": "getbrewerStatistics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Media",
+            "description": "getbrewerStatistics",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for getting brewer details statistic",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetaccountsbyconsumption/1.0/getAccountsByConsumption": {
+      "post": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "getAccountsByConsumption",
+        "description": "getAccountsByConsumption",
+        "operationId": "getAccountsByConsumption",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Media",
+            "description": "get Accounts by Consumption",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get account by consumption",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetavgbrewers&Consumption/1.0/getavgBrewersConsumption": {
+      "post": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "getavgBrewersConsumption",
+        "description": "getavgBrewersConsumption",
+        "operationId": "getavgBrewersConsumption",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Media",
+            "description": "get Avg Brewers Consumption",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results get Avg Brewers Consumption",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetnotificationscount/1.0/getNotificationsCount": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "getNotificationsCount",
+        "description": "getNotificationsCount",
+        "operationId": "getNotificationsCount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "AlertName",
+            "in": "query",
+            "description": "pass an optional AlertName string for getting Notification count",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for getting notification count",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Alerts"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSGetkadaccountnamefilter/1.0/getKADAccountNameFilter": {
+      "get": {
+        "tags": [
+          "Account Management"
+        ],
+        "summary": "getKADAccountNameFilter",
+        "description": "getKADAccountNameFilter",
+        "operationId": "getKADAccountNameFilter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KADAccountName",
+            "in": "query",
+            "description": "pass an optional KADAccountName string for getting KAD account list based on account name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for getting KAD account list based on account name",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BrewerDetailsList": {
+      "type": "object",
+      "required": [
+        "AssetId",
+        "BrewCount",
+        "BrewerPartnerId",
+        "ContactId",
+        "DeviceType",
+        "Firmware",
+        "Model",
+        "NetworkConnection",
+        "PlacementLocation",
+        "RegistrationApprovalStatus",
+        "RegistrationDate",
+        "SerialNumber",
+        "Status",
+        "WarrantyEndDate",
+        "deviceId"
+      ],
+      "properties": {
+        "SerialNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "DeviceType": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "PlacementLocation": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "KABBusinessAccount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "RegistrationApprovalStatus": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "RegistrationDate": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "deviceId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "AssetId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "WarrantyEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "Model": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Firmware": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BrewCount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "NetworkConnection": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BrewerPartnerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ContactId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "BrewerResponseDetailsList": {
+      "type": "object",
+      "required": [
+        "AssetId",
+        "BrewCount",
+        "BrewerPartnerId",
+        "ContactId",
+        "DeviceType",
+        "ErrorDescription",
+        "ErrroCode",
+        "Firmware",
+        "Model",
+        "NetworkConnection",
+        "PlacementLocation",
+        "RegistrationApprovalStatus",
+        "RegistrationDate",
+        "SerialNumber",
+        "Status",
+        "WarrantyEndDate",
+        "deviceId"
+      ],
+      "properties": {
+        "Status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ErrroCode": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ErrorDescription": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "SerialNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "DeviceType": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "PlacementLocation": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "KABBusinessAccount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "RegistrationApprovalStatus": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "RegistrationDate": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "deviceId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "AssetId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "WarrantyEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "Model": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Firmware": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BrewCount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "NetworkConnection": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BrewerPartnerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ContactId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "UserList": {
+      "type": "object",
+      "required": [
+        "EmailAddress",
+        "ErrorCode",
+        "ErrorMessage",
+        "FirstName",
+        "LastName",
+        "PartnerID",
+        "PartnerName",
+        "Status",
+        "UserId"
+      ],
+      "properties": {
+        "FirstName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "LastName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "UserId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "EmailAddress": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Status": {
+          "type": "string",
+          "format": "SUCCESS",
+          "example": "abc"
+        },
+        "ErrorCode": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ErrorMessage": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "PartnerID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "PartnerName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "AccountList": {
+      "type": "object",
+      "required": [
+        "BusinessAccountId",
+        "BusinessAccountName",
+        "BusinessId",
+        "ContactId",
+        "EmailAddress",
+        "FirstName",
+        "KADAccountId",
+        "KADAccountName",
+        "LastName",
+        "ListOfContact",
+        "PartnerId",
+        "PrimaryContactId",
+        "PrimaryContactName",
+        "SerialNumber"
+      ],
+      "properties": {
+        "BusinessAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BusinessAccountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "KADAccountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "FirstName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "LastName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "EmailAddress": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "KADAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "PrimaryContactId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "PrimaryContactName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ListOfContact": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "SerialNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ContactId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BusinessId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "PartnerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "Media": {
+      "type": "object",
+      "required": [
+        "BusinessAccountId",
+        "Description",
+        "ErrorCode",
+        "ErrorDescription",
+        "Image",
+        "KADAccountId",
+        "LastModified",
+        "MediaId",
+        "NumberofBrewer",
+        "SerialNumList",
+        "Status",
+        "Title",
+        "Type"
+      ],
+      "properties": {
+        "Image": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Title": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Description": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Type": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ErrorCode": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "ErrorDescription": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "NumberofBrewer": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "LastModified": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "MediaId": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "KADAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BusinessAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "SerialNumList": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "Brands": {
+      "type": "object",
+      "required": [
+        "BrandName",
+        "MasterBrandName"
+      ],
+      "properties": {
+        "MasterBrandName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BrandName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "Alerts": {
+      "type": "object",
+      "required": [
+        "AlertName",
+        "AlertType",
+        "BusinessAccount",
+        "Count",
+        "Date",
+        "Description",
+        "KADAccount",
+        "SerialNumber",
+        "Severity"
+      ],
+      "properties": {
+        "AlertName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "AlertType": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Description": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Severity": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Date": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "KADAccount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "BusinessAccount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "SerialNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        },
+        "Count": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "Variety": {
+      "type": "object",
+      "required": [
+        "VarietyName"
+      ],
+      "properties": {
+        "VarietyName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    },
+    "LocationList": {
+      "type": "object",
+      "required": [
+        "PlacementLocationName"
+      ],
+      "properties": {
+        "PlacementLocationName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc"
+        }
+      }
+    }
+  }
+}
