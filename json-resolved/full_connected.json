@@ -345,7 +345,7 @@
     },
     "/ic/api/AMSGetbusinessaccountcontact/1.0/getBusinessAccountContact" : {
       "get" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "getBusinessAccountContact" ],
         "summary" : "getBusinessAccountContact",
         "description" : "getBusinessAccountContact",
         "operationId" : "getBusinessAccountContact",
@@ -413,7 +413,7 @@
     },
     "/ic/api/AMSGetuserorglist/1.0/getUserOrgList" : {
       "get" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "getUserOrgList" ],
         "summary" : "getUserOrgList",
         "description" : "getUserOrgList",
         "operationId" : "getUserOrgList",
@@ -447,7 +447,7 @@
     },
     "/ic/api/AMSCreateofficeaccount/1.0/createOfficeAccount" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "createOfficeAccount" ],
         "summary" : "createOfficeAccount",
         "description" : "createOfficeAccount",
         "operationId" : "createOfficeAccount",
@@ -483,7 +483,7 @@
     },
     "/ic/api/AMSGetbrewerlocationlist/1.0/getBrewerLocationList" : {
       "get" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "getBrewerLocationList" ],
         "summary" : "getBrewerLocationList",
         "description" : "getBrewerLocationList",
         "operationId" : "getBrewerLocationList",
@@ -519,7 +519,7 @@
     },
     "/ic/api/AMSUpdatebrewer/1.0/updateBrewer" : {
       "patch" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "updateBrewer" ],
         "summary" : "updateBrewer",
         "description" : "updateBrewer",
         "operationId" : "updateBrewer",
@@ -555,7 +555,7 @@
     },
     "/ic/api/AMSSubmitinstallationrequest/1.0/submitInstallationRequest" : {
       "post" : {
-        "tags" : [ "Install", "SubmitInstallationRequest" ],
+        "tags" : [ "Install", "submitInstallationRequest" ],
         "summary" : "submitInstallationRequest",
         "description" : "submitInstallationRequest",
         "operationId" : "submitInstallationRequest",
@@ -591,7 +591,7 @@
     },
     "/ic/api/AMSCreateuser/1.0/createUser" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "createUser" ],
         "summary" : "createUser",
         "description" : "createUser",
         "operationId" : "createUser",
@@ -627,7 +627,7 @@
     },
     "/ic/api/AMSUninstallbrewer/1.0/uninstallBrewer" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "uninstallBrewer" ],
         "summary" : "uninstallBrewer",
         "description" : "uninstallBrewer",
         "operationId" : "uninstallBrewer",
