@@ -2,14 +2,10 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "These are OIC Integration APIs for Brewer Management",
-    "version" : "1.0.0",
-    "title" : "AMP VBCS Application",
+    "version" : "1.0.1",
+    "title" : "AMP OIC APIs",
     "contact" : {
-      "email" : "ramjeee.yerneni_ex@kdrp.com"
-    },
-    "license" : {
-      "name" : "Apache 2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "email" : "bryan.arndorfer_ex@kdrp.com"
     }
   },
   "host" : "virtserver.swaggerhub.com",
@@ -349,7 +345,7 @@
     },
     "/ic/api/AMSGetbusinessaccountcontact/1.0/getBusinessAccountContact" : {
       "get" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "getBusinessAccountContact" ],
         "summary" : "getBusinessAccountContact",
         "description" : "getBusinessAccountContact",
         "operationId" : "getBusinessAccountContact",
@@ -417,7 +413,7 @@
     },
     "/ic/api/AMSGetuserorglist/1.0/getUserOrgList" : {
       "get" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "getUserOrgList" ],
         "summary" : "getUserOrgList",
         "description" : "getUserOrgList",
         "operationId" : "getUserOrgList",
@@ -451,7 +447,7 @@
     },
     "/ic/api/AMSCreateofficeaccount/1.0/createOfficeAccount" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "createOfficeAccount" ],
         "summary" : "createOfficeAccount",
         "description" : "createOfficeAccount",
         "operationId" : "createOfficeAccount",
@@ -487,7 +483,7 @@
     },
     "/ic/api/AMSGetbrewerlocationlist/1.0/getBrewerLocationList" : {
       "get" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "getBrewerLocationList" ],
         "summary" : "getBrewerLocationList",
         "description" : "getBrewerLocationList",
         "operationId" : "getBrewerLocationList",
@@ -523,7 +519,7 @@
     },
     "/ic/api/AMSUpdatebrewer/1.0/updateBrewer" : {
       "patch" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "updateBrewer" ],
         "summary" : "updateBrewer",
         "description" : "updateBrewer",
         "operationId" : "updateBrewer",
@@ -559,7 +555,7 @@
     },
     "/ic/api/AMSSubmitinstallationrequest/1.0/submitInstallationRequest" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "submitInstallationRequest" ],
         "summary" : "submitInstallationRequest",
         "description" : "submitInstallationRequest",
         "operationId" : "submitInstallationRequest",
@@ -595,7 +591,7 @@
     },
     "/ic/api/AMSCreateuser/1.0/createUser" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "createUser" ],
         "summary" : "createUser",
         "description" : "createUser",
         "operationId" : "createUser",
@@ -631,7 +627,7 @@
     },
     "/ic/api/AMSUninstallbrewer/1.0/uninstallBrewer" : {
       "post" : {
-        "tags" : [ "Install" ],
+        "tags" : [ "Install", "uninstallBrewer" ],
         "summary" : "uninstallBrewer",
         "description" : "uninstallBrewer",
         "operationId" : "uninstallBrewer",
