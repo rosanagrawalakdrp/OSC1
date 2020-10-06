@@ -39,7 +39,7 @@
   "paths" : {
     "/ic/api/AMSUserlist/1.0/processUserRequest" : {
       "get" : {
-        "tags" : [ "User Management" ],
+        "tags" : [ "User Management","processUserRequest" ],
         "summary" : "get User List",
         "description" : "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
         "operationId" : "getUserList",
@@ -177,7 +177,7 @@
     },
     "/ic/api/AMSGetPlacementLocListFilter/1.0/getPlacementLocListFilter" : {
       "get" : {
-        "tags" : [ "Brewer Management" ],
+        "tags" : [ "Brewer Management","getPlacementLocListFilter" ],
         "summary" : "getPlacementLocListFilter",
         "description" : "By passing in the appropriate options, you can search for\navailable result in the system\n",
         "operationId" : "getPlacementLocListFilter",
@@ -207,7 +207,7 @@
     },
     "/ic/api/AMSGetBusinessAccountListFilter/1.0/getBusinessAccountListFilter" : {
       "get" : {
-        "tags" : [ "Brewer Management" ],
+        "tags" : [ "Brewer Management","getBusinessAccountListFilter" ],
         "summary" : "getBusinessAccountListFilter",
         "description" : "By passing in the appropriate options, you can search for\navailable result in the system\n",
         "operationId" : "getBusinessAccountListFilter",
@@ -243,7 +243,7 @@
     },
     "/ic/api/AMSGetalertConsumptioncounts/1.0/getAlertConsumptionCounts" : {
       "get" : {
-        "tags" : [ "Brewer Management" ],
+        "tags" : [ "Brewer Management","getAlertConsumptionCounts" ],
         "summary" : "getAlertConsumptionCounts",
         "description" : "By passing in the appropriate options, you can search for\navailable result in the system\n",
         "operationId" : "getAlertConsumptionCounts",
@@ -273,7 +273,7 @@
     },
     "/ic/api/AMSGetbrewerdetail/1.0/getBrewerDetail" : {
       "get" : {
-        "tags" : [ "Brewer Management" ],
+        "tags" : [ "Brewer Management","getBrewerDetail" ],
         "summary" : "getBrewerDetail",
         "description" : "By passing in the appropriate options, you can search for\navailable result in the system\n",
         "operationId" : "getBrewerDetail",
@@ -309,7 +309,7 @@
     },
     "/ic/api/AMSGetbrewerlist/1.0/getBrewerList" : {
       "post" : {
-        "tags" : [ "Brewer Management" ],
+        "tags" : [ "Brewer Management","getBrewerList" ],
         "summary" : "getBrewerList",
         "description" : "getBrewerList",
         "operationId" : "getBrewerList",
@@ -663,7 +663,7 @@
     },
     "/ic/api/AMSGetmasterbrandlovs/1.0/getMasterBrandLOVs" : {
       "get" : {
-        "tags" : [ "Consumption and Alerts" ],
+        "tags" : [ "Consumption and Alerts","getMasterBrandLOVs" ],
         "summary" : "getMasterBrandLOVs",
         "description" : "getMasterBrandLOVs",
         "operationId" : "getMasterBrandLOVs",
@@ -697,7 +697,7 @@
     },
     "/ic/api/AMSGetbrandlovs/1.0/getBrandLOVs" : {
       "get" : {
-        "tags" : [ "Consumption and Alerts" ],
+        "tags" : [ "Consumption and Alerts","getBrandLOVs" ],
         "summary" : "getBrandLOVs",
         "description" : "getBrandLOVs",
         "operationId" : "getBrandLOVs",
@@ -731,7 +731,7 @@
     },
     "/ic/api/AMSGetvarietyfilter/1.0/getVarietyFilter" : {
       "get" : {
-        "tags" : [ "Consumption and Alerts" ],
+        "tags" : [ "Consumption and Alerts","getVarietyFilter" ],
         "summary" : "getVarietyFilter",
         "description" : "getVarietyFilter",
         "operationId" : "getVarietyFilter",
@@ -765,7 +765,7 @@
     },
     "/ic/api/AMSGetalertnamefilter/1.0/getAlertNameFilter" : {
       "get" : {
-        "tags" : [ "Consumption and Alerts" ],
+        "tags" : [ "Consumption and Alerts","getAlertNameFilter" ],
         "summary" : "getAlertNameFilter",
         "description" : "getAlertNameFilter",
         "operationId" : "getAlertNameFilter",
@@ -799,7 +799,7 @@
     },
     "/ic/api/AMSGetalertlist/1.0/getAlertList" : {
       "get" : {
-        "tags" : [ "Consumption and Alerts" ],
+        "tags" : [ "Consumption and Alerts","getAlertList" ],
         "summary" : "getAlertList",
         "description" : "getAlertList",
         "operationId" : "getAlertList",
@@ -833,7 +833,7 @@
     },
     "/ic/api/AMSExportalerts/1.0/exportAlerts" : {
       "post" : {
-        "tags" : [ "Consumption and Alerts" ],
+        "tags" : [ "Consumption and Alerts","exportAlerts" ],
         "summary" : "exportAlerts",
         "description" : "exportAlerts",
         "operationId" : "exportAlerts",
@@ -869,7 +869,7 @@
     },
     "/ic/api/AMSGetmediapldetail/1.0/getMediaPLDetail" : {
       "get" : {
-        "tags" : [ "Media Management" ],
+        "tags" : [ "Media Management","getMediaPLDetail" ],
         "summary" : "getMediaPLDetail",
         "description" : "getMediaPLDetail",
         "operationId" : "getMediaPLDetail",
@@ -915,7 +915,7 @@
     },
     "/ic/api/AMSGetmediapllist/1.0/getMediaPLList" : {
       "get" : {
-        "tags" : [ "Media Management" ],
+        "tags" : [ "Media Management","getMediaPLList" ],
         "summary" : "getMediaPLList",
         "description" : "getMediaPLList",
         "operationId" : "getMediaPLList",
@@ -961,7 +961,7 @@
     },
     "/ic/api/AMSCreatemediaplaylist/1.0/createMediaPlayList" : {
       "post" : {
-        "tags" : [ "Media Management" ],
+        "tags" : [ "Media Management","createMediaPlayList" ],
         "summary" : "createMediaPlayList",
         "description" : "createMediaPlayList",
         "operationId" : "createMediaPlayList",
@@ -997,7 +997,7 @@
     },
     "/ic/api/AMSPublishmedia/1.0/publishMedia" : {
       "post" : {
-        "tags" : [ "Media Management" ],
+        "tags" : [ "Media Management","publishMedia" ],
         "summary" : "publishMedia",
         "description" : "publishMedia",
         "operationId" : "publishMedia",
@@ -1033,7 +1033,7 @@
     },
     "/ic/api/AMSUnpublishmedia/1.0/unpublishMedia" : {
       "post" : {
-        "tags" : [ "Media Management" ],
+        "tags" : [ "Media Management","unpublishMedia" ],
         "summary" : "unpublishMedia",
         "description" : "unpublishMedia",
         "operationId" : "unpublishMedia",
@@ -1069,7 +1069,7 @@
     },
     "/ic/api/AMSGetalertcountsbycriticality/1.0/getAlertCountsByCriticality" : {
       "get" : {
-        "tags" : [ "Dashboard" ],
+        "tags" : [ "Dashboard","getAlertCountsByCriticality" ],
         "summary" : "getAlertCountsByCriticality",
         "description" : "getAlertCountsByCriticality",
         "operationId" : "getAlertCountsByCriticality",
@@ -1103,7 +1103,7 @@
     },
     "/ic/api/AMSGetbrewerstatistics/1.0/getbrewerStatistics" : {
       "post" : {
-        "tags" : [ "Dashboard" ],
+        "tags" : [ "Dashboard","getbrewerStatistics" ],
         "summary" : "getbrewerStatistics",
         "description" : "getbrewerStatistics",
         "operationId" : "getbrewerStatistics",
@@ -1139,7 +1139,7 @@
     },
     "/ic/api/AMSGetaccountsbyconsumption/1.0/getAccountsByConsumption" : {
       "post" : {
-        "tags" : [ "Dashboard" ],
+        "tags" : [ "Dashboard","getAccountsByConsumption" ],
         "summary" : "getAccountsByConsumption",
         "description" : "getAccountsByConsumption",
         "operationId" : "getAccountsByConsumption",
@@ -1175,7 +1175,7 @@
     },
     "/ic/api/AMSGetavgbrewers&Consumption/1.0/getavgBrewersConsumption" : {
       "post" : {
-        "tags" : [ "Dashboard" ],
+        "tags" : [ "Dashboard","getavgBrewersConsumption" ],
         "summary" : "getavgBrewersConsumption",
         "description" : "getavgBrewersConsumption",
         "operationId" : "getavgBrewersConsumption",
@@ -1211,7 +1211,7 @@
     },
     "/ic/api/AMSGetnotificationscount/1.0/getNotificationsCount" : {
       "get" : {
-        "tags" : [ "Dashboard" ],
+        "tags" : [ "Dashboard","getNotificationsCount" ],
         "summary" : "getNotificationsCount",
         "description" : "getNotificationsCount",
         "operationId" : "getNotificationsCount",
@@ -1245,7 +1245,7 @@
     },
     "/ic/api/AMSGetkadaccountnamefilter/1.0/getKADAccountNameFilter" : {
       "get" : {
-        "tags" : [ "Account Management" ],
+        "tags" : [ "Account Management","getKADAccountNameFilter" ],
         "summary" : "getKADAccountNameFilter",
         "description" : "getKADAccountNameFilter",
         "operationId" : "getKADAccountNameFilter",
@@ -1280,7 +1280,7 @@
     "/ic/api/AMSGetBusinessAccountByKADAccount/1.0/getBusinessAccountLoVByKADAccount": {
       "get": {
         "tags": [
-          "Account Management"
+          "Account Management","getBusinessAccountLoVByKADAccount"
         ],
         "summary": "getBusinessAccountLoVByKADAccount",
         "description": "getBusinessAccountLoVByKADAccount",
