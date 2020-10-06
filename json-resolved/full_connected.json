@@ -1276,8 +1276,51 @@
           }
         }
       }
+    },
+    "/ic/api/AMSGetBusinessAccountByKADAccount/1.0/getBusinessAccountLoVByKADAccount": {
+      "get": {
+        "tags": [
+          "Account Management"
+        ],
+        "summary": "getBusinessAccountLoVByKADAccount",
+        "description": "getBusinessAccountLoVByKADAccount",
+        "operationId": "getBusinessAccountLoVByKADAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KADAccountName",
+            "in": "query",
+            "description": "pass an optional KADAccountName string for getting Business account list based on account name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for getting KAD account list based on account name",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
     }
   },
+  
   "definitions" : {
     "BrewerDetailsList" : {
       "type" : "object",
