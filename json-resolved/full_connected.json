@@ -1318,9 +1318,94 @@
           }
         }
       }
+    },
+    "/ic/api/AMSGetKADAccountByUser/1.0/getKADAccountLoVByUser": {
+      "get": {
+        "tags": [
+          "Account Management,getKADAccountLoVByUser"
+        ],
+        "summary": "getKADAccountLoVByUser",
+        "description": "getKADAccountLoVByUser",
+        "operationId": "getKADAccountLoVByUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "pass an optional user string for getting KAD account list based on user name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for getting KAD account list based on user name",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/ic/api/AMSRegisterBrewer/1.0/registerBrewer": {
+      "post": {
+        "tags": [
+          "Install,registerBrewer"
+        ],
+        "summary": "registerBrewer",
+        "description": "registerBrewer",
+        "operationId": "registerBrewer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "BrewerDetailsList",
+            "description": "register Brewer request parameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrewerDetailsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for register brewer request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BrewerDetailsList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
     }
   },
-  
   "definitions" : {
     "BrewerDetailsList" : {
       "type" : "object",
