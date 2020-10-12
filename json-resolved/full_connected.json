@@ -48,11 +48,11 @@
         "https"
     ],
     "paths": {
-        "/ic/api/AMSUserlist/1.0/processUserRequest": {
+        "/ic/api/AMSUserlist/1.0/getUserList": {
             "get": {
                 "tags": [
                     "User Management",
-                    "processUserRequest"
+                    "getUserList"
                 ],
                 "summary": "get User List",
                 "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -214,6 +214,310 @@
                     },
                     "409": {
                         "description": "an existing item already exists"
+                    }
+                }
+            }
+        },
+        "/ic/api/AMSUserlist/1.0/getUserInfo": {
+            "get": {
+                "tags": [
+                    "User Management",
+                    "getUserInfo"
+                ],
+                "summary": "get User Info",
+                "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
+                "operationId": "getUserInfo",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "KADAccountId",
+                        "in": "query",
+                        "description": "pass an optional KADAccountId string for looking up user",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "UserId",
+                        "in": "query",
+                        "description": "pass an optional UserId string for looking up user",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "search results matching criteria",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserList"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad input parameter"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "resetPassword",
+                "description": "Reset password for user",
+                "operationId": "resetPassword",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "UserList",
+                        "description": "user object for reset password",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserList"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "results for reset password",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserList"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input, object invalid"
+                    },
+                    "409": {
+                        "description": "an existing item already exists"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "deactivateUser",
+                "description": "deactivate user",
+                "operationId": "deactivateUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "UserList",
+                        "description": "user object for deactivating",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserList"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "results for deactivating user",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserList"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input, object invalid"
+                    },
+                    "409": {
+                        "description": "an existing item already exists"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "updateUser",
+                "description": "updates for user",
+                "operationId": "updateUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "UserList",
+                        "description": "user object for update",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserList"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "results for update user",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserList"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input, object invalid"
+                    },
+                    "409": {
+                        "description": "an existing item already exists"
+                    }
+                }
+            }
+        },
+        "/ic/api/AMSUserlist/1.0/deactivateUser": {
+             "delete": {
+                "tags": [
+                    "User Management"
+					,"deactivateUser"
+                ],
+                "summary": "deactivateUser",
+                "description": "deactivate user",
+                "operationId": "deactivateUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "UserList",
+                        "description": "user object for deactivating",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserList"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "results for deactivating user",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserList"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input, object invalid"
+                    },
+                    "409": {
+                        "description": "an existing item already exists"
+                    }
+                }
+            }
+		},
+        "/ic/api/AMSUserlist/1.0/resetPassword": {
+            "post": {
+                "tags": [
+                    "User Management",
+					"resetPassword"
+                ],
+                "summary": "resetPassword",
+                "description": "Reset password for user",
+                "operationId": "resetPassword",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "UserList",
+                        "description": "user object for reset password",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserList"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "results for reset password",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserList"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input, object invalid"
+                    },
+                    "409": {
+                        "description": "an existing item already exists"
+                    }
+                }
+            }
+        },
+        "/ic/api/AMSUserlist/1.0/resendInvite": {
+            "get": {
+                "tags": [
+                    "User Management",
+                    "resendInvite"
+                ],
+                "summary": "resend Invite for  User ",
+                "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
+                "operationId": "resendInvite",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "KADAccountId",
+                        "in": "query",
+                        "description": "pass an optional KADAccountId string for looking up user",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "UserId",
+                        "in": "query",
+                        "description": "pass an optional UserId string for looking up user",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "search results matching criteria",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserList"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad input parameter"
                     }
                 }
             }
