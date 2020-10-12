@@ -39,7 +39,7 @@
   "paths" : {
     "/ic/api/AMSUserlist/1.0/processUserRequest" : {
       "get" : {
-        "tags" : [ "User Management" ],
+        "tags" : [ "User Management", "getUserList" ],
         "summary" : "get User List",
         "description" : "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
         "operationId" : "getUserList",
