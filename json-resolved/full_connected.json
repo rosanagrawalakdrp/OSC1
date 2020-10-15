@@ -1343,6 +1343,49 @@
                 }
             }
         },
+        "/ic/api/AMSGetalertlist/1.0/getAlertResolution": {
+            "get": {
+                "tags": [
+                    "Consumption and Alerts",
+                    "getAlertResolution"
+                ],
+                "summary": "getAlertResolution",
+                "description": "getAlertResolution",
+                "operationId": "getAlertResolution",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "AlertName",
+                        "in": "query",
+                        "description": "pass an optional AlertName string for lookup in knowledger base",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "results for get alert knowledge lookup",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Alerts"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input, object invalid"
+                    },
+                    "409": {
+                        "description": "an existing item already exists"
+                    }
+                }
+            }
+        },
         "/ic/api/AMSExportalerts/1.0/exportAlerts": {
             "post": {
                 "tags": [
