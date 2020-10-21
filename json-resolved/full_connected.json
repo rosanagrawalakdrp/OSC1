@@ -90,134 +90,8 @@
                         "description": "bad input parameter"
                     }
                 }
-            },
-            "post": {
-                "tags": [
-                    "User Management"
-                ],
-                "summary": "resetPassword",
-                "description": "Reset password for user",
-                "operationId": "resetPassword",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for reset password",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "results for reset password",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "invalid input, object invalid"
-                    },
-                    "409": {
-                        "description": "an existing item already exists"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "User Management"
-                ],
-                "summary": "deactivateUser",
-                "description": "deactivate user",
-                "operationId": "deactivateUser",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for deactivating",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "results for deactivating user",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "invalid input, object invalid"
-                    },
-                    "409": {
-                        "description": "an existing item already exists"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "User Management"
-                ],
-                "summary": "updateUser",
-                "description": "updates for user",
-                "operationId": "updateUser",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for update",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "results for update user",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "invalid input, object invalid"
-                    },
-                    "409": {
-                        "description": "an existing item already exists"
-                    }
-                }
             }
-        },
+          },
         "/ic/api/AMSUserlist/1.0/getUserInfo": {
             "get": {
                 "tags": [
@@ -234,14 +108,14 @@
                     {
                         "name": "KADAccountId",
                         "in": "query",
-                        "description": "pass an optional KADAccountId string for looking up user",
+                        "description": "pass an  KADAccountId string for looking up user",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "UserId",
                         "in": "query",
-                        "description": "pass an optional UserId string for looking up user",
+                        "description": "pass an  UserId string for looking up user",
                         "required": false,
                         "type": "string"
                     }
@@ -258,132 +132,6 @@
                     },
                     "400": {
                         "description": "bad input parameter"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "User Management"
-                ],
-                "summary": "resetPassword",
-                "description": "Reset password for user",
-                "operationId": "resetPassword",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for reset password",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "results for reset password",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "invalid input, object invalid"
-                    },
-                    "409": {
-                        "description": "an existing item already exists"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "User Management"
-                ],
-                "summary": "deactivateUser",
-                "description": "deactivate user",
-                "operationId": "deactivateUser",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for deactivating",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "results for deactivating user",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "invalid input, object invalid"
-                    },
-                    "409": {
-                        "description": "an existing item already exists"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "User Management"
-                ],
-                "summary": "updateUser",
-                "description": "updates for user",
-                "operationId": "updateUser",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for update",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "results for update user",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "invalid input, object invalid"
-                    },
-                    "409": {
-                        "description": "an existing item already exists"
                     }
                 }
             }
@@ -685,7 +433,7 @@
             }
         },
         "/ic/api/AMSGetbrewerlist/1.0/getBrewerList": {
-            "post": {
+            "get": {
                 "tags": [
                     "Brewer Management",
                     "getBrewerList"
@@ -701,13 +449,53 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "get Brewer details list filter parameters",
+                        "name": "KADAccountId",
+                        "in": "query",
+                        "description": "pass an  KADAccountId string",
                         "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/BrewerDetailsList"
-                        }
+                        "type": "string"
+                    },
+                    {
+                        "name": "BusinessAccountId",
+                        "in": "query",
+                        "description": "pass an optional BusinessAccountId string",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "PlacementLocation",
+                        "in": "query",
+                        "description": "pass an  PlacementLocation string",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "DeviceType",
+                        "in": "query",
+                        "description": "pass an optional DeviceType string",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "Status",
+                        "in": "query",
+                        "description": "pass an  Status string",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "RegistrationDate",
+                        "in": "query",
+                        "description": "pass an optional RegistrationDate string",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "RegistrationApproval",
+                        "in": "query",
+                        "description": "pass an  RegistrationApproval string",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -716,7 +504,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/BrewerDetailsList"
+                                "$ref": "#/definitions/BrewerDetailsListResponse"
                             }
                         }
                     },
@@ -1450,21 +1238,21 @@
                     {
                         "name": "MediaId",
                         "in": "query",
-                        "description": "pass an optional MediaId string for looking up Media",
+                        "description": "pass an MediaId string for looking up Media",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "KADAccountId",
                         "in": "query",
-                        "description": "pass an optional KADAccountId string for looking up Media",
+                        "description": "pass an KADAccountId string for looking up Media",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "BusinessAccountId",
                         "in": "query",
-                        "description": "pass an optional BusinessAccountId string for looking up Media",
+                        "description": "pass an BusinessAccountId string for looking up Media",
                         "required": false,
                         "type": "string"
                     }
@@ -1475,7 +1263,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Media"
+                                "$ref": "#/definitions/MediaPLList"
                             }
                         }
                     },
@@ -1507,21 +1295,21 @@
                     {
                         "name": "MediaId",
                         "in": "query",
-                        "description": "pass an optional MediaId string for looking up Media",
+                        "description": "pass an  MediaId string for looking up Media",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "KADAccountId",
                         "in": "query",
-                        "description": "pass an optional KADAccountId string for looking up Media",
+                        "description": "pass an  KADAccountId string for looking up Media",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "BusinessAccountId",
                         "in": "query",
-                        "description": "pass an optional BusinessAccountId string for looking up Media",
+                        "description": "pass an  BusinessAccountId string for looking up Media",
                         "required": false,
                         "type": "string"
                     }
@@ -1532,7 +1320,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Media"
+                                "$ref": "#/definitions/Medialist"
                             }
                         }
                     },
@@ -1563,11 +1351,11 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "Media",
+                        "name": "createMediaPlayListRequest",
                         "description": "create Media playlist",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Media"
+                            "$ref": "#/definitions/createMediaPlayListRequest"
                         }
                     }
                 ],
@@ -1577,7 +1365,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Media"
+                                "$ref": "#/definitions/createMediaPlayListResponse"
                             }
                         }
                     },
@@ -1608,11 +1396,11 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "Media",
+                        "name": "PublishUnpublishMediaRequest",
                         "description": "Publish Media",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Media"
+                            "$ref": "#/definitions/PublishUnpublishMediaRequest"
                         }
                     }
                 ],
@@ -1622,7 +1410,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Media"
+                                "$ref": "#/definitions/PublishUnpublishMediaResponse"
                             }
                         }
                     },
@@ -1653,11 +1441,11 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "Media",
+                        "name": "PublishUnpublishMediaRequest",
                         "description": "unpublish Media",
                         "required": false,
                         "schema": {
-                            "$ref": "#/definitions/Media"
+                            "$ref": "#/definitions/PublishUnpublishMediaRequest"
                         }
                     }
                 ],
@@ -1667,7 +1455,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Media"
+                                "$ref": "#/definitions/PublishUnpublishMediaResponse"
                             }
                         }
                     },
@@ -1741,7 +1529,7 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "Media",
+                        "name": "BrewerDetailsList",
                         "description": "getbrewerStatistics",
                         "required": false,
                         "schema": {
@@ -1786,7 +1574,7 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "Media",
+                        "name": "AccountList",
                         "description": "get Accounts by Consumption",
                         "required": false,
                         "schema": {
@@ -1831,7 +1619,7 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "Media",
+                        "name": "BrewerDetailsList",
                         "description": "get Avg Brewers Consumption",
                         "required": false,
                         "schema": {
@@ -2533,91 +2321,6 @@
                 }
             }
         },
-        "Media": {
-            "type": "object",
-            "required": [
-                "BusinessAccountId",
-                "Description",
-                "ErrorCode",
-                "ErrorDescription",
-                "Image",
-                "KADAccountId",
-                "LastModified",
-                "MediaId",
-                "NumberofBrewer",
-                "SerialNumList",
-                "Status",
-                "Title",
-                "Type"
-            ],
-            "properties": {
-                "Image": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "Title": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "Description": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "Type": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "Status": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "ErrorCode": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "ErrorDescription": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "NumberofBrewer": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "LastModified": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "MediaId": {
-                    "type": "string",
-                    "format": "date-time",
-                    "example": "2016-08-29T09:12:33.001Z"
-                },
-                "KADAccountId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "BusinessAccountId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                },
-                "SerialNumList": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
-                }
-            }
-        },
         "Brands": {
             "type": "object",
             "required": [
@@ -2814,6 +2517,308 @@
                     "example": "abc"
                 }
             }
-        }
+        },
+		 "PublishUnpublishMediaRequest": {
+            "type": "object",
+            "required": [
+                "SerialNumberList",
+                "MediaId"
+            ],
+            "properties": {
+                "MediaId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "MediaId"
+                },
+                "SerialNumberList": {
+                    "type": "array",
+					"items": {
+                                "$ref": "#/definitions/SerialNumber"
+					}					
+                }
+            }
+        },
+		 "SerialNumber": {
+            "type": "object",
+            "required": [
+                "SerialNumber"
+            ],
+            "properties": {
+                "SerialNumber": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "SerialNumber"
+                }
+            }
+        },
+		"PublishUnpublishMediaResponse": {
+            "type": "object",
+            "required": [
+                "Status",
+                "ErrorMessage"
+            ],
+            "properties": {
+                "Status": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Success"
+                },
+                "ErrorMessage": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "NA"
+                }
+            }
+        },
+		 "MediaPLList": {
+            "type": "object",
+            "required": [
+                "BusinessAccountId",
+                "KADAccountId",
+                "MediaId",
+                "Image",
+                "Title",
+                "Type",
+				"Status",
+                "NumberOfBrewer",
+                "LastModified"
+               
+                
+            ],
+            "properties": {
+                "Image": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                },
+                "Title": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                },
+                "Type": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                },
+                "Status": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                },
+                "NumberofBrewer": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                },
+                "LastModified": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                },
+                "MediaId": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
+                },
+                "KADAccountId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                },
+                "BusinessAccountId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "abc"
+                }
+            }
+        },
+		 "createMediaPlayListRequest": {
+            "type": "object",
+            "required": [
+                "PlayListName",
+                "PlayListNumber",
+                "Description",
+                "Type",
+                "PublicStatus",
+                "KADAccount",
+				"BusinessAccount",
+                "DefaultBrewerId",
+                "LastModified",
+				"LastModifiedAMPUserId",
+				"MediaList"
+            ],
+            "properties": {
+                "PlayListName": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "PlayListName"
+                },
+                "PlayListNumber": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "PlayListNumber"
+                },
+                "Description": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Description"
+                },
+                "PublicStatus": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "PublicStatus"
+                },
+                "KADAccount": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "KADAccount"
+                },
+                "BusinessAccount": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "BusinessAccount"
+                },
+                "DefaultBrewerId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "DefaultBrewerId"
+                },
+                "LastModified": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "LastModified"
+                },
+                "LastModifiedAMPUserId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "LastModifiedAMPUserId"
+                },
+                "Medialist": {
+                    "type": "array",
+					"items": {
+                                "$ref": "#/definitions/Medialist"
+					}					
+                }
+            }
+        },
+		"Medialist": {
+            "type": "object",
+            "required": [
+                "ImageName",
+				"ImageURL",
+				"Order",
+				"TransitionTime",
+				"MediaNumber",
+				"LastModifiedAMPUserId",
+				"Type",
+				"Status",
+				"NumberOfBrewer",
+				"LastModified"				
+            ],
+			"properties": {
+                 "ImageName": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "ImageName"
+                },
+                "ImageURL": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "ImageURL"
+                },
+                "TransitionTime": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "TransitionTime"
+                },
+                "MediaNumber": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "MediaNumber"
+                },
+                "LastModifiedAMPUserId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "LastModifiedAMPUserId"
+                }
+            }
+        },
+		"createMediaPlayListResponse": {
+            "type": "object",
+            "required": [
+                "Status",
+                "ErrorMessage"
+            ],
+            "properties": {
+                "Status": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Success"
+                },
+                "ErrorMessage": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "NA"
+                }
+            }
+        },
+		"BrewerDetailsListResponse": {
+            "type": "object",
+            "required": [
+                "SerialNumber",
+                "DeviceType",
+                "PlacementLocation",
+                "Status",
+				"KADBusinessAccount",
+                "RegistrationApprovalStatus",
+                "RegistrationDate",
+                "Model"                
+            ],
+            "properties": {
+                "SerialNumber": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "SerialNumber"
+                },
+                "DeviceType": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "DeviceType"
+                },
+                "PlacementLocation": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "PlacementLocation"
+                },
+                "Status": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Status"
+                },
+                "KADBusinessAccount": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "KADBusinessAccount"
+                },
+                "RegistrationApprovalStatus": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "RegistrationApprovalStatus"
+                },
+                "RegistrationDate": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "RegistrationDate"
+                },
+                "Model": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Model"
+                }
+            }
+        },
+       
+       
     }
 }
