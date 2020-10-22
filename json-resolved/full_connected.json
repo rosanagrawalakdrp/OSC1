@@ -153,24 +153,16 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for deactivating",
+                        "name": "UserId",
+                        "in": "query",
+                        "description": "pass an  UserId string",
                         "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "results for deactivating user",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
+                        "description": "results for deactivating user"
                     },
                     "400": {
                         "description": "invalid input, object invalid"
@@ -198,24 +190,16 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "UserList",
-                        "description": "user object for reset password",
+                        "name": "UserId",
+                        "in": "query",
+                        "description": "pass an  UserId string",
                         "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserList"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "results for reset password",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/UserList"
-                            }
-                        }
+                        "description": "results for reset password"
                     },
                     "400": {
                         "description": "invalid input, object invalid"
@@ -1259,11 +1243,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "results for get Media list",
+                        "description": "results for get Media Details",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/MediaPLList"
+                                "$ref": "#/definitions/MediaDetails"
                             }
                         }
                     },
@@ -1320,7 +1304,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Medialist"
+                                "$ref": "#/definitions/MediaDetailsList"
                             }
                         }
                     },
@@ -1976,47 +1960,47 @@
                 "SerialNumber": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "SerialNumber"
                 },
                 "DeviceType": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "DeviceType"
                 },
                 "PlacementLocation": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "PlacementLocation"
                 },
                 "Status": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Status"
                 },
                 "KABBusinessAccount": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KABBusinessAccount"
                 },
                 "RegistrationApprovalStatus": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "RegistrationApprovalStatus"
                 },
                 "RegistrationDate": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "RegistrationDate"
                 },
                 "deviceId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "deviceId"
                 },
                 "AssetId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "AssetId"
                 },
                 "WarrantyEndDate": {
                     "type": "string",
@@ -2036,12 +2020,12 @@
                 "BrewCount": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Model"
                 },
                 "NetworkConnection": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "NetworkConnection"
                 },
                 "BrewerPartnerId": {
                     "type": "string",
@@ -2051,7 +2035,7 @@
                 "ContactId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "ContactId"
                 }
             }
         },
@@ -2080,57 +2064,57 @@
                 "Status": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Status"
                 },
                 "ErrroCode": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "ErrroCode"
                 },
                 "ErrorDescription": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "ErrorDescription"
                 },
                 "SerialNumber": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "SerialNumber"
                 },
                 "DeviceType": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "DeviceType"
                 },
                 "PlacementLocation": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "PlacementLocation"
                 },
                 "KABBusinessAccount": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KABBusinessAccount"
                 },
                 "RegistrationApprovalStatus": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "RegistrationApprovalStatus"
                 },
                 "RegistrationDate": {
                     "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
+                             "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
                 },
                 "deviceId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "deviceId"
                 },
                 "AssetId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "AssetId"
                 },
                 "WarrantyEndDate": {
                     "type": "string",
@@ -2140,32 +2124,32 @@
                 "Model": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Model"
                 },
                 "Firmware": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Firmware"
                 },
                 "BrewCount": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BrewCount"
                 },
                 "NetworkConnection": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "NetworkConnection"
                 },
                 "BrewerPartnerId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BrewerPartnerId"
                 },
                 "ContactId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "ContactId"
                 }
             }
         },
@@ -2180,54 +2164,66 @@
                 "PartnerID",
                 "PartnerName",
                 "Status",
-                "UserId"
+                "UserId",
+				"Address",
+				"PhoneNumber"
             ],
             "properties": {
                 "FirstName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "FirstName"
                 },
                 "LastName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "LastName"
                 },
                 "UserId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "UserId"
                 },
                 "EmailAddress": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "EmailAddress"
                 },
                 "Status": {
                     "type": "string",
                     "format": "SUCCESS",
-                    "example": "abc"
+                    "example": "Status"
                 },
                 "ErrorCode": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "ErrorCode"
                 },
                 "ErrorMessage": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "ErrorMessage"
                 },
                 "PartnerID": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "PartnerID"
                 },
                 "PartnerName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
-                }
+                    "example": "PartnerName"
+                },
+                "Address": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Address"
+                },
+                "PhoneNumber": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "PhoneNumber"
+                }				
             }
         },
         "AccountList": {
@@ -2252,17 +2248,17 @@
                 "BusinessAccountId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BusinessAccountId"
                 },
                 "BusinessAccountName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BusinessAccountName"
                 },
                 "KADAccountName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KADAccountName"
                 },
                 "FirstName": {
                     "type": "string",
@@ -2272,52 +2268,53 @@
                 "LastName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "LastName"
                 },
                 "EmailAddress": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "EmailAddress"
                 },
                 "KADAccountId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KADAccountId"
                 },
                 "PrimaryContactId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "PrimaryContactId"
                 },
                 "PrimaryContactName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "PrimaryContactName"
                 },
                 "ListOfContact": {
-                    "type": "string",
-                    "format": "date-time",
-                    "example": "2016-08-29T09:12:33.001Z"
+                    "type": "array",
+					"items": {
+                                "$ref": "#/definitions/ListOfContact"
+					}					
                 },
                 "SerialNumber": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "SerialNumber"
                 },
                 "ContactId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "ContactId"
                 },
                 "BusinessId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BusinessId"
                 },
                 "PartnerId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "PartnerId"
                 }
             }
         },
@@ -2331,12 +2328,25 @@
                 "MasterBrandName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "MasterBrandName"
                 },
                 "BrandName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BrandName"
+                }
+            }
+        },
+		"ListOfContact": {
+            "type": "object",
+            "required": [
+				"UserId"
+            ],
+            "properties": {
+                "UserId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "UserId"
                 }
             }
         },
@@ -2357,47 +2367,47 @@
                 "AlertName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "AlertName"
                 },
                 "AlertType": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "AlertType"
                 },
                 "Description": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Description"
                 },
                 "Severity": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Severity"
                 },
                 "Date": {
                     "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
+                            "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
                 },
                 "KADAccount": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KADAccount"
                 },
                 "BusinessAccount": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BusinessAccount"
                 },
                 "SerialNumber": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "SerialNumber"
                 },
                 "Count": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Count"
                 }
             }
         },
@@ -2423,72 +2433,72 @@
                 "KADAccountId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KADAccountId"
                 },
                 "BusinessAccountId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BusinessAccountId"
                 },
                 "MasterBrand": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "MasterBrand"
                 },
                 "Brand": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Brand"
                 },
                 "LidType": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "LidType"
                 },
                 "BrewDate": {
                     "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
+                            "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
                 },
                 "Variety": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Variety"
                 },
                 "SerialNum": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "SerialNum"
                 },
                 "KADAccountName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KADAccountName"
                 },
                 "BusinessAccountName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BusinessAccountName"
                 },
                 "UserID": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "UserID"
                 },
                 "COUNTConsumption": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "COUNTConsumption"
                 },
                 "COUNTAlert": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "COUNTAlert"
                 },
                 "AVGConsumption": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "AVGConsumption"
                 }
             }
         },
@@ -2501,7 +2511,7 @@
                 "VarietyName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "VarietyName"
                 }
             }
         },
@@ -2514,7 +2524,7 @@
                 "PlacementLocationName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "PlacementLocationName"
                 }
             }
         },
@@ -2589,47 +2599,47 @@
                 "Image": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Image"
                 },
                 "Title": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Title"
                 },
                 "Type": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Type"
                 },
                 "Status": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Status"
                 },
                 "NumberofBrewer": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "NumberofBrewer"
                 },
                 "LastModified": {
                     "type": "string",
-                    "format": "uuid",
-                    "example": "abc"
+                     "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
                 },
                 "MediaId": {
                     "type": "string",
-                    "format": "date-time",
-                    "example": "2016-08-29T09:12:33.001Z"
+                    "format": "uuid",
+                    "example": "MediaId"
                 },
                 "KADAccountId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "KADAccountId"
                 },
                 "BusinessAccountId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BusinessAccountId"
                 }
             }
         },
@@ -2727,6 +2737,11 @@
                     "format": "uuid",
                     "example": "ImageURL"
                 },
+                "Order": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Order"
+                },
                 "TransitionTime": {
                     "type": "string",
                     "format": "uuid",
@@ -2741,6 +2756,95 @@
                     "type": "string",
                     "format": "uuid",
                     "example": "LastModifiedAMPUserId"
+                },
+                "Type": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "Type"
+                },
+                "Status": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Status"
+                },
+                "NumberOfBrewer": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "NumberOfBrewer"
+                },
+                "LastModified": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
+                }
+            }
+        },
+		"MediaDetailsList": {
+            "type": "object",
+            "required": [
+                "Image",
+				"Title",
+				"Type",
+				"Status",
+				"NumberOfBrewer",
+				"LastModified"				
+            ],
+			"properties": {
+                 "Image": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "ImageName"
+                },
+                "Title": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Title"
+                },
+                "Type": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Type"
+                },
+                "Status": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Status"
+                },
+                "NumberOfBrewer": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "NumberOfBrewer"
+                },
+                "LastModified": {
+                    "type": "string",  
+					"format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
+                }
+
+            }
+        },
+		"MediaDetails": {
+            "type": "object",
+            "required": [
+                "ImageName",
+				"Title",
+				"Description"				
+            ],
+			"properties": {
+                 "ImageName": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "ImageName"
+                },
+                "Title": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Title"
+                },
+                "Description": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Description"
                 }
             }
         },
@@ -2770,7 +2874,7 @@
                 "DeviceType",
                 "PlacementLocation",
                 "Status",
-				"KADBusinessAccount",
+		"KADBusinessAccount",
                 "RegistrationApprovalStatus",
                 "RegistrationDate",
                 "Model"                
@@ -2808,8 +2912,8 @@
                 },
                 "RegistrationDate": {
                     "type": "string",
-                    "format": "uuid",
-                    "example": "RegistrationDate"
+                    "format": "date-time",
+                    "example": "2016-08-29T09:12:33.001Z"
                 },
                 "Model": {
                     "type": "string",
