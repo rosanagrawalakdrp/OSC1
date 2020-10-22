@@ -1825,7 +1825,14 @@
                     {
                         "name": "KADAccountName",
                         "in": "query",
-                        "description": "pass an optional KADAccountName string for getting Business account list based on account name",
+                        "description": "pass an KADAccountName string for getting Business account list based on account name",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "KADAccountNumber",
+                        "in": "query",
+                        "description": "pass an KADAccountNumber string for getting Business account list based on account name",
                         "required": false,
                         "type": "string"
                     }
@@ -1922,7 +1929,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/BrewerDetailsList"
+                                "$ref": "#/definitions/RegisterBrewerResponse"
                             }
                         }
                     },
@@ -2874,7 +2881,7 @@
                 "DeviceType",
                 "PlacementLocation",
                 "Status",
-		"KADBusinessAccount",
+				"KADBusinessAccount",
                 "RegistrationApprovalStatus",
                 "RegistrationDate",
                 "Model"                
@@ -2919,6 +2926,25 @@
                     "type": "string",
                     "format": "uuid",
                     "example": "Model"
+                }
+            }
+        },
+		"RegisterBrewerResponse": {
+            "type": "object",
+            "required": [
+                "Status",
+                "ErrorMessage"
+            ],
+            "properties": {
+                "Status": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "Success"
+                },
+                "ErrorMessage": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "NA"
                 }
             }
         },
