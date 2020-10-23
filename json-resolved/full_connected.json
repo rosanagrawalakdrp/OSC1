@@ -1947,7 +1947,9 @@
         "BrewerDetailsList": {
             "type": "object",
             "required": [
-                "AssetId",
+                "UserID",
+				"AssetId",
+				"KADAccountId",
                 "BrewCount",
                 "BrewerPartnerId",
                 "ContactId",
@@ -2017,12 +2019,12 @@
                 "Model": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Model"
                 },
                 "Firmware": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "Firmware"
                 },
                 "BrewCount": {
                     "type": "string",
@@ -2037,7 +2039,17 @@
                 "BrewerPartnerId": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "BrewerPartnerId"
+                },
+                "UserID": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "UserID"
+                },
+                "KADAccountId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "KADAccountId"
                 },
                 "ContactId": {
                     "type": "string",
@@ -2238,18 +2250,14 @@
             "required": [
                 "BusinessAccountId",
                 "BusinessAccountName",
-                "BusinessId",
-                "ContactId",
                 "EmailAddress",
                 "FirstName",
                 "KADAccountId",
                 "KADAccountName",
                 "LastName",
                 "ListOfContact",
-                "PartnerId",
                 "PrimaryContactId",
-                "PrimaryContactName",
-                "SerialNumber"
+                "PrimaryContactName"
             ],
             "properties": {
                 "BusinessAccountId": {
@@ -2270,7 +2278,7 @@
                 "FirstName": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "abc"
+                    "example": "FirstName"
                 },
                 "LastName": {
                     "type": "string",
@@ -2302,26 +2310,6 @@
 					"items": {
                                 "$ref": "#/definitions/ListOfContact"
 					}					
-                },
-                "SerialNumber": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "SerialNumber"
-                },
-                "ContactId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "ContactId"
-                },
-                "BusinessId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "BusinessId"
-                },
-                "PartnerId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "PartnerId"
                 }
             }
         },
@@ -2657,7 +2645,6 @@
                 "PlayListNumber",
                 "Description",
                 "Type",
-                "PublicStatus",
                 "KADAccount",
 				"BusinessAccount",
                 "DefaultBrewerId",
@@ -2681,10 +2668,10 @@
                     "format": "uuid",
                     "example": "Description"
                 },
-                "PublicStatus": {
+                "Type": {
                     "type": "string",
                     "format": "uuid",
-                    "example": "PublicStatus"
+                    "example": "Type"
                 },
                 "KADAccount": {
                     "type": "string",
@@ -2728,11 +2715,8 @@
 				"TransitionTime",
 				"MediaNumber",
 				"LastModifiedAMPUserId",
-				"Type",
-				"Status",
-				"NumberOfBrewer",
-				"LastModified"				
-            ],
+				"Type"
+			],
 			"properties": {
                  "ImageName": {
                     "type": "string",
@@ -2766,23 +2750,8 @@
                 },
                 "Type": {
                     "type": "string",
-                    "format": "date-time",
+                    "format": "Type",
                     "example": "Type"
-                },
-                "Status": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "Status"
-                },
-                "NumberOfBrewer": {
-                    "type": "string",
-                    "format": "uuid",
-                    "example": "NumberOfBrewer"
-                },
-                "LastModified": {
-                    "type": "string",
-                    "format": "date-time",
-                    "example": "2016-08-29T09:12:33.001Z"
                 }
             }
         },
@@ -2792,6 +2761,7 @@
                 "Image",
 				"Title",
 				"Type",
+				"URL",
 				"Status",
 				"NumberOfBrewer",
 				"LastModified"				
@@ -2812,7 +2782,12 @@
                     "format": "uuid",
                     "example": "Type"
                 },
-                "Status": {
+                "URL": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "https://google.com/image.png"
+                },
+				"Status": {
                     "type": "string",
                     "format": "uuid",
                     "example": "Status"
@@ -2835,7 +2810,8 @@
             "required": [
                 "ImageName",
 				"Title",
-				"Description"				
+				"Description",
+				"URL"					
             ],
 			"properties": {
                  "ImageName": {
@@ -2852,6 +2828,11 @@
                     "type": "string",
                     "format": "uuid",
                     "example": "Description"
+                },
+                "URL": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "URL"
                 }
             }
         },
@@ -2881,7 +2862,8 @@
                 "DeviceType",
                 "PlacementLocation",
                 "Status",
-				"KADBusinessAccount",
+				"KADAccount",
+				"BusinessAccount",
                 "RegistrationApprovalStatus",
                 "RegistrationDate",
                 "Model"                
@@ -2907,7 +2889,12 @@
                     "format": "uuid",
                     "example": "Status"
                 },
-                "KADBusinessAccount": {
+                "KADAccount": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "KADBusinessAccount"
+                },
+                "BusinessAccount": {
                     "type": "string",
                     "format": "uuid",
                     "example": "KADBusinessAccount"
