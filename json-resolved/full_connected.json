@@ -196,6 +196,20 @@
                         "required": false,
                         "type": "string"
                     }
+			{
+                        "name": "UserId_Test",
+                        "in": "query",
+                        "description": "pass an  UserId string",
+                        "required": false,
+                        "type": "string"
+                    }
+			{
+                        "name": "KAD ACCOUNT ID",
+                        "in": "query",
+                        "description": "pass an  UserId string",
+                        "required": false,
+                        "type": "string"
+                    }
                 ],
                 "responses": {
                     "200": {
