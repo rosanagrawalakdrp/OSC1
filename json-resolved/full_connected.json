@@ -2783,6 +2783,7 @@
                     "example": "MediaNumber"
                 },
                 "LastModifiedAMPUserId": {
+		
                     "type": "string",
                     "format": "uuid",
                     "example": "LastModifiedAMPUserId"
