@@ -228,7 +228,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "results for reset password"
+                        "description": "results for reset password (success/failure)"
                     },
                     "400": {
                         "description": "invalid input, object invalid"
@@ -2783,6 +2783,7 @@
                     "example": "MediaNumber"
                 },
                 "LastModifiedAMPUserId": {
+		
                     "type": "string",
                     "format": "uuid",
                     "example": "LastModifiedAMPUserId"
