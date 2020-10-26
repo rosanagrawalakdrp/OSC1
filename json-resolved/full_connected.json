@@ -76,7 +76,7 @@
                         "type": "string"
                     },
 		{
-                        "name": "UserId",
+                        "name": "ReqForSearchUserId",
                         "in": "query",
                         "description": "pass an optional UserId string for looking up user",
                         "required": false,
@@ -128,7 +128,7 @@
                     },
 		
 		{
-                        "name": "UserId",
+                        "name": "ReqForSearchUserId",
                         "in": "query",
                         "description": "pass an  UserId string for looking up user",
                         "required": false,
@@ -219,7 +219,7 @@
                         "type": "string"
                     },
 			{
-                        "name": "UserId",
+                        "name": "ReqForSearchUserId",
                         "in": "query",
                         "description": "pass an  UserId string",
                         "required": false,
