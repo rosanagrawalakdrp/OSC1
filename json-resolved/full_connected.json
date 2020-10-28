@@ -1847,8 +1847,11 @@
           "400": {
             "description": "invalid input, object invalid"
           },
+          "406": {
+            "description": "No Account Found"
+          },
           "409": {
-            "description": "an existing item already exists"
+            "description": "Duplicate Record exists"
           }
         }
       }
@@ -2413,64 +2416,22 @@
     "AccountList": {
       "type": "object",
       "required": [
-        "BusinessAccountId",
-        "BusinessAccountName",
-        "EmailAddress",
-        "FirstName",
         "KADAccountId",
         "KADAccountName",
-        "LastName",
-        "ListOfContact",
-        "PrimaryContactId",
-        "PrimaryContactName"
+       
       ],
       "properties": {
-        "BusinessAccountId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "BusinessAccountId"
-        },
-        "BusinessAccountName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "BusinessAccountName"
-        },
-        "KADAccountName": {
+          "KADAccountName": {
           "type": "string",
           "format": "uuid",
           "example": "KADAccountName"
         },
-        "FirstName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "FirstName"
-        },
-        "LastName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "LastName"
-        },
-        "EmailAddress": {
-          "type": "string",
-          "format": "uuid",
-          "example": "EmailAddress"
-        },
-        "KADAccountId": {
+         "KADAccountId": {
           "type": "string",
           "format": "uuid",
           "example": "KADAccountId"
         },
-        "PrimaryContactId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "PrimaryContactId"
-        },
-        "PrimaryContactName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "PrimaryContactName"
-        },
-        "ListOfContact": {
+       "ListOfContact": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ListOfContact"
