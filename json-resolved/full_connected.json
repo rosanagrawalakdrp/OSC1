@@ -48,11 +48,10 @@
     "https"
   ],
   "paths": {
-    "/ic/api/AMSUserlist/1.0/getUserList": {
+    "/getUserList": {
       "get": {
         "tags": [
-          "User Management",
-          "getUserList"
+          "User Management"
         ],
         "summary": "get User List",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -99,11 +98,10 @@
         }
       }
     },
-    "/ic/api/AMSUserlist/1.0/getUserInfo": {
+    "/getUserInfo": {
       "get": {
         "tags": [
-          "User Management",
-          "getUserInfo"
+          "User Management"
         ],
         "summary": "get User Info",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -150,11 +148,10 @@
         }
       }
     },
-    "/ic/api/AMSUserlist/1.0/deactivateUser": {
+    "/deactivateUser": {
       "delete": {
         "tags": [
-          "User Management",
-          "deactivateUser"
+          "User Management"
         ],
         "summary": "deactivateUser",
         "description": "deactivate user",
@@ -187,11 +184,10 @@
         }
       }
     },
-    "/ic/api/AMSUserlist/1.0/resetPassword": {
+    "/resetPassword": {
       "post": {
         "tags": [
-          "User Management",
-          "resetPassword"
+          "User Management"
         ],
         "summary": "resetPassword",
         "description": "Reset password for user",
@@ -226,8 +222,8 @@
           }
         ],
         "responses": {
-         "200": {
-            "description": "Results for Reset Passwrod",
+          "200": {
+            "description": "results for reset password (success/failure)",
             "schema": {
               "type": "array",
               "items": {
@@ -244,11 +240,10 @@
         }
       }
     },
-    "/ic/api/AMSUserlist/1.0/resendInvite": {
+    "/resendInvite": {
       "get": {
         "tags": [
-          "User Management",
-          "resendInvite"
+          "User Management"
         ],
         "summary": "resend Invite for  User ",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -288,11 +283,10 @@
         }
       }
     },
-    "/ic/api/AMSGetPlacementLocListFilter/1.0/getPlacementLocListFilter": {
+    "/getPlacementLocListFilter": {
       "get": {
         "tags": [
-          "Brewer Management",
-          "getPlacementLocListFilter"
+          "Brewer Management"
         ],
         "summary": "getPlacementLocListFilter",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
@@ -325,11 +319,10 @@
         }
       }
     },
-    "/ic/api/AMSGetBusinessAccountListFilter/1.0/getBusinessAccountListFilter": {
+    "/getBusinessAccountListFilter": {
       "get": {
         "tags": [
-          "Brewer Management",
-          "getBusinessAccountListFilter"
+          "Brewer Management"
         ],
         "summary": "getBusinessAccountListFilter",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
@@ -369,11 +362,10 @@
         }
       }
     },
-    "/ic/api/AMSGetalertConsumptioncounts/1.0/getAlertConsumptionCounts": {
+    "/getAlertConsumptionCounts": {
       "get": {
         "tags": [
-          "Brewer Management",
-          "getAlertConsumptionCounts"
+          "Brewer Management"
         ],
         "summary": "getAlertConsumptionCounts",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
@@ -406,41 +398,44 @@
         }
       }
     },
-    "/ic/api/AMSGetbrewerdetail/1.0/getBrewerDetail": {
+    "/BrewerDetail/{assetId}": {
       "get": {
         "tags": [
-          "Brewer Management",
-          "getBrewerDetail"
+          "Brewer Management"
         ],
-        "summary": "getBrewerDetail",
+        "summary": "get Brewer Details",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
         "operationId": "getBrewerDetail",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "DeviceId",
-            "in": "query",
-            "description": "pass an optional DeviceId string",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/partnerId"
           },
           {
-            "name": "SerialNumber",
-            "in": "query",
-            "description": "pass an optional DeviceId string",
-            "required": false,
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "pass the asset Id string",
+            "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "search results matching criteria",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BrewerDetailsList"
+                "$ref": "#/definitions/BrewerDetail"
               }
             }
           },
@@ -450,11 +445,10 @@
         }
       }
     },
-    "/ic/api/AMSGetbrewerlist/1.0/getBrewerList": {
+    "/getBrewerList": {
       "get": {
         "tags": [
-          "Brewer Management",
-          "getBrewerList"
+          "Brewer Management"
         ],
         "summary": "getBrewerList",
         "description": "getBrewerList",
@@ -535,15 +529,19 @@
         }
       }
     },
-    "/AccountContacts/{accountId}": {
+    "/BusinessAccountContacts/{accountId}": {
       "get": {
         "tags": [
-          "Install",
-          "getBusinessAccountContact"
+          "Install"
         ],
         "summary": "get list of contacts for  Business Account",
         "description": "get list of contacts for  Business Account",
         "operationId": "getBusinessAccountContact",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -552,11 +550,17 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/partnerID"
+          },
+          {
             "name": "accountId",
             "in": "path",
             "description": "pass a BusinessAccountId string for looking up user",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
           }
         ],
         "responses": {
@@ -578,15 +582,20 @@
         }
       }
     },
-    "/{partnerId}/BrewerDetailInstall/{userId}": {
+    "/BrewerDetailInstall/{serialNum}": {
       "get": {
         "tags": [
           "Install",
-          "getBrewerDetailInstall"
+          "Brewer Management"
         ],
         "summary": "get Brewer Info during Install",
         "description": "This API is to be used during Installation for looking up Serial Number",
         "operationId": "getBrewerDetailInstall",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -595,25 +604,17 @@
         ],
         "parameters": [
           {
-            "name": "SerialNumber",
-            "in": "query",
+            "name": "serialNum",
+            "in": "path",
             "description": "pass a SerialNumber string for looking up user",
             "required": true,
             "type": "string"
           },
           {
-            "name": "partnerId",
-            "in": "path",
-            "description": "pass the KAD Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/partnerID"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "pass the UserId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/requesterID"
           }
         ],
         "responses": {
@@ -622,7 +623,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BrewerDetailsList"
+                "$ref": "#/definitions/BrewerDetail"
               }
             }
           },
@@ -638,12 +639,16 @@
     "/UserOrgList/{userId}": {
       "get": {
         "tags": [
-          "Install",
-          "getUserOrgList"
+          "Install"
         ],
         "summary": "Get a List of KAD Accounts for a user",
         "description": "This API is to retrieve list of KAD Accounts for logged in user",
         "operationId": "getUserOrgList",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -652,11 +657,13 @@
         ],
         "parameters": [
           {
-            "name": "userId",
-            "in": "path",
-            "description": "pass the UserId string for looking up user",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/partnerID"
+          },
+          {
+            "$ref": "#/parameters/userId"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
           }
         ],
         "responses": {
@@ -678,11 +685,11 @@
         }
       }
     },
-    "/ic/api/AMSCreateofficeaccount/1.0/createOfficeAccount": {
+    "/createOfficeAccount": {
       "post": {
         "tags": [
-          "Install",
-          "createOfficeAccount"
+          "Account Management",
+          "Install"
         ],
         "summary": "createOfficeAccount",
         "description": "createOfficeAccount",
@@ -723,11 +730,10 @@
         }
       }
     },
-    "/ic/api/AMSGetbrewerlocationlist/1.0/getBrewerLocationList": {
+    "/getBrewerLocationList": {
       "get": {
         "tags": [
-          "Install",
-          "getBrewerLocationList"
+          "Install"
         ],
         "summary": "getBrewerLocationList",
         "description": "getBrewerLocationList",
@@ -768,11 +774,10 @@
         }
       }
     },
-    "/ic/api/AMSUpdatebrewer/1.0/updateBrewer": {
+    "/updateBrewer": {
       "patch": {
         "tags": [
-          "Install",
-          "updateBrewer"
+          "Brewer Management"
         ],
         "summary": "updateBrewer",
         "description": "updateBrewer",
@@ -813,15 +818,19 @@
         }
       }
     },
-    "/{partnerId}/InstallRequest/{userId}": {
+    "/InstallRequest": {
       "post": {
         "tags": [
-          "Install",
-          "submitInstallationRequest"
+          "Install"
         ],
         "summary": "Submit an Installation Request",
         "description": "This API is to submit an installation Request on confirmation page",
         "operationId": "submitInstallationRequest",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -830,18 +839,10 @@
         ],
         "parameters": [
           {
-            "name": "partnerId",
-            "in": "path",
-            "description": "pass a SerialNumber string for looking up user",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/partnerID"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "pass a SerialNumber string for looking up user",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/requesterID"
           },
           {
             "in": "body",
@@ -866,11 +867,10 @@
         }
       }
     },
-    "/ic/api/AMSCreateuser/1.0/createUser": {
+    "/createUser": {
       "post": {
         "tags": [
-          "Install",
-          "createUser"
+          "Install"
         ],
         "summary": "createUser",
         "description": "createUser",
@@ -911,11 +911,10 @@
         }
       }
     },
-    "/ic/api/AMSUninstallbrewer/1.0/uninstallBrewer": {
+    "/uninstallBrewer": {
       "post": {
         "tags": [
-          "Install",
-          "uninstallBrewer"
+          "Install"
         ],
         "summary": "uninstallBrewer",
         "description": "uninstallBrewer",
@@ -956,11 +955,10 @@
         }
       }
     },
-    "/ic/api/AMSGetmasterbrandlovs/1.0/getMasterBrandLOVs": {
+    "/getMasterBrandLOVs": {
       "get": {
         "tags": [
-          "Consumption and Alerts",
-          "getMasterBrandLOVs"
+          "Consumption and Alerts"
         ],
         "summary": "getMasterBrandLOVs",
         "description": "getMasterBrandLOVs",
@@ -999,11 +997,10 @@
         }
       }
     },
-    "/ic/api/AMSGetbrandlovs/1.0/getBrandLOVs": {
+    "/getBrandLOVs": {
       "get": {
         "tags": [
-          "Consumption and Alerts",
-          "getBrandLOVs"
+          "Consumption and Alerts"
         ],
         "summary": "getBrandLOVs",
         "description": "getBrandLOVs",
@@ -1042,11 +1039,10 @@
         }
       }
     },
-    "/ic/api/AMSGetvarietyfilter/1.0/getVarietyFilter": {
+    "/getVarietyFilter": {
       "get": {
         "tags": [
-          "Consumption and Alerts",
-          "getVarietyFilter"
+          "Consumption and Alerts"
         ],
         "summary": "getVarietyFilter",
         "description": "getVarietyFilter",
@@ -1085,11 +1081,10 @@
         }
       }
     },
-    "/ic/api/AMSGetalertnamefilter/1.0/getAlertNameFilter": {
+    "/getAlertNameFilter": {
       "get": {
         "tags": [
-          "Consumption and Alerts",
-          "getAlertNameFilter"
+          "Consumption and Alerts"
         ],
         "summary": "getAlertNameFilter",
         "description": "getAlertNameFilter",
@@ -1128,11 +1123,10 @@
         }
       }
     },
-    "/ic/api/AMSGetalertlist/1.0/getAlertList": {
+    "/getAlertList": {
       "get": {
         "tags": [
-          "Consumption and Alerts",
-          "getAlertList"
+          "Consumption and Alerts"
         ],
         "summary": "getAlertList",
         "description": "getAlertList",
@@ -1171,11 +1165,10 @@
         }
       }
     },
-    "/ic/api/AMSGetalertlist/1.0/getAlertResolution": {
+    "/getAlertResolution": {
       "get": {
         "tags": [
-          "Consumption and Alerts",
-          "getAlertResolution"
+          "Consumption and Alerts"
         ],
         "summary": "getAlertResolution",
         "description": "getAlertResolution",
@@ -1214,11 +1207,10 @@
         }
       }
     },
-    "/ic/api/AMSExportalerts/1.0/exportAlerts": {
+    "/exportAlerts": {
       "post": {
         "tags": [
-          "Consumption and Alerts",
-          "exportAlerts"
+          "Consumption and Alerts"
         ],
         "summary": "exportAlerts",
         "description": "exportAlerts",
@@ -1259,11 +1251,10 @@
         }
       }
     },
-    "/ic/api/AMSGetmediapldetail/1.0/getMediaPLDetail": {
+    "/getMediaPLDetail": {
       "get": {
         "tags": [
-          "Media Management",
-          "getMediaPLDetail"
+          "Media Management"
         ],
         "summary": "getMediaPLDetail",
         "description": "getMediaPLDetail",
@@ -1316,11 +1307,10 @@
         }
       }
     },
-    "/ic/api/AMSGetmediapllist/1.0/getMediaPLList": {
+    "/getMediaPLList": {
       "get": {
         "tags": [
-          "Media Management",
-          "getMediaPLList"
+          "Media Management"
         ],
         "summary": "getMediaPLList",
         "description": "getMediaPLList",
@@ -1373,11 +1363,10 @@
         }
       }
     },
-    "/ic/api/AMSCreatemediaplaylist/1.0/createMediaPlayList": {
+    "/createMediaPlayList": {
       "post": {
         "tags": [
-          "Media Management",
-          "createMediaPlayList"
+          "Media Management"
         ],
         "summary": "createMediaPlayList",
         "description": "createMediaPlayList",
@@ -1418,11 +1407,10 @@
         }
       }
     },
-    "/ic/api/AMSPublishmedia/1.0/publishMedia": {
+    "/publishMedia": {
       "post": {
         "tags": [
-          "Media Management",
-          "publishMedia"
+          "Media Management"
         ],
         "summary": "publishMedia",
         "description": "publishMedia",
@@ -1463,11 +1451,10 @@
         }
       }
     },
-    "/ic/api/AMSUnpublishmedia/1.0/unpublishMedia": {
+    "/unpublishMedia": {
       "post": {
         "tags": [
-          "Media Management",
-          "unpublishMedia"
+          "Media Management"
         ],
         "summary": "unpublishMedia",
         "description": "unpublishMedia",
@@ -1508,11 +1495,10 @@
         }
       }
     },
-    "/ic/api/AMSGetalertcountsbycriticality/1.0/getAlertCountsByCriticality": {
+    "/getAlertCountsByCriticality": {
       "get": {
         "tags": [
-          "Dashboard",
-          "getAlertCountsByCriticality"
+          "Dashboard"
         ],
         "summary": "getAlertCountsByCriticality",
         "description": "getAlertCountsByCriticality",
@@ -1551,11 +1537,10 @@
         }
       }
     },
-    "/ic/api/AMSGetbrewerstatistics/1.0/getbrewerStatistics": {
+    "/getbrewerStatistics": {
       "post": {
         "tags": [
-          "Dashboard",
-          "getbrewerStatistics"
+          "Dashboard"
         ],
         "summary": "getbrewerStatistics",
         "description": "getbrewerStatistics",
@@ -1596,11 +1581,10 @@
         }
       }
     },
-    "/ic/api/AMSGetaccountsbyconsumption/1.0/getAccountsByConsumption": {
+    "/getAccountsByConsumption": {
       "post": {
         "tags": [
-          "Dashboard",
-          "getAccountsByConsumption"
+          "Dashboard"
         ],
         "summary": "getAccountsByConsumption",
         "description": "getAccountsByConsumption",
@@ -1641,11 +1625,10 @@
         }
       }
     },
-    "/ic/api/AMSGetavgbrewers&Consumption/1.0/getavgBrewersConsumption": {
+    "/getavgBrewersConsumption": {
       "post": {
         "tags": [
-          "Dashboard",
-          "getavgBrewersConsumption"
+          "Dashboard"
         ],
         "summary": "getavgBrewersConsumption",
         "description": "getavgBrewersConsumption",
@@ -1686,11 +1669,10 @@
         }
       }
     },
-    "/ic/api/AMSConsumption/1.0/getAlertandConsumptionCounts": {
+    "/getAlertandConsumptionCounts": {
       "post": {
         "tags": [
-          "Consumption and Alerts",
-          "getAlertandConsumptionCounts"
+          "Consumption and Alerts"
         ],
         "summary": "getAlertandConsumptionCounts",
         "description": "getAlertandConsumptionCounts",
@@ -1731,15 +1713,19 @@
         }
       }
     },
-    "/ic/api/AMSConsumption/1.0/getConsumptionList": {
+    "/getConsumptionList": {
       "post": {
         "tags": [
-          "Consumption and Alerts",
-          "getConsumptionList"
+          "Consumption and Alerts"
         ],
         "summary": "getConsumptionList",
         "description": "getConsumptionList",
         "operationId": "getConsumptionList",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -1747,6 +1733,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/partnerId"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
           {
             "in": "body",
             "name": "Consumption",
@@ -1776,11 +1768,10 @@
         }
       }
     },
-    "/ic/api/AMSGetnotificationscount/1.0/getNotificationsCount": {
+    "/getNotificationsCount": {
       "get": {
         "tags": [
-          "Dashboard",
-          "getNotificationsCount"
+          "Dashboard"
         ],
         "summary": "getNotificationsCount",
         "description": "getNotificationsCount",
@@ -1819,11 +1810,10 @@
         }
       }
     },
-    "/ic/api/AMSGetkadaccountnamefilter/1.0/getKADAccountNameFilter": {
+    "/getKADAccountNameFilter": {
       "get": {
         "tags": [
-          "Account Management",
-          "getKADAccountNameFilter"
+          "Account Management"
         ],
         "summary": "getKADAccountNameFilter",
         "description": "getKADAccountNameFilter",
@@ -1862,16 +1852,20 @@
         }
       }
     },
-    "/AccountLOVs/{partnerId}": {
+    "/BusinessAccountLOVs/{partnerId}": {
       "get": {
         "tags": [
           "Account Management",
-          "getBusinessAccountLoVByKADAccount",
           "Install"
         ],
         "summary": "get List of Business Accounts by KAD for LOV",
         "description": "get List of Business Accounts by KAD for LOV",
         "operationId": "getBusinessAccountLoVByKADAccount",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -1880,9 +1874,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
             "name": "partnerId",
             "in": "path",
-            "description": "pass an KADAccountName string for getting Business account list based on account name",
+            "description": "pass the KAD Account Id to pull related Business Account Names",
             "required": true,
             "type": "string"
           },
@@ -1913,10 +1913,10 @@
         }
       }
     },
-    "/ic/api/AMSGetKADAccountByUser/1.0/getKADAccountLoVByUser": {
+    "/getKADAccountLoVByUser": {
       "get": {
         "tags": [
-          "Account Management,getKADAccountLoVByUser"
+          "Account Management"
         ],
         "summary": "getKADAccountLoVByUser",
         "description": "getKADAccountLoVByUser",
@@ -1958,11 +1958,16 @@
     "/registerBrewer": {
       "post": {
         "tags": [
-          "Install,registerBrewer"
+          "Install"
         ],
         "summary": "Trigger Brewer RegistrationProcess",
         "description": "Trigger Brewer RegistrationProcess",
         "operationId": "registerBrewer",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -1971,12 +1976,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
             "in": "body",
-            "name": "BrewerDetailsList",
+            "name": "BrewerRegRequest",
             "description": "register Brewer request parameters",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ServiceRequest"
+              "$ref": "#/definitions/RegistrationRequest"
             }
           }
         ],
@@ -2111,6 +2122,196 @@
           "type": "string",
           "format": "uuid",
           "example": "ContactId"
+        }
+      }
+    },
+    "RegistrationRequest": {
+      "type": "object",
+      "required": [
+        "assetId",
+        "brewerPartnerId",
+        "partnerGroupId",
+        "businessAccountId",
+        "businessAccGroupId",
+        "contactId",
+        "contactName",
+        "placementLocation",
+        "registrationApprovalStatus",
+        "serialNumber",
+        "deviceId",
+        "assetTypeID",
+        "ioTOrgID"
+      ],
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "ast-000000000abc"
+        },
+        "brewerPartnerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "ka-000000000a1"
+        },
+        "partnerGroupId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "pg-000001"
+        },
+        "businessAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "ba-0000001"
+        },
+        "businessAccGroupId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "bag-0000001"
+        },
+        "contactId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "c-00000001"
+        },
+        "contactName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "John Smith"
+        },
+        "placementLocation": {
+          "type": "string",
+          "format": "uuid",
+          "example": "1st Floor Cafetaria"
+        },
+        "registrationApprovalStatus": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Approved"
+        },
+        "serialNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "4500.000.00001"
+        },
+        "deviceId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "d-0000001"
+        },
+        "assetTypeID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "asset-type-001"
+        },
+        "ioTOrgID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Org-001"
+        }
+      }
+    },
+    "BrewerDetail": {
+      "type": "object",
+      "required": [
+        "assetId",
+        "bewCount",
+        "brewerPartnerId",
+        "contactId",
+        "deviceType",
+        "dataRecipeVer",
+        "appUIVersion",
+        "model",
+        "networkConnection",
+        "placementLocation",
+        "registrationStatus",
+        "registrationDate",
+        "serialNumber",
+        "status",
+        "warrantyEndDate",
+        "deviceId"
+      ],
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "450.000.0000"
+        },
+        "deviceType": {
+          "type": "string",
+          "format": "uuid",
+          "example": "pod2cup"
+        },
+        "placementLocation": {
+          "type": "string",
+          "format": "uuid",
+          "example": "1st floor Cafetaria"
+        },
+        "status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Registered"
+        },
+        "registrationStatus": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Approved"
+        },
+        "registrationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC Datetime when registration request was approved",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "deviceId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000123abc"
+        },
+        "assetId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "00000002347647a"
+        },
+        "warrantyEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Warranty End Date in OEC",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "model": {
+          "type": "string",
+          "format": "uuid",
+          "example": "K4500"
+        },
+        "dataRecipeVer": {
+          "type": "string",
+          "format": "uuid",
+          "example": "1.1.1"
+        },
+        "appUIVersion": {
+          "type": "string",
+          "format": "uuid",
+          "example": "0.0.1"
+        },
+        "brewCount": {
+          "type": "integer",
+          "format": "uuid",
+          "example": 0
+        },
+        "networkConnection": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Online"
+        },
+        "brewerPartnerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "d00000000123"
+        },
+        "contactId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "c00000000123"
         }
       }
     },
@@ -2982,44 +3183,50 @@
     "RegisterBrewerResponse": {
       "type": "object",
       "required": [
-        "Status",
-        "ErrorMessage"
+        "status",
+        "errorMessage",
+        "requestId"
       ],
       "properties": {
-        "Status": {
+        "status": {
           "type": "string",
           "format": "uuid",
           "example": "Success"
         },
-        "ErrorMessage": {
+        "errorMessage": {
           "type": "string",
           "format": "uuid",
           "example": "NA"
+        },
+        "requestId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "SR00001"
         }
       }
     },
-     "ResetPasswordResponse": {
+    "ResetPasswordResponse": {
       "type": "object",
       "required": [
-        "Url",
-        "Status",
-        "ErrorMessage"
+        "status",
+        "errorMessage",
+        "url"
       ],
       "properties": {
-        "Url": {
-          "type": "string",
-          "format": "uuid",
-          "example": "www.google.com"
-        },
-        "Status": {
+        "status": {
           "type": "string",
           "format": "uuid",
           "example": "Success"
         },
-        "ErrorMessage": {
+        "errorMessage": {
           "type": "string",
           "format": "uuid",
           "example": "NA"
+        },
+        "url": {
+          "type": "string",
+          "format": "uuid",
+          "example": "http://localhost/"
         }
       }
     },
@@ -3110,41 +3317,121 @@
     },
     "AccountLOV": {
       "type": "object",
-      "required": [
-        "name",
-        "accountId"
-      ],
       "properties": {
-        "name": {
-          "type": "string",
-          "format": "uuid",
-          "example": "W B Mason"
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 2
         },
-        "accountId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "00000000123abc"
+        "accountLOVs": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "format": "uuid",
+              "example": "W B Mason"
+            },
+            "accountId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "00000000123abc"
+            }
+          },
+          "example": [
+            {
+              "name": "W B Mason",
+              "accountId": "00000000123a"
+            },
+            {
+              "name": "Staples, Inc",
+              "accountId": "00000000123b"
+            }
+          ]
         }
       }
     },
     "ContactLOV": {
       "type": "object",
-      "required": [
-        "name",
-        "contactId"
-      ],
       "properties": {
-        "name": {
-          "type": "string",
-          "format": "uuid",
-          "example": "John Smith"
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 3
         },
-        "contactId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "00000000123a"
+        "contactLOVs": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "contactId": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "example": [
+            {
+              "name": "John Smith",
+              "contactId": "00000000123a"
+            },
+            {
+              "name": "Sara Smith",
+              "contactId": "00000000123b"
+            },
+            {
+              "name": "Mark Taylor",
+              "contactId": "00000000123c"
+            }
+          ]
         }
       }
+    }
+  },
+  "parameters": {
+    "requesterID": {
+      "in": "header",
+      "name": "X-Requester-ID",
+      "type": "string",
+      "required": true,
+      "description": "pass the userId for the requester as a header variable"
+    },
+    "partnerID": {
+      "in": "header",
+      "name": "X-Partner-ID",
+      "type": "string",
+      "required": true,
+      "description": "pass the Partner Accpunt ID of the user as a path parameter"
+    },
+    "partnerId": {
+      "in": "query",
+      "name": "partnerId",
+      "type": "string",
+      "required": true,
+      "description": "pass the Partner Accpunt ID of the user as a query parameter"
+    },
+    "userId": {
+      "in": "path",
+      "name": "userId",
+      "type": "string",
+      "required": true,
+      "description": "pass the userId for the requester as a path variable"
+    }
+  },
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://example.com/oauth/authorize",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "read": "Grants read access",
+        "write": "Grants write access",
+        "admin": "Grants read and write access to administrative information"
+      }
+    },
+    "basicAuth": {
+      "type": "basic"
     }
   }
 }
