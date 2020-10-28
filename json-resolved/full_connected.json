@@ -319,53 +319,11 @@
         }
       }
     },
-    "/getBusinessAccountListFilter": {
+    "/AlertConsumptionCounts/{partnerId}": {
       "get": {
         "tags": [
-          "Brewer Management"
-        ],
-        "summary": "getBusinessAccountListFilter",
-        "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
-        "operationId": "getBusinessAccountListFilter",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "PartnerId",
-            "in": "query",
-            "description": "pass an optional PartnerId string",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "BusinessAccountName",
-            "in": "query",
-            "description": "pass an optional BusinessAccountName string",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "search results matching criteria",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AccountList"
-              }
-            }
-          },
-          "400": {
-            "description": "bad input parameter"
-          }
-        }
-      }
-    },
-    "/getAlertConsumptionCounts": {
-      "get": {
-        "tags": [
-          "Brewer Management"
+          "Brewer Management",
+          "Consumption and Alerts"
         ],
         "summary": "getAlertConsumptionCounts",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
@@ -373,27 +331,53 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-            "name": "AlertName",
-            "in": "query",
-            "description": "pass an optional AlertName string",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/path_partnerId"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "$ref": "#/parameters/header_partnerID"
           }
         ],
         "responses": {
           "200": {
             "description": "search results matching criteria",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Alerts"
+              "type": "object",
+              "properties": {
+                "partnerId": {
+                  "type": "string",
+                  "example": "p0000000001"
+                },
+                "counts": {
+                  "type": "object",
+                  "properties": {
+                    "alertcount": {
+                      "type": "integer",
+                      "example": 5
+                    },
+                    "consumptioncount": {
+                      "type": "integer",
+                      "example": 1054
+                    }
+                  }
+                }
               }
             }
           },
           "400": {
             "description": "bad input parameter"
+          },
+          "404": {
+            "description": "Account Record not found"
           }
         }
       }
@@ -416,7 +400,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/partnerId"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/requesterID"
@@ -441,6 +425,9 @@
           },
           "400": {
             "description": "bad input parameter"
+          },
+          "404": {
+            "description": "Asset Record Not Found"
           }
         }
       }
@@ -550,7 +537,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/partnerID"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "name": "accountId",
@@ -611,7 +598,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/partnerID"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/requesterID"
@@ -657,7 +644,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/partnerID"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/userId"
@@ -839,7 +826,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/partnerID"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/requesterID"
@@ -1669,50 +1656,6 @@
         }
       }
     },
-    "/getAlertandConsumptionCounts": {
-      "post": {
-        "tags": [
-          "Consumption and Alerts"
-        ],
-        "summary": "getAlertandConsumptionCounts",
-        "description": "getAlertandConsumptionCounts",
-        "operationId": "getAlertandConsumptionCounts",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Consumption",
-            "description": "get Alert and Consumption Counts",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/Consumption"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "results for get Alert and Consumption Counts",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Consumption"
-              }
-            }
-          },
-          "400": {
-            "description": "invalid input, object invalid"
-          },
-          "409": {
-            "description": "an existing item already exists"
-          }
-        }
-      }
-    },
     "/getConsumptionList": {
       "post": {
         "tags": [
@@ -1734,7 +1677,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/partnerId"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/requesterID"
@@ -1810,52 +1753,11 @@
         }
       }
     },
-    "/getKADAccountNameFilter": {
-      "get": {
-        "tags": [
-          "Account Management"
-        ],
-        "summary": "getKADAccountNameFilter",
-        "description": "getKADAccountNameFilter",
-        "operationId": "getKADAccountNameFilter",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "KADAccountName",
-            "in": "query",
-            "description": "pass an optional KADAccountName string for getting KAD account list based on account name",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "results for getting KAD account list based on account name",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AccountList"
-              }
-            }
-          },
-          "400": {
-            "description": "invalid input, object invalid"
-          },
-          "409": {
-            "description": "an existing item already exists"
-          }
-        }
-      }
-    },
     "/BusinessAccountLOVs/{partnerId}": {
       "get": {
         "tags": [
           "Account Management",
+          "Brewer Management",
           "Install"
         ],
         "summary": "get List of Business Accounts by KAD for LOV",
@@ -1874,17 +1776,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/partnerID"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/requesterID"
           },
           {
-            "name": "partnerId",
-            "in": "path",
-            "description": "pass the KAD Account Id to pull related Business Account Names",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/path_partnerId"
           },
           {
             "name": "accountName",
@@ -1976,7 +1874,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/partnerID"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/requesterID"
@@ -3335,16 +3233,23 @@
               "type": "string",
               "format": "uuid",
               "example": "00000000123abc"
+            },
+            "accountNumber": {
+              "type": "string",
+              "format": "uuid",
+              "example": "a0000000123abc"
             }
           },
           "example": [
             {
               "name": "W B Mason",
-              "accountId": "00000000123a"
+              "accountId": "00000000123a",
+              "accountNumber": "a00000000123a"
             },
             {
               "name": "Staples, Inc",
-              "accountId": "00000000123b"
+              "accountId": "00000000123b",
+              "accountNumber": "a00000000123a"
             }
           ]
         }
@@ -3368,20 +3273,27 @@
             "contactId": {
               "type": "string",
               "format": "uuid"
+            },
+            "contactNumber": {
+              "type": "string",
+              "format": "uuid"
             }
           },
           "example": [
             {
               "name": "John Smith",
-              "contactId": "00000000123a"
+              "contactId": "00000000123a",
+              "contactNumber": "c00000000123a"
             },
             {
               "name": "Sara Smith",
-              "contactId": "00000000123b"
+              "contactId": "00000000123b",
+              "contactNumber": "c00000000123b"
             },
             {
               "name": "Mark Taylor",
-              "contactId": "00000000123c"
+              "contactId": "00000000123c",
+              "contactNumber": "c00000000123c"
             }
           ]
         }
@@ -3396,19 +3308,26 @@
       "required": true,
       "description": "pass the userId for the requester as a header variable"
     },
-    "partnerID": {
+    "header_partnerID": {
       "in": "header",
       "name": "X-Partner-ID",
       "type": "string",
       "required": true,
       "description": "pass the Partner Accpunt ID of the user as a path parameter"
     },
-    "partnerId": {
+    "query_partnerId": {
       "in": "query",
       "name": "partnerId",
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "pass the Partner Accpunt ID of the user as a query parameter"
+    },
+    "path_partnerId": {
+      "in": "path",
+      "name": "partnerId",
+      "type": "string",
+      "required": true,
+      "description": "pass the Partner Accpunt ID of the user as a path parameter"
     },
     "userId": {
       "in": "path",
