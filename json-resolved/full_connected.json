@@ -226,8 +226,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "results for reset password (success/failure)"
+         "200": {
+            "description": "Results for Reset Passwrod",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResetPasswordResponse"
+              }
+            }
           },
           "400": {
             "description": "invalid input, object invalid"
@@ -2980,6 +2986,31 @@
         "ErrorMessage"
       ],
       "properties": {
+        "Status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Success"
+        },
+        "ErrorMessage": {
+          "type": "string",
+          "format": "uuid",
+          "example": "NA"
+        }
+      }
+    },
+     "ResetPasswordResponse": {
+      "type": "object",
+      "required": [
+        "Url",
+        "Status",
+        "ErrorMessage"
+      ],
+      "properties": {
+        "Url": {
+          "type": "string",
+          "format": "uuid",
+          "example": "www.google.com"
+        },
         "Status": {
           "type": "string",
           "format": "uuid",
