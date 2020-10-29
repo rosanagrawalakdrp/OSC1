@@ -1306,7 +1306,7 @@
         "tags": [
           "Media Management"
         ],
-        "summary": "createMediaPlayList  -- put the post into the 'Media Playlist' portion  get + post,
+        "summary": "createMediaPlayList  -- put the post into the 'Media Playlist' portion  get + post",
         "description": "createMediaPlayList",
         "operationId": "createMediaPlayList",
         "consumes": [
