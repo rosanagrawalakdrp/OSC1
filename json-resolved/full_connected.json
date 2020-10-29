@@ -760,6 +760,7 @@
       "post": {
         "tags": [
           "Install"
+          "submitInstallationRequest"
         ],
         "summary": "Submit an Installation Request",
         "description": "This API is to submit an installation Request on confirmation page",
