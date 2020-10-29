@@ -1931,6 +1931,8 @@
         "SerialNumber",
         "Status",
         "WarrantyEndDate",
+        "AppUIVer",
+        "DataRecipeVer",
         "deviceId"
       ],
       "properties": {
@@ -2018,6 +2020,16 @@
           "type": "string",
           "format": "uuid",
           "example": "KADAccountId"
+        },
+        "AppUIVer": {
+          "type": "string",
+          "format": "uuid",
+          "example": "AppUIVer"
+        },
+        "DataRecipeVer": {
+          "type": "string",
+          "format": "uuid",
+          "example": "DataRecipeVer"
         },
         "ContactId": {
           "type": "string",
