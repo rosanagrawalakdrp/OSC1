@@ -48,14 +48,14 @@
     "https"
   ],
   "paths": {
-    "/getUserList": {
+    "/UserList": {
       "get": {
         "tags": [
           "User Management"
         ],
         "summary": "get User List",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
-        "operationId": "getUserList",
+        "operationId": "UserList",
         "produces": [
           "application/json"
         ],
@@ -98,14 +98,14 @@
         }
       }
     },
-    "/getUserInfo": {
+    "/UserInfo": {
       "get": {
         "tags": [
           "User Management"
         ],
         "summary": "get User Info",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
-        "operationId": "getUserInfo",
+        "operationId": "UserInfo",
         "produces": [
           "application/json"
         ],
@@ -283,14 +283,14 @@
         }
       }
     },
-    "/getPlacementLocListFilter": {
+    "/PlacementLocListFilter": {
       "get": {
         "tags": [
           "Brewer Management"
         ],
-        "summary": "getPlacementLocListFilter",
+        "summary": "PlacementLocListFilter",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
-        "operationId": "getPlacementLocListFilter",
+        "operationId": "PlacementLocListFilter",
         "produces": [
           "application/json"
         ],
@@ -325,9 +325,9 @@
           "Brewer Management",
           "Consumption and Alerts"
         ],
-        "summary": "getAlertConsumptionCounts",
+        "summary": "AlertConsumptionCounts",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
-        "operationId": "getAlertConsumptionCounts",
+        "operationId": "AlertConsumptionCounts",
         "produces": [
           "application/json"
         ],
@@ -389,7 +389,7 @@
         ],
         "summary": "get Brewer Details",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
-        "operationId": "getBrewerDetail",
+        "operationId": "BrewerDetail",
         "security": [
           {
             "basicAuth": []
@@ -432,14 +432,14 @@
         }
       }
     },
-    "/getBrewerList": {
+    "/BrewerList": {
       "get": {
         "tags": [
           "Brewer Management"
         ],
-        "summary": "getBrewerList",
-        "description": "getBrewerList",
-        "operationId": "getBrewerList",
+        "summary": "BrewerList",
+        "description": "BrewerList",
+        "operationId": "BrewerList",
         "consumes": [
           "application/json"
         ],
@@ -523,7 +523,7 @@
         ],
         "summary": "get list of contacts for  Business Account",
         "description": "get list of contacts for  Business Account",
-        "operationId": "getBusinessAccountContact",
+        "operationId": "BusinessAccountContacts",
         "security": [
           {
             "basicAuth": []
@@ -577,7 +577,7 @@
         ],
         "summary": "get Brewer Info during Install",
         "description": "This API is to be used during Installation for looking up Serial Number",
-        "operationId": "getBrewerDetailInstall",
+        "operationId": "BrewerDetailInstall",
         "security": [
           {
             "basicAuth": []
@@ -619,55 +619,6 @@
           },
           "404": {
             "description": "Asset Record Not Found"
-          }
-        }
-      }
-    },
-    "/UserOrgList/{userId}": {
-      "get": {
-        "tags": [
-          "Install"
-        ],
-        "summary": "Get a List of KAD Accounts for a user",
-        "description": "This API is to retrieve list of KAD Accounts for logged in user",
-        "operationId": "getUserOrgList",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/header_partnerID"
-          },
-          {
-            "$ref": "#/parameters/userId"
-          },
-          {
-            "$ref": "#/parameters/requesterID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "results for get user list",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AccountLOV"
-              }
-            }
-          },
-          "400": {
-            "description": "invalid input, object invalid"
-          },
-          "404": {
-            "description": "user not found"
           }
         }
       }
@@ -717,14 +668,14 @@
         }
       }
     },
-    "/getBrewerLocationList": {
+    "/BrewerLocationList": {
       "get": {
         "tags": [
           "Install"
         ],
-        "summary": "getBrewerLocationList",
-        "description": "getBrewerLocationList",
-        "operationId": "getBrewerLocationList",
+        "summary": "BrewerLocationList",
+        "description": "BrewerLocationList",
+        "operationId": "BrewerLocationList",
         "consumes": [
           "application/json"
         ],
@@ -809,10 +760,11 @@
       "post": {
         "tags": [
           "Install"
+          "submitInstallationRequest"
         ],
         "summary": "Submit an Installation Request",
         "description": "This API is to submit an installation Request on confirmation page",
-        "operationId": "submitInstallationRequest",
+        "operationId": "InstallationRequest",
         "security": [
           {
             "basicAuth": []
@@ -837,7 +789,7 @@
             "description": "submit Brewer installation request parameters",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceRequest"
+              "$ref": "#/definitions/InstallRequest"
             }
           }
         ],
@@ -942,14 +894,14 @@
         }
       }
     },
-    "/getMasterBrandLOVs": {
+    "/MasterBrandLOVs": {
       "get": {
         "tags": [
           "Consumption and Alerts"
         ],
-        "summary": "getMasterBrandLOVs",
-        "description": "getMasterBrandLOVs",
-        "operationId": "getMasterBrandLOVs",
+        "summary": "MasterBrandLOVs",
+        "description": "MasterBrandLOVs",
+        "operationId": "MasterBrandLOVs",
         "consumes": [
           "application/json"
         ],
@@ -984,14 +936,14 @@
         }
       }
     },
-    "/getBrandLOVs": {
+    "/BrandLOVs": {
       "get": {
         "tags": [
           "Consumption and Alerts"
         ],
-        "summary": "getBrandLOVs",
-        "description": "getBrandLOVs",
-        "operationId": "getBrandLOVs",
+        "summary": "BrandLOVs",
+        "description": "BrandLOVs",
+        "operationId": "BrandLOVs",
         "consumes": [
           "application/json"
         ],
@@ -1026,14 +978,14 @@
         }
       }
     },
-    "/getVarietyFilter": {
+    "/VarietyFilter": {
       "get": {
         "tags": [
           "Consumption and Alerts"
         ],
-        "summary": "getVarietyFilter",
-        "description": "getVarietyFilter",
-        "operationId": "getVarietyFilter",
+        "summary": "VarietyFilter",
+        "description": "VarietyFilter",
+        "operationId": "VarietyFilter",
         "consumes": [
           "application/json"
         ],
@@ -1068,14 +1020,14 @@
         }
       }
     },
-    "/getAlertNameFilter": {
+    "/AlertNameFilter": {
       "get": {
         "tags": [
           "Consumption and Alerts"
         ],
-        "summary": "getAlertNameFilter",
-        "description": "getAlertNameFilter",
-        "operationId": "getAlertNameFilter",
+        "summary": "AlertNameFilter",
+        "description": "AlertNameFilter",
+        "operationId": "AlertNameFilter",
         "consumes": [
           "application/json"
         ],
@@ -1110,14 +1062,14 @@
         }
       }
     },
-    "/getAlertList": {
+    "/AlertList": {
       "get": {
         "tags": [
           "Consumption and Alerts"
         ],
-        "summary": "getAlertList",
-        "description": "getAlertList",
-        "operationId": "getAlertList",
+        "summary": "AlertList Detail output (grid)",
+        "description": "AlertList",
+        "operationId": "AlertList",
         "consumes": [
           "application/json"
         ],
@@ -1152,14 +1104,14 @@
         }
       }
     },
-    "/getAlertResolution": {
+    "/AlertResolution": {
       "get": {
         "tags": [
           "Consumption and Alerts"
         ],
-        "summary": "getAlertResolution",
-        "description": "getAlertResolution",
-        "operationId": "getAlertResolution",
+        "summary": "AlertResolution Lookup",
+        "description": "AlertResolution",
+        "operationId": "AlertResolution",
         "consumes": [
           "application/json"
         ],
@@ -1238,14 +1190,14 @@
         }
       }
     },
-    "/getMediaPLDetail": {
+    "/MediaPLDetail": {
       "get": {
         "tags": [
           "Media Management"
         ],
-        "summary": "getMediaPLDetail",
-        "description": "getMediaPLDetail",
-        "operationId": "getMediaPLDetail",
+        "summary": "Media Playlist Detail",
+        "description": "Media Playlist Detail",
+        "operationId": "MediaPLDetail",
         "consumes": [
           "application/json"
         ],
@@ -1294,14 +1246,14 @@
         }
       }
     },
-    "/getMediaPLList": {
+    "/MediaPLList": {
       "get": {
         "tags": [
           "Media Management"
         ],
-        "summary": "getMediaPLList",
-        "description": "getMediaPLList",
-        "operationId": "getMediaPLList",
+        "summary": "Media Play List",
+        "description": "Media Play List",
+        "operationId": "MediaPList",
         "consumes": [
           "application/json"
         ],
@@ -1355,7 +1307,7 @@
         "tags": [
           "Media Management"
         ],
-        "summary": "createMediaPlayList",
+        "summary": "createMediaPlayList  -- put the post into the 'Media Playlist' portion  get + post",
         "description": "createMediaPlayList",
         "operationId": "createMediaPlayList",
         "consumes": [
@@ -1482,14 +1434,14 @@
         }
       }
     },
-    "/getAlertCountsByCriticality": {
+    "/AlertCountsByCriticality": {
       "get": {
         "tags": [
           "Dashboard"
         ],
-        "summary": "getAlertCountsByCriticality",
-        "description": "getAlertCountsByCriticality",
-        "operationId": "getAlertCountsByCriticality",
+        "summary": "AlertCountsByCriticality",
+        "description": "AlertCountsByCriticality",
+        "operationId": "AlertCountsByCriticality",
         "consumes": [
           "application/json"
         ],
@@ -1524,14 +1476,14 @@
         }
       }
     },
-    "/getbrewerStatistics": {
+    "/brewerStatistics": {
       "post": {
         "tags": [
           "Dashboard"
         ],
-        "summary": "getbrewerStatistics",
-        "description": "getbrewerStatistics",
-        "operationId": "getbrewerStatistics",
+        "summary": "brewerStatistics",
+        "description": "brewerStatistics",
+        "operationId": "brewerStatistics",
         "consumes": [
           "application/json"
         ],
@@ -1568,14 +1520,14 @@
         }
       }
     },
-    "/getAccountsByConsumption": {
+    "/AccountsByConsumption": {
       "post": {
         "tags": [
           "Dashboard"
         ],
-        "summary": "getAccountsByConsumption",
+        "summary": "AccountsByConsumption",
         "description": "getAccountsByConsumption",
-        "operationId": "getAccountsByConsumption",
+        "operationId": "AccountsByConsumption",
         "consumes": [
           "application/json"
         ],
@@ -1612,14 +1564,14 @@
         }
       }
     },
-    "/getavgBrewersConsumption": {
+    "/avgBrewersConsumption": {
       "post": {
         "tags": [
           "Dashboard"
         ],
-        "summary": "getavgBrewersConsumption",
+        "summary": "avgBrewersConsumption",
         "description": "getavgBrewersConsumption",
-        "operationId": "getavgBrewersConsumption",
+        "operationId": "avgBrewersConsumption",
         "consumes": [
           "application/json"
         ],
@@ -1656,14 +1608,14 @@
         }
       }
     },
-    "/getConsumptionList": {
+    "/consumptionList": {
       "post": {
         "tags": [
           "Consumption and Alerts"
         ],
         "summary": "getConsumptionList",
-        "description": "getConsumptionList",
-        "operationId": "getConsumptionList",
+        "description": "getConsumptionList  -- output as grid detail in vbcs",
+        "operationId": "consumptionList",
         "security": [
           {
             "basicAuth": []
@@ -1711,14 +1663,14 @@
         }
       }
     },
-    "/getNotificationsCount": {
+    "/NotificationsCount": {
       "get": {
         "tags": [
           "Dashboard"
         ],
         "summary": "getNotificationsCount",
         "description": "getNotificationsCount",
-        "operationId": "getNotificationsCount",
+        "operationId": "NotificationsCount",
         "consumes": [
           "application/json"
         ],
@@ -1753,72 +1705,14 @@
         }
       }
     },
-    "/BusinessAccountLOVs/{partnerId}": {
-      "get": {
-        "tags": [
-          "Account Management",
-          "Brewer Management",
-          "Install"
-        ],
-        "summary": "get List of Business Accounts by KAD for LOV",
-        "description": "get List of Business Accounts by KAD for LOV",
-        "operationId": "getBusinessAccountLoVByKADAccount",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/header_partnerID"
-          },
-          {
-            "$ref": "#/parameters/requesterID"
-          },
-          {
-            "$ref": "#/parameters/path_partnerId"
-          },
-          {
-            "name": "accountName",
-            "in": "query",
-            "description": "pass an optional account name string to filter list of business accounts",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "results for getting Business Account list based on KAD account",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AccountLOV"
-              }
-            }
-          },
-          "400": {
-            "description": "invalid input, object invalid"
-          },
-          "404": {
-            "description": "KAD Account does not exist"
-          }
-        }
-      }
-    },
-    "/getKADAccountLoVByUser": {
+    "/KADAccountLoVByUser": {
       "get": {
         "tags": [
           "Account Management"
         ],
         "summary": "getKADAccountLoVByUser",
         "description": "getKADAccountLoVByUser",
-        "operationId": "getKADAccountLoVByUser",
+        "operationId": "KADAccountLoVByUser",
         "consumes": [
           "application/json"
         ],
@@ -3101,30 +2995,15 @@
         }
       }
     },
-    "ServiceRequest": {
+    "InstallRequest": {
       "type": "object",
       "required": [
-        "requestType",
         "serialNum",
-        "assetId",
-        "deviceId",
-        "modelNum",
-        "dataRecipeVer",
-        "appUIVer",
         "requestedPartnerId",
-        "officeAccountId",
-        "brewerLocation",
-        "contactId",
         "flgSNScanned",
-        "requestId"
       ],
       "properties": {
-        "requestType": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Success"
-        },
-        "serialNum": {
+       "serialNum": {
           "type": "string",
           "format": "uuid",
           "example": "4500.000.0000"
@@ -3132,57 +3011,92 @@
         "assetId": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "OracleEC_ID"
         },
-        "deviceId": {
+        "deviceId_oracle": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Oracle IOT ID"
+        },
+         "deviceId_azure": {
+          "type": "string",
+          "format": "uuid",
+          "example": "AZURE IOT ID"
         },
         "modelNum": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "K4500"
         },
         "dataRecipeVer": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "1.41.15.15"
         },
         "appUIVer": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "2.55.186"
+        },
+        "NetworkConnection": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Connected"
+        },
+        "Firmware": {
+          "type": "string",
+          "format": "uuid",
+          "example": "2.55.186"
         },
         "requestedPartnerId": {
           "type": "string",
           "format": "uuid",
           "example": "Success"
         },
-        "officeAccountId": {
+        "KADAccountName": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Arndorfer HQ"
+        },
+        "BusinessAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN123456"
+        },
+        "BusinessAccountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Arndorfer Enterprises"
         },
         "brewerLocation": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Kitchen Counter"
         },
         "contactId": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "FSN123456"
         },
-        "flgSNScanned": {
+        "Scanned": {
+          "type": "boolean",
+          "format": "uuid",
+          "example": "TRUE"
+        },
+        "RequestorUserName": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "bryan.arndorfer_ex@kdrp.com"
         },
-        "requestId": {
+        "RequestorFirstName": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Bryan"
+        },
+        "RequestorLastName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Arndorfer"
         }
       }
     },
