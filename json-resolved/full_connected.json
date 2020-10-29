@@ -759,7 +759,7 @@
     "/InstallRequest": {
       "post": {
         "tags": [
-          "Install"
+          "Install",
           "submitInstallationRequest"
         ],
         "summary": "Submit an Installation Request",
