@@ -788,7 +788,7 @@
             "description": "submit Brewer installation request parameters",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceRequest"
+              "$ref": "#/definitions/InstallRequest"
             }
           }
         ],
@@ -2994,30 +2994,15 @@
         }
       }
     },
-    "ServiceRequest": {
+    "InstallRequest": {
       "type": "object",
       "required": [
-        "requestType",
         "serialNum",
-        "assetId",
-        "deviceId",
-        "modelNum",
-        "dataRecipeVer",
-        "appUIVer",
         "requestedPartnerId",
-        "officeAccountId",
-        "brewerLocation",
-        "contactId",
         "flgSNScanned",
-        "requestId"
       ],
       "properties": {
-        "requestType": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Success"
-        },
-        "serialNum": {
+       "serialNum": {
           "type": "string",
           "format": "uuid",
           "example": "4500.000.0000"
@@ -3025,57 +3010,92 @@
         "assetId": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "OracleEC_ID"
         },
-        "deviceId": {
+        "deviceId_oracle": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Oracle IOT ID"
+        },
+         "deviceId_azure": {
+          "type": "string",
+          "format": "uuid",
+          "example": "AZURE IOT ID"
         },
         "modelNum": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "K4500"
         },
         "dataRecipeVer": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "1.41.15.15"
         },
         "appUIVer": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "2.55.186"
+        },
+        "NetworkConnection": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Connected"
+        },
+        "Firmware": {
+          "type": "string",
+          "format": "uuid",
+          "example": "2.55.186"
         },
         "requestedPartnerId": {
           "type": "string",
           "format": "uuid",
           "example": "Success"
         },
-        "officeAccountId": {
+        "KADAccountName": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Arndorfer HQ"
+        },
+        "BusinessAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN123456"
+        },
+        "BusinessAccountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Arndorfer Enterprises"
         },
         "brewerLocation": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Kitchen Counter"
         },
         "contactId": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "FSN123456"
         },
-        "flgSNScanned": {
+        "Scanned": {
+          "type": "boolean",
+          "format": "uuid",
+          "example": "TRUE"
+        },
+        "RequestorUserName": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "bryan.arndorfer_ex@kdrp.com"
         },
-        "requestId": {
+        "RequestorFirstName": {
           "type": "string",
           "format": "uuid",
-          "example": "Success"
+          "example": "Bryan"
+        },
+        "RequestorLastName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Arndorfer"
         }
       }
     },
