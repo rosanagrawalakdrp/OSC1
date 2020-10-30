@@ -240,7 +240,7 @@
         }
       }
     },
-    "/resendInvite": {
+    "/resendInvite/{userId}": {
       "get": {
         "tags": [
           "User Management"
@@ -253,18 +253,13 @@
         ],
         "parameters": [
           {
-            "name": "KADAccountId",
-            "in": "query",
-            "description": "pass an optional KADAccountId string for looking up user",
-            "required": false,
-            "type": "string"
+             $ref: '#/parameters/userId'
           },
           {
-            "name": "UserId",
-            "in": "query",
-            "description": "pass an optional UserId string for looking up user",
-            "required": false,
-            "type": "string"
+             $ref: '#/parameters/header_partnerID'
+          },
+          {
+             $ref: '#/parameters/requesterID'
           }
         ],
         "responses": {
