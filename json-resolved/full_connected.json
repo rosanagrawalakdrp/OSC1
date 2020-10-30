@@ -1615,7 +1615,7 @@
         ],
         "summary": "getConsumptionList",
         "description": "getConsumptionList",
-        "operationId": "getConsumptionList",
+        "operationId": "ConsumptionList",
         "security": [
           {
             "basicAuth": []
