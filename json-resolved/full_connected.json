@@ -1608,14 +1608,14 @@
         }
       }
     },
-    "/consumptionList": {
-      "post": {
+    "/ConsumptionList/{userId}": {
+      "get": {
         "tags": [
           "Consumption and Alerts"
         ],
         "summary": "getConsumptionList",
-        "description": "getConsumptionList  -- output as grid detail in vbcs",
-        "operationId": "consumptionList",
+        "description": "getConsumptionList",
+        "operationId": "getConsumptionList",
         "security": [
           {
             "basicAuth": []
@@ -1629,19 +1629,83 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/userId"
+          },
+          {
             "$ref": "#/parameters/header_partnerID"
           },
           {
             "$ref": "#/parameters/requesterID"
           },
           {
-            "in": "body",
-            "name": "Consumption",
-            "description": "get Consumption List",
+            "name": "PartnerNum",
+            "in": "query",
+            "description": "pass an optional PartnerNum string for filter",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/Consumption"
-            }
+            "type": "string"
+          },
+          {
+            "name": "AccountNum",
+            "in": "query",
+            "description": "pass one or more optional AccountNum string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "SerialNum",
+            "in": "query",
+            "description": "pass one or more optional SerialNum string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lidType",
+            "in": "query",
+            "description": "pass one or more optional lidType string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "description": "pass one or more optional brand string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "variety",
+            "in": "query",
+            "description": "pass one or more optional variety string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "roastType",
+            "in": "query",
+            "description": "pass one or more optional roastType string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "podType",
+            "in": "query",
+            "description": "pass one or more optional podType string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "brewResult",
+            "in": "query",
+            "description": "pass one or more optional brewResult string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "brewDate",
+            "in": "query",
+            "description": "pass one or more optional brewDate string for filter. multiple values should be comma separated",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1657,8 +1721,8 @@
           "400": {
             "description": "invalid input, object invalid"
           },
-          "409": {
-            "description": "an existing item already exists"
+          "404": {
+            "description": "user Id not found"
           }
         }
       }
@@ -2441,91 +2505,131 @@
     "Consumption": {
       "type": "object",
       "required": [
-        "KADAccountId",
-        "BusinessAccountId",
-        "MasterBrand",
-        "Brand",
-        "LidType",
-        "BrewDate",
-        "Variety",
-        "SerialNum",
-        "KADAccountName",
-        "BusinessAccountName",
-        "UserID",
-        "COUNTConsumption",
-        "COUNTAlert",
-        "AVGConsumption"
+        "placementLoc",
+        "kADAccountId",
+        "kADAccountName",
+        "businessAccountId",
+        "businessAccountName",
+        "masterBrand",
+        "brand",
+        "lidType",
+        "brewDate",
+        "variety",
+        "serialNum",
+        "deviceId",
+        "userID",
+        "rebateEligible",
+        "ownership",
+        "brewResult",
+        "beverageType",
+        "brewSize",
+        "podType"
       ],
       "properties": {
-        "KADAccountId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "KADAccountId"
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 2
         },
-        "BusinessAccountId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "BusinessAccountId"
-        },
-        "MasterBrand": {
-          "type": "string",
-          "format": "uuid",
-          "example": "MasterBrand"
-        },
-        "Brand": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Brand"
-        },
-        "LidType": {
-          "type": "string",
-          "format": "uuid",
-          "example": "LidType"
-        },
-        "BrewDate": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2016-08-29T09:12:33.001Z"
-        },
-        "Variety": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Variety"
-        },
-        "SerialNum": {
-          "type": "string",
-          "format": "uuid",
-          "example": "SerialNum"
-        },
-        "KADAccountName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "KADAccountName"
-        },
-        "BusinessAccountName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "BusinessAccountName"
-        },
-        "UserID": {
-          "type": "string",
-          "format": "uuid",
-          "example": "UserID"
-        },
-        "COUNTConsumption": {
-          "type": "string",
-          "format": "uuid",
-          "example": "COUNTConsumption"
-        },
-        "COUNTAlert": {
-          "type": "string",
-          "format": "uuid",
-          "example": "COUNTAlert"
-        },
-        "AVGConsumption": {
-          "type": "string",
-          "format": "uuid",
-          "example": "AVGConsumption"
+        "ConsumptionList": {
+          "type": "object",
+          "properties": {
+            "kADAccountId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "KADAccountId"
+            },
+            "businessAccountId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "BusinessAccountId"
+            },
+            "masterBrand": {
+              "type": "string",
+              "format": "uuid",
+              "example": "MasterBrand"
+            },
+            "brand": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Brand"
+            },
+            "lidType": {
+              "type": "string",
+              "format": "uuid",
+              "example": "LidType"
+            },
+            "brewDate": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2016-08-29T09:12:33.001Z"
+            },
+            "variety": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Variety"
+            },
+            "serialNum": {
+              "type": "string",
+              "format": "uuid",
+              "example": "SerialNum"
+            },
+            "kADAccountName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "KADAccountName"
+            },
+            "businessAccountName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "BusinessAccountName"
+            },
+            "userID": {
+              "type": "string",
+              "format": "uuid",
+              "example": "UserID"
+            },
+            "placementLoc": {
+              "type": "string",
+              "format": "uuid",
+              "example": "1st Floor Cafetaria"
+            },
+            "rebateEligible": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Yes"
+            },
+            "ownership": {
+              "type": "string",
+              "format": "uuid",
+              "example": "KDP Owned"
+            },
+            "deviceId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "000000123abc"
+            },
+            "brewResult": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Success"
+            },
+            "beverageType": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Cafemocha"
+            },
+            "brewSize": {
+              "type": "string",
+              "format": "uuid",
+              "example": "6 oz"
+            },
+            "podType": {
+              "type": "string",
+              "format": "uuid",
+              "example": "k-cup"
+            }
+          }
         }
       }
     },
