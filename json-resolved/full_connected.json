@@ -269,13 +269,7 @@
         ],
         "responses": {
           "200": {
-            "description": "search results matching criteria",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/UserList"
-              }
-            }
+            "description": "Success or Failure"
           },
           "400": {
             "description": "bad input parameter"
