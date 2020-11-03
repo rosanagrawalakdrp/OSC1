@@ -48,7 +48,7 @@
     "https"
   ],
   "paths": {
-    "/UserList": {
+        "/UserList/{userId}": {
       "get": {
         "tags": [
           "User Management"
@@ -59,25 +59,67 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-            "name": "KADAccountId",
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "$ref": "#/parameters/userId"
+          },
+          {
+            "name": "filterUserId",
             "in": "query",
-            "description": "pass an optional KADAccountId string for looking up user",
+            "description": "pass an optional userID string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "UserId",
+            "name": "filterFN",
             "in": "query",
-            "description": "pass an optional UserId string for looking up user",
+            "description": "pass one or more optional First Name string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "ReqForSearchUserId",
+            "name": "filterLN",
             "in": "query",
-            "description": "pass an optional UserId string for looking up user",
+            "description": "pass one or more optional Last Name string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterRole",
+            "in": "query",
+            "description": "pass one or more optional Role string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterStatus",
+            "in": "query",
+            "description": "pass one or more optional Status string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterCreatedFromDt",
+            "in": "query",
+            "description": "pass an optional From Date string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterCreatedToDt",
+            "in": "query",
+            "description": "pass an optional To Date string for looking up user",
             "required": false,
             "type": "string"
           }
@@ -2314,84 +2356,96 @@
     },
     "UserList": {
       "type": "object",
-      "required": [
-        "EmailAddress",
-        "ErrorCode",
-        "ErrorMessage",
-        "FirstName",
-        "LastName",
-        "PartnerID",
-        "PartnerName",
-        "Status",
-        "UserId",
-        "Address",
-        "PhoneNumber"
-      ],
       "properties": {
-        "FirstName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "FirstName"
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 2
         },
-        "LastName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "LastName"
-        },
-        "UserId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "UserId"
-        },
-        "EmailAddress": {
-          "type": "string",
-          "format": "uuid",
-          "example": "EmailAddress"
-        },
-        "Status": {
-          "type": "string",
-          "format": "SUCCESS",
-          "example": "Status"
-        },
-        "ErrorCode": {
-          "type": "string",
-          "format": "uuid",
-          "example": "ErrorCode"
-        },
-        "ErrorMessage": {
-          "type": "string",
-          "format": "uuid",
-          "example": "ErrorMessage"
-        },
-        "PartnerID": {
-          "type": "string",
-          "format": "uuid",
-          "example": "PartnerID"
-        },
-        "PartnerName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "PartnerName"
-        },
-        "Address": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Address"
-        },
-        "CreatedDate": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2016-08-29T09:12:33.001Z"
-        },
-        "Role": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Role"
-        },
-        "PhoneNumber": {
-          "type": "string",
-          "format": "uuid",
-          "example": "PhoneNumber"
+        "Users": {
+          "type": "object",
+          "properties": {
+            "FirstName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "FirstName"
+            },
+            "LastName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "LastName"
+            },
+            "UserId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "UserId"
+            },
+            "EmailAddress": {
+              "type": "string",
+              "format": "uuid",
+              "example": "EmailAddress"
+            },
+            "Status": {
+              "type": "string",
+              "format": "SUCCESS",
+              "example": "Status"
+            },
+            "PartnerNum": {
+              "type": "string",
+              "format": "uuid",
+              "example": 83
+            },
+            "businessAccNum": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0-007796470"
+            },
+            "businessAccId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0-007796470"
+            },
+            "businessAccName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "ABC Corp"
+            },
+            "role": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Technician"
+            },
+            "PartnerID": {
+              "type": "string",
+              "format": "uuid",
+              "example": "PartnerID"
+            },
+            "PartnerName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "PartnerName"
+            },
+            "Address": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Address"
+            },
+            "CreatedDate": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2016-08-29T09:12:33.001Z"
+            },
+            "Role": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Role"
+            },
+            "PhoneNumber": {
+              "type": "string",
+              "format": "uuid",
+              "example": "PhoneNumber"
+            }
+          }
         }
       }
     },
