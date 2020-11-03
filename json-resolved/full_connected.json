@@ -98,7 +98,7 @@
         }
       }
     },
-    "/UserInfo": {
+    "/AMPUser/{userId}": {
       "get": {
         "tags": [
           "User Management"
@@ -109,27 +109,20 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-            "name": "KADAccountId",
-            "in": "query",
-            "description": "pass an  KADAccountId string for looking up user",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
-            "name": "UserId",
-            "in": "query",
-            "description": "pass an  UserId string for looking up user",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/requesterID"
           },
           {
-            "name": "ReqForSearchUserId",
-            "in": "query",
-            "description": "pass an  UserId string for looking up user",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/userId"
           }
         ],
         "responses": {
@@ -138,23 +131,26 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UserList"
+                "$ref": "#/definitions/User"
               }
             }
           },
           "400": {
             "description": "bad input parameter"
+          },
+          "404": {
+            "description": "User Record Not found"
           }
         }
       }
     },
-    "/deactivateUser": {
-      "delete": {
+    "/deactivateUser/{userId}": {
+      "post": {
         "tags": [
           "User Management"
         ],
-        "summary": "deactivateUser",
-        "description": "deactivate user",
+        "summary": "Remove User from Account",
+        "description": "API to remove a user from an account. If user has no active affiliation to another account, user's access is deactivated from AMP Portal",
         "operationId": "deactivateUser",
         "consumes": [
           "application/json"
@@ -162,18 +158,34 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-            "name": "UserId",
-            "in": "query",
-            "description": "pass an  UserId string",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/userId"
+          },
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "in": "body",
+            "name": "UserAccess",
+            "description": "submit user deactivation request parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserAccess"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "results for deactivating user"
+            "description": "OK"
           },
           "400": {
             "description": "invalid input, object invalid"
@@ -184,7 +196,7 @@
         }
       }
     },
-    "/resetPassword": {
+    "/resetPassword/{email}": {
       "post": {
         "tags": [
           "User Management"
@@ -198,26 +210,23 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-            "name": "KADAccountId",
-            "in": "query",
-            "description": "pass an  KADAccountId string for looking up user",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/header_partnerID"
           },
           {
-            "name": "UserId",
-            "in": "query",
-            "description": "pass an  UserId string",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/requesterID"
           },
           {
-            "name": "ReqForSearchUserId",
-            "in": "query",
-            "description": "pass an  UserId string",
-            "required": false,
+            "name": "email",
+            "in": "path",
+            "description": "pass the email address/username string of the user to reset password",
+            "required": true,
             "type": "string"
           }
         ],
@@ -241,7 +250,7 @@
       }
     },
     "/resendInvite/{userId}": {
-      "get": {
+      "post": {
         "tags": [
           "User Management"
         ],
@@ -251,15 +260,29 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-             $ref: '#/parameters/userId'
+            "$ref": "#/parameters/userId"
           },
           {
-             $ref: '#/parameters/header_partnerID'
+            "$ref": "#/parameters/header_partnerID"
           },
           {
-             $ref: '#/parameters/requesterID'
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "in": "body",
+            "name": "UserAccess",
+            "description": "submit user deactivation request parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserAccess"
+            }
           }
         ],
         "responses": {
@@ -3276,6 +3299,177 @@
               "contactNumber": "c00000000123c"
             }
           ]
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FirstName"
+        },
+        "lastName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "LastName"
+        },
+        "userId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "UserId"
+        },
+        "emailAddress": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc@test.com"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "888-888-8888"
+        },
+        "role": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Technician"
+        },
+        "status": {
+          "type": "string",
+          "format": "SUCCESS",
+          "example": "Active"
+        },
+        "primaryAccPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "0000000123"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "dateDeactivated": {
+          "type": "string",
+          "format": "uuid",
+          "example": "N/A"
+        },
+        "dateActivated": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01/01/2020"
+        },
+        "lastLoginTime": {
+          "type": "string",
+          "format": "uuid",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "accountrel": {
+          "type": "object",
+          "description": "list of accounts associated with contact- constrained by requester's access",
+          "properties": {
+            "total": {
+              "type": "integer",
+              "format": "int64",
+              "example": 2
+            },
+            "accounts": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "partyNum": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "dateAdded": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "status": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "example": [
+                {
+                  "name": "KAD Account Number 1",
+                  "partyNum": "p00908098a",
+                  "dateAdded": "05/14/2019",
+                  "status": "Primary"
+                },
+                {
+                  "name": "KAD Account Number 2",
+                  "partyNum": "p00908098b",
+                  "dateAdded": "05/14/2019",
+                  "status": null
+                }
+              ]
+            }
+          }
+        },
+        "notifications": {
+          "type": "object",
+          "properties": {
+            "overHeated": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "reqDscale": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "binFull": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "noNetworkConn": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "disconnectedMajor": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "UserAccess": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "uuid",
+          "example": "test@test.com"
+        },
+        "userPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "u000003uu3u1"
+        },
+        "accountPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "a000003i3s"
+        },
+        "role": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Technician"
+        },
+        "status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "active"
         }
       }
     }
