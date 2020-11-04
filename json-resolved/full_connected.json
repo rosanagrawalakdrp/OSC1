@@ -1826,7 +1826,8 @@
     "/KADAccountLoVByUser": {
       "get": {
         "tags": [
-          "Account Management"
+          "Account Management",
+          "getKADAccountLoVByUser"
         ],
         "summary": "getKADAccountLoVByUser",
         "description": "getKADAccountLoVByUser",
