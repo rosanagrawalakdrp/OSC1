@@ -502,7 +502,7 @@
         ],
         "parameters": [
           {
-            "name": "KADAccountId",
+          "name": "KADAccountId",
             "in": "query",
             "description": "pass an  KADAccountId string",
             "required": false,
@@ -1859,7 +1859,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AccountList"
+                "$ref": "#/definitions/AccountLOV"
               }
             }
           },
