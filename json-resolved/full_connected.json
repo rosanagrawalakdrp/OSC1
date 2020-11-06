@@ -3228,7 +3228,7 @@
         "assetId": {
           "type": "string",
           "format": "uuid",
-          "example": "OracleEC_ID"
+          "example": "IB ID - PARTY"
         },
         "deviceId_oracle": {
           "type": "string",
