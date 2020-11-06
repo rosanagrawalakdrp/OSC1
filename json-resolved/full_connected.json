@@ -570,10 +570,11 @@
         }
       }
     },
-    "/BusinessAccountContacts/{accountId}": {
+    "/BusinessAccountContacts/": {
       "get": {
         "tags": [
-          "Install"
+          "Install",
+          "getBusinessAccountContacts"
         ],
         "summary": "get list of contacts for  Business Account",
         "description": "get list of contacts for  Business Account",
@@ -595,7 +596,7 @@
           },
           {
             "name": "accountId",
-            "in": "path",
+            "in": "query",
             "description": "pass a BusinessAccountId string for looking up user",
             "required": true,
             "type": "string"
@@ -606,7 +607,7 @@
         ],
         "responses": {
           "200": {
-            "description": "results for get brewer list",
+            "description": "results for get contact list",
             "schema": {
               "type": "array",
               "items": {
