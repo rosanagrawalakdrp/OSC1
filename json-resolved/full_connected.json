@@ -849,7 +849,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Installation Request Submitted Successfully"
+            "description": "Installation Request Submitted Successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SuccessFailResponse"
+              }
+            }
           },
           "400": {
             "description": "invalid input, object invalid"
@@ -1826,7 +1832,8 @@
     "/KADAccountLoVByUser": {
       "get": {
         "tags": [
-          "Account Management"
+          "Account Management",
+          "getKADAccountLoVByUser"
         ],
         "summary": "getKADAccountLoVByUser",
         "description": "getKADAccountLoVByUser",
@@ -3140,6 +3147,31 @@
         }
       }
     },
+    "SuccessFailResponse": {
+      "type": "object",
+      "required": [
+        "status",
+        "errorMessage",
+        "requestId"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Success"
+        },
+        "errorMessage": {
+          "type": "string",
+          "format": "uuid",
+          "example": "NA"
+        },
+        "requestId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "SR00001"
+        }
+      }
+    },
     "ResetPasswordResponse": {
       "type": "object",
       "required": [
@@ -3169,8 +3201,23 @@
       "type": "object",
       "required": [
         "serialNum",
+        "assetid",
+        "deviceId_oracle",
+        "deviceId_azure",
+        "modelNum",
+        "dataRecipeVer",
+        "appUIVer",
+        "NetworkConnection",
+        "Firmware",
         "requestedPartnerId",
-        "flgSNScanned",
+        "KADAccountName",
+        "BusinessAccountId",
+        "BusinessAccountName",
+        "contactId",
+        "Scanned",
+        "RequestorUserName",
+        "RequestorFirstName",
+        "RequestorLastName"
       ],
       "properties": {
        "serialNum": {
@@ -3181,7 +3228,7 @@
         "assetId": {
           "type": "string",
           "format": "uuid",
-          "example": "OracleEC_ID"
+          "example": "IB ID - PARTY"
         },
         "deviceId_oracle": {
           "type": "string",
