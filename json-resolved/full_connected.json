@@ -2259,15 +2259,20 @@
           "description": "UTC Datetime when registration request was approved",
           "example": "2016-08-29T09:12:33.001Z"
         },
-        "deviceId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "00000000123abc"
-        },
         "assetId": {
           "type": "string",
           "format": "uuid",
-          "example": "00000002347647a"
+          "example": "IB ID - PARTY"
+        },
+        "deviceId_oracle": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Oracle IOT ID"
+        },
+         "deviceId_azure": {
+          "type": "string",
+          "format": "uuid",
+          "example": "AZURE IOT ID"
         },
         "warrantyEndDate": {
           "type": "string",
