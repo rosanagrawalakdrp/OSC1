@@ -486,39 +486,88 @@
         }
       }
     },
-    "/BrewerList": {
+    "/DeviceList/{userId}": {
       "get": {
         "tags": [
           "Brewer Management"
         ],
-        "summary": "BrewerList",
-        "description": "BrewerList",
+        "summary": "Get List of Brewers for a User's associated Account",
+        "description": "This API is to retrieve a list of devices for the logged in User's account",
         "operationId": "BrewerList",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "application/json"
+          "application/jso"
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          }
         ],
         "parameters": [
           {
-          "name": "KADAccountId",
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "$ref": "#/parameters/userId"
+          },
+          {
+            "name": "partnerNum",
             "in": "query",
-            "description": "pass an  KADAccountId string",
+            "description": "pass an optional KADAccountId string",
             "required": false,
             "type": "string"
           },
           {
-            "name": "BusinessAccountId",
+            "name": "partnerName",
+            "in": "query",
+            "description": "pass an optional KAD Account Name string",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AccountId",
             "in": "query",
             "description": "pass an optional BusinessAccountId string",
             "required": false,
             "type": "string"
           },
           {
-            "name": "PlacementLocation",
+            "name": "AccountName",
             "in": "query",
-            "description": "pass an  PlacementLocation string",
+            "description": "pass an optional AccountName string",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "brewerSN",
+            "in": "query",
+            "description": "pass an  Serial Number string for filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "modelNum",
+            "in": "query",
+            "description": "pass an  Brewer model Number string for filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reqConPartyNum",
+            "in": "query",
+            "description": "pass an  Party Number of requester contact string for filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reqConName",
+            "in": "query",
+            "description": "pass an  optional requester contact Name string for filter",
             "required": false,
             "type": "string"
           },
@@ -530,23 +579,30 @@
             "type": "string"
           },
           {
-            "name": "Status",
+            "name": "connStatus",
             "in": "query",
-            "description": "pass an  Status string",
+            "description": "pass anoptional Connection Status string",
             "required": false,
             "type": "string"
           },
           {
-            "name": "RegistrationDate",
+            "name": "regStartDt",
             "in": "query",
-            "description": "pass an optional RegistrationDate string",
+            "description": "pass an optional Registration Start Date string for filtering",
             "required": false,
             "type": "string"
           },
           {
-            "name": "RegistrationApproval",
+            "name": "regEndDt",
             "in": "query",
-            "description": "pass an  RegistrationApproval string",
+            "description": "pass an optional Registration End Date string for filtering",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "regStatus",
+            "in": "query",
+            "description": "pass an  Registration Approval Status string",
             "required": false,
             "type": "string"
           }
@@ -557,15 +613,15 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BrewerDetailsListResponse"
+                "$ref": "#/definitions/DeviceList"
               }
             }
           },
           "400": {
             "description": "invalid input, object invalid"
           },
-          "409": {
-            "description": "an existing item already exists"
+          "404": {
+            "description": " User Record Not found"
           }
         }
       }
@@ -1996,6 +2052,118 @@
     }
   },
   "definitions": {
+    "DeviceList": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 2
+        },
+        "deviceList": {
+          "type": "object",
+          "properties": {
+            "serialNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "deviceType": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "placementLoc": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "connStatus": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Status"
+            },
+            "accPartyNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "accName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "partnerPartyNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "partnerName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "regStatus": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "regDate": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "deviceId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "assetId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "model": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "conPartyNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "conName": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "example": [
+            {
+              "serialNum": "450.000.0001",
+              "deviceType": "K-cup POD",
+              "placementLoc": "1st Floor Cafetaria",
+              "connStatus": "Online",
+              "accPartyNum": "a7966r4diupdd",
+              "accName": "ABC Corp",
+              "partnerPartyNum": "p762ekhdekjdh",
+              "partnerName": "W B Mason",
+              "regStatus": "Approved",
+              "regDate": "11/1/2020",
+              "deviceId": "d6740ydhejd[ed]",
+              "assetId": "as4edhedjkehd",
+              "model": "K4500",
+              "conPartyNum": "c946699r6841",
+              "conName": "John Smith"
+            },
+            {
+              "serialNum": "450.000.0002",
+              "deviceType": "K-cup POD",
+              "placementLoc": "2nd Floor Cafetaria",
+              "connStatus": "Unknown",
+              "accPartyNum": "a7966r4diupdd",
+              "accName": "ABC Corp",
+              "partnerPartyNum": "p762ekhdekjdh",
+              "partnerName": "W B Mason",
+              "regStatus": "Pending Approval",
+              "regDate": "11/1/2020",
+              "deviceId": "d6740ydhejdtg",
+              "assetId": "as4edhedjkehe",
+              "model": "K4500",
+              "conPartyNum": "c946699r6841",
+              "conName": "John Smith"
+            }
+          ]
+        }
+      }
+    },
     "BrewerDetailsList": {
       "type": "object",
       "required": [
