@@ -436,10 +436,11 @@
         }
       }
     },
-    "/BrewerDetail/{assetId}": {
+    "/BrewerDetail/": {
       "get": {
         "tags": [
-          "Brewer Management"
+          "Brewer Management",
+          "getBrewerDetail"
         ],
         "summary": "get Brewer Details",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
@@ -461,7 +462,7 @@
           },
           {
             "name": "assetId",
-            "in": "path",
+            "in": "query",
             "description": "pass the asset Id string",
             "required": true,
             "type": "string"
