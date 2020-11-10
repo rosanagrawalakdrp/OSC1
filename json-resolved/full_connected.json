@@ -373,11 +373,12 @@
         }
       }
     },
-    "/AlertConsumptionCounts/{partnerId}": {
+    "/AlertConsumptionCounts": {
       "get": {
         "tags": [
           "Brewer Management",
-          "Consumption and Alerts"
+          "Consumption and Alerts",
+          "getAlertandConsumptionCounts"
         ],
         "summary": "AlertConsumptionCounts",
         "description": "By passing in the appropriate options, you can search for\navailable result in the system\n",
@@ -392,9 +393,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/path_partnerId"
-          },
-          {
             "$ref": "#/parameters/requesterID"
           },
           {
@@ -407,7 +405,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "partnerId": {
+                "KADAccountId": {
                   "type": "string",
                   "example": "p0000000001"
                 },
