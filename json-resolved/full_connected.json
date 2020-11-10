@@ -1942,7 +1942,8 @@
     "/registerBrewer": {
       "post": {
         "tags": [
-          "Install"
+          "Install",
+          "registerBrewer"
         ],
         "summary": "Trigger Brewer RegistrationProcess",
         "description": "Trigger Brewer RegistrationProcess",
@@ -1971,7 +1972,7 @@
             "description": "register Brewer request parameters",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/RegistrationRequest"
+              "$ref": "#/definitions/RegisterBrewerRequest"
             }
           }
         ],
@@ -1981,7 +1982,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RegisterBrewerResponse"
+                "$ref": "#/definitions/SuccessFailResponse"
               }
             }
           },
@@ -2121,90 +2122,33 @@
         }
       }
     },
-    "RegistrationRequest": {
+    "RegisterBrewerRequest": {
       "type": "object",
       "required": [
-        "assetId",
-        "brewerPartnerId",
-        "partnerGroupId",
-        "businessAccountId",
-        "businessAccGroupId",
-        "contactId",
-        "contactName",
-        "placementLocation",
-        "registrationApprovalStatus",
-        "serialNumber",
-        "deviceId",
-        "assetTypeID",
-        "ioTOrgID"
+        "serialNumber"
       ],
       "properties": {
         "assetId": {
           "type": "string",
           "format": "uuid",
-          "example": "ast-000000000abc"
-        },
-        "brewerPartnerId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "ka-000000000a1"
-        },
-        "partnerGroupId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "pg-000001"
-        },
-        "businessAccountId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "ba-0000001"
-        },
-        "businessAccGroupId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "bag-0000001"
-        },
-        "contactId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "c-00000001"
-        },
-        "contactName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "John Smith"
-        },
-        "placementLocation": {
-          "type": "string",
-          "format": "uuid",
-          "example": "1st Floor Cafetaria"
-        },
-        "registrationApprovalStatus": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Approved"
+          "example": "IB Asset - ast-000000000abc"
         },
         "serialNumber": {
           "type": "string",
           "format": "uuid",
           "example": "4500.000.00001"
         },
-        "deviceId": {
+        "AZUREdeviceId": {
           "type": "string",
           "format": "uuid",
           "example": "d-0000001"
-        },
-        "assetTypeID": {
+      },
+        "OracledeviceId": {
           "type": "string",
           "format": "uuid",
-          "example": "asset-type-001"
-        },
-        "ioTOrgID": {
-          "type": "string",
-          "format": "uuid",
-          "example": "Org-001"
-        }
+          "example": "d-0000001"
       }
+     }
     },
     "BrewerDetailLOV": {
       "type": "object",
