@@ -558,7 +558,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BrewerDetailsListResponse"
+                "$ref": "#/definitions/BrewerDetail"
               }
             }
           },
@@ -2206,6 +2206,61 @@
           "example": "Org-001"
         }
       }
+    },
+    "BrewerDetailLOV": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 3
+        },
+        "BrewerDetails": {
+          "$ref": "#/definitions/BrewerDetail"
+        }
+      },
+      "example": 
+      [
+        "total": 3,
+  {
+    "serialNumber": "450.000.0000",
+    "deviceType": "pod2cup",
+    "placementLocation": "1st floor Cafetaria",
+    "status": "Registered",
+    "registrationStatus": "Approved",
+    "registrationDate": "2016-08-29T09:12:33.001Z",
+    "assetId": "IB ID - PARTY",
+    "deviceId_oracle": "Oracle IOT ID",
+    "deviceId_azure": "AZURE IOT ID",
+    "warrantyEndDate": "2016-08-29T09:12:33.001Z",
+    "model": "K4500",
+    "dataRecipeVer": "1.1.1",
+    "appUIVersion": "0.0.1",
+    "brewCount": 0,
+    "networkConnection": "Online",
+    "brewerPartnerId": "d00000000123",
+    "contactId": "c00000000123"
+  },
+            {
+    "serialNumber": "450.000.1230",
+    "deviceType": "pod2cup",
+    "placementLocation": "2nsdfloor Cafetaria",
+    "status": "Registered",
+    "registrationStatus": "Pending",
+    "registrationDate": "2016-08-29T09:12:33.001Z",
+    "assetId": "IB ID - PARTY",
+    "deviceId_oracle": "Oracle IOT ID",
+    "deviceId_azure": "AZURE IOT ID",
+    "warrantyEndDate": "2016-08-29T09:12:33.001Z",
+    "model": "K4500",
+    "dataRecipeVer": "1.1.1",
+    "appUIVersion": "0.0.1",
+    "brewCount": 0,
+    "networkConnection": "Online",
+    "brewerPartnerId": "d00000000123",
+    "contactId": "c00000000123"
+  }
+          ]
     },
     "BrewerDetail": {
       "type": "object",
