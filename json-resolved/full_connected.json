@@ -140,10 +140,11 @@
         }
       }
     },
-    "/AMPUser/{userId}": {
+    "/AMPUser/": {
       "get": {
         "tags": [
-          "User Management"
+          "User Management",
+          "getUserInfo"
         ],
         "summary": "get User Info",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -3512,6 +3513,11 @@
         "primaryAccPartyNum": {
           "type": "string",
           "format": "uuid",
+          "example": "r0000000123"
+        },
+        "primaryAccPartyId": {
+          "type": "string",
+          "format": "uuid",
           "example": "0000000123"
         },
         "createdDate": {
@@ -3554,6 +3560,10 @@
                   "type": "string",
                   "format": "uuid"
                 },
+                "partyId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
                 "dateAdded": {
                   "type": "string",
                   "format": "uuid"
@@ -3567,46 +3577,18 @@
                 {
                   "name": "KAD Account Number 1",
                   "partyNum": "p00908098a",
+                  "partyId": "123",
                   "dateAdded": "05/14/2019",
                   "status": "Primary"
                 },
                 {
                   "name": "KAD Account Number 2",
                   "partyNum": "p00908098b",
+                  "partyId": "134",
                   "dateAdded": "05/14/2019",
                   "status": null
                 }
               ]
-            }
-          }
-        },
-        "notifications": {
-          "type": "object",
-          "properties": {
-            "overHeated": {
-              "type": "string",
-              "format": "uuid",
-              "example": false
-            },
-            "reqDscale": {
-              "type": "string",
-              "format": "uuid",
-              "example": false
-            },
-            "binFull": {
-              "type": "string",
-              "format": "uuid",
-              "example": false
-            },
-            "noNetworkConn": {
-              "type": "string",
-              "format": "uuid",
-              "example": false
-            },
-            "disconnectedMajor": {
-              "type": "string",
-              "format": "uuid",
-              "example": false
             }
           }
         }
