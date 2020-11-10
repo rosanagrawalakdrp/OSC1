@@ -490,7 +490,8 @@
     "/BrewerList": {
       "get": {
         "tags": [
-          "Brewer Management"
+          "Brewer Management",
+          "getBrewerList"
         ],
         "summary": "BrewerList",
         "description": "BrewerList",
@@ -558,7 +559,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BrewerDetail"
+                "$ref": "#/definitions/BrewerDetailLOV"
               }
             }
           },
