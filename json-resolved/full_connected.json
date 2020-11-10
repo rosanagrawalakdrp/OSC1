@@ -239,10 +239,11 @@
         }
       }
     },
-    "/resetPassword/{email}": {
+    "/resetPassword": {
       "post": {
         "tags": [
-          "User Management"
+          "User Management",
+          "resetPassword"
         ],
         "summary": "resetPassword",
         "description": "Reset password for user",
@@ -267,7 +268,7 @@
           },
           {
             "name": "email",
-            "in": "path",
+            "in": "query",
             "description": "pass the email address/username string of the user to reset password",
             "required": true,
             "type": "string"
@@ -279,7 +280,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ResetPasswordResponse"
+                "$ref": "#/definitions/SuccessFailResponse"
               }
             }
           },
@@ -292,10 +293,11 @@
         }
       }
     },
-    "/resendInvite/{userId}": {
+    "/resendInvite": {
       "post": {
         "tags": [
-          "User Management"
+          "User Management",
+          "resendInvite"
         ],
         "summary": "resend Invite for  User ",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -321,7 +323,7 @@
           {
             "in": "body",
             "name": "UserAccess",
-            "description": "submit user deactivation request parameters",
+            "description": "submit user request parameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UserAccess"
@@ -329,8 +331,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success or Failure"
+           "200": {
+            "description": "results for reset password (success/failure)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SuccessFailResponse"
+              }
+            }
           },
           "400": {
             "description": "bad input parameter"
