@@ -185,6 +185,60 @@
             "description": "User Record Not found"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "User Management",
+          "updateUser"
+        ],
+        "summary": "Update User Info",
+        "description": "By passing in the appropriate options, you can update for\navailable user in the system\n",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "$ref": "#/parameters/userId"
+          },
+          {
+            "in": "body",
+            "name": "UserDetails",
+            "description": "submit user deactivation request parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserAccess"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          },
+          "404": {
+            "description": "User Record Not found"
+          }
+        }
       }
     },
     "/deactivateUser/{userId}": {
@@ -218,7 +272,7 @@
           },
           {
             "in": "body",
-            "name": "UserAccess",
+            "name": "UserAcc",
             "description": "submit user deactivation request parameters",
             "required": true,
             "schema": {
