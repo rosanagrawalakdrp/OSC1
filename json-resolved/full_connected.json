@@ -186,7 +186,7 @@
           }
         }
       },
-      "post": {
+      "patch": {
         "tags": [
           "User Management",
           "updateUser"
