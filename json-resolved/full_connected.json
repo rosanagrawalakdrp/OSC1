@@ -48,10 +48,11 @@
     "https"
   ],
   "paths": {
-        "/UserList/{userId}": {
+        "/UserList": {
       "get": {
         "tags": [
-          "User Management"
+          "User Management",
+          "getUserList"
         ],
         "summary": "get User List",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -71,32 +72,29 @@
           {
             "$ref": "#/parameters/requesterID"
           },
-          {
-            "$ref": "#/parameters/userId"
-          },
-          {
-            "name": "filterUserId",
+           {
+            "name": "userId",
             "in": "query",
-            "description": "pass an optional userID string for looking up user",
+            "description": "pass one or more optional userId string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterFN",
+            "name": "firstName",
             "in": "query",
             "description": "pass one or more optional First Name string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterLN",
+            "name": "lastName",
             "in": "query",
             "description": "pass one or more optional Last Name string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterRole",
+            "name": "role",
             "in": "query",
             "description": "pass one or more optional Role string for looking up user",
             "required": false,
@@ -110,14 +108,14 @@
             "type": "string"
           },
           {
-            "name": "filterCreatedFromDt",
+            "name": "createdFromDt",
             "in": "query",
             "description": "pass an optional From Date string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterCreatedToDt",
+            "name": "createdToDt",
             "in": "query",
             "description": "pass an optional To Date string for looking up user",
             "required": false,
@@ -128,10 +126,7 @@
           "200": {
             "description": "search results matching criteria",
             "schema": {
-              "type": "array",
-              "items": {
                 "$ref": "#/definitions/UserList"
-              }
             }
           },
           "400": {
@@ -165,8 +160,12 @@
             "$ref": "#/parameters/requesterID"
           },
           {
-            "$ref": "#/parameters/userId"
-          }
+            "name": "userId",
+            "in": "query",
+            "description": "pass one or more optional Status string for looking up user",
+            "required": false,
+            "type": "string"
+          },
         ],
         "responses": {
           "200": {
@@ -208,9 +207,6 @@
           },
           {
             "$ref": "#/parameters/requesterID"
-          },
-          {
-            "$ref": "#/parameters/userId"
           },
           {
             "in": "body",
@@ -2456,8 +2452,20 @@
           "example": 2
         },
         "Users": {
-          "type": "object",
-          "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDetails"
+          }
+        }
+      }
+    },
+    "UserDetails": {
+      "type": "object",
+      "required": [
+      "FirstName",
+      "LastName"
+      ],
+      "properties": {
             "FirstName": {
               "type": "string",
               "format": "uuid",
@@ -2538,8 +2546,6 @@
               "format": "uuid",
               "example": "PhoneNumber"
             }
-          }
-        }
       }
     },
     "AccountList": {
