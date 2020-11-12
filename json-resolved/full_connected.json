@@ -48,10 +48,11 @@
     "https"
   ],
   "paths": {
-        "/UserList/{userId}": {
+        "/UserList": {
       "get": {
         "tags": [
-          "User Management"
+          "User Management",
+          "getUserList"
         ],
         "summary": "get User List",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -71,32 +72,29 @@
           {
             "$ref": "#/parameters/requesterID"
           },
-          {
-            "$ref": "#/parameters/userId"
-          },
-          {
-            "name": "filterUserId",
+           {
+            "name": "userId",
             "in": "query",
-            "description": "pass an optional userID string for looking up user",
+            "description": "pass one or more optional userId string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterFN",
+            "name": "firstName",
             "in": "query",
             "description": "pass one or more optional First Name string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterLN",
+            "name": "lastName",
             "in": "query",
             "description": "pass one or more optional Last Name string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterRole",
+            "name": "role",
             "in": "query",
             "description": "pass one or more optional Role string for looking up user",
             "required": false,
@@ -110,14 +108,14 @@
             "type": "string"
           },
           {
-            "name": "filterCreatedFromDt",
+            "name": "createdFromDt",
             "in": "query",
             "description": "pass an optional From Date string for looking up user",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filterCreatedToDt",
+            "name": "createdToDt",
             "in": "query",
             "description": "pass an optional To Date string for looking up user",
             "required": false,
@@ -128,10 +126,7 @@
           "200": {
             "description": "search results matching criteria",
             "schema": {
-              "type": "array",
-              "items": {
                 "$ref": "#/definitions/UserList"
-              }
             }
           },
           "400": {
@@ -165,8 +160,12 @@
             "$ref": "#/parameters/requesterID"
           },
           {
-            "$ref": "#/parameters/userId"
-          }
+            "name": "userId",
+            "in": "query",
+            "description": "pass one or more optional Status string for looking up user",
+            "required": false,
+            "type": "string"
+          },
         ],
         "responses": {
           "200": {
@@ -208,9 +207,6 @@
           },
           {
             "$ref": "#/parameters/requesterID"
-          },
-          {
-            "$ref": "#/parameters/userId"
           },
           {
             "in": "body",
@@ -533,10 +529,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BrewerDetail"
-              }
+              "$ref": "#/definitions/BrewerDetail"
             }
           },
           "400": {
@@ -618,10 +611,7 @@
           "200": {
             "description": "results for get brewer list",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BrewerDetailLOV"
-              }
+              "$ref": "#/definitions/BrewerDetailLOV"
             }
           },
           "400": {
@@ -2222,52 +2212,13 @@
           "example": 3
         },
         "BrewerDetails": {
-          "$ref": "#/definitions/BrewerDetail"
+          "type": "array",
+           "items": {
+            "$ref": "#/definitions/BrewerDetail"
+           }
         }
+       }
       },
-      "example": 
-      [
-        "total": 3,
-  {
-    "serialNumber": "450.000.0000",
-    "deviceType": "pod2cup",
-    "placementLocation": "1st floor Cafetaria",
-    "status": "Registered",
-    "registrationStatus": "Approved",
-    "registrationDate": "2016-08-29T09:12:33.001Z",
-    "assetId": "IB ID - PARTY",
-    "deviceId_oracle": "Oracle IOT ID",
-    "deviceId_azure": "AZURE IOT ID",
-    "warrantyEndDate": "2016-08-29T09:12:33.001Z",
-    "model": "K4500",
-    "dataRecipeVer": "1.1.1",
-    "appUIVersion": "0.0.1",
-    "brewCount": 0,
-    "networkConnection": "Online",
-    "brewerPartnerId": "d00000000123",
-    "contactId": "c00000000123"
-  },
-            {
-    "serialNumber": "450.000.1230",
-    "deviceType": "pod2cup",
-    "placementLocation": "2nsdfloor Cafetaria",
-    "status": "Registered",
-    "registrationStatus": "Pending",
-    "registrationDate": "2016-08-29T09:12:33.001Z",
-    "assetId": "IB ID - PARTY",
-    "deviceId_oracle": "Oracle IOT ID",
-    "deviceId_azure": "AZURE IOT ID",
-    "warrantyEndDate": "2016-08-29T09:12:33.001Z",
-    "model": "K4500",
-    "dataRecipeVer": "1.1.1",
-    "appUIVersion": "0.0.1",
-    "brewCount": 0,
-    "networkConnection": "Online",
-    "brewerPartnerId": "d00000000123",
-    "contactId": "c00000000123"
-  }
-          ]
-    },
     "BrewerDetail": {
       "type": "object",
       "required": [
@@ -2501,8 +2452,20 @@
           "example": 2
         },
         "Users": {
-          "type": "object",
-          "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDetails"
+          }
+        }
+      }
+    },
+    "UserDetails": {
+      "type": "object",
+      "required": [
+      "FirstName",
+      "LastName"
+      ],
+      "properties": {
             "FirstName": {
               "type": "string",
               "format": "uuid",
@@ -2583,8 +2546,6 @@
               "format": "uuid",
               "example": "PhoneNumber"
             }
-          }
-        }
       }
     },
     "AccountList": {
