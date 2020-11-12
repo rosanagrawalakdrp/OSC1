@@ -533,10 +533,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BrewerDetail"
-              }
+              "$ref": "#/definitions/BrewerDetail"
             }
           },
           "400": {
