@@ -1657,9 +1657,10 @@
       }
     },
     "/AccountsByConsumption": {
-      "post": {
+      "get": {
         "tags": [
-          "Dashboard"
+          "Dashboard",
+          "AccountsByConsumption"
         ],
         "summary": "AccountsByConsumption",
         "description": "getAccountsByConsumption",
@@ -1670,15 +1671,24 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-            "in": "body",
-            "name": "AccountList",
-            "description": "get Accounts by Consumption",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountList"
-            }
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "SortOrder",
+            "in": "query",
+            "description": "Insert the Order order to sort by: ASC or DESC",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1687,7 +1697,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AccountList"
+                "$ref": "#/definitions/AccountsByConsumptionObject"
               }
             }
           },
@@ -2593,6 +2603,73 @@
           "items": {
             "$ref": "#/definitions/ListOfContact"
           }
+        }
+      }
+    },
+    "AccountsByConsumptionObject": {
+      "type": "object",
+      "required": [
+        "DateLastRefreshed",
+        "SortOrder",
+        "CustomerAccountNum",
+        "CustomerAccountName",
+        "TotalBrews",
+        "AvgPerBrewer",
+      ],
+      "properties": {
+          "DateLastRefreshed": {
+          "type": "string",
+          "format": "uuid",
+          "example": "11/22/2022"
+        },
+         "SortOrder": {
+          "type": "string",
+          "format": "uuid",
+          "example": "ASC"
+        },
+       "Accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountsByConsumptionList"
+          }
+        }
+      }
+    },
+    "AccountsByConsumptionList": {
+      "type": "object",
+      "required": [
+        "Rank",
+        "CustomerAccountId",
+        "CustomerAccountNum",
+        "CustomerAccountName",
+        "TotalBrews",
+        "AvgPerBrewer",
+      ],
+      "properties": {
+          "CustomerAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "30000128"
+        },
+         "CustomerAccountNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN123"
+        },
+        "CustomerAccountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Staples123"
+        },
+        "TotalBrews": {
+          "type": "string",
+          "format": "uuid",
+          "example": "795"
+        },
+        "AvgPerBrewer": {
+          "type": "string",
+          "format": "uuid",
+          "example": "265"
         }
       }
     },
