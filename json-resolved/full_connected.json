@@ -453,6 +453,27 @@
           },
           {
             "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "name": "SerialNumber",
+            "in": "query",
+            "description": "pass an optional SerialNumber string",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "AzureIOTDeviceID",
+            "in": "query",
+            "description": "pass an optional Azure IOT Device ID string",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "OracleIOTDeviceID",
+            "in": "query",
+            "description": "pass an optional Oracle IOT Device ID string",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -464,6 +485,10 @@
                 "KADAccountId": {
                   "type": "string",
                   "example": "p0000000001"
+                },
+                "SerialNumber": {
+                  "type": "string",
+                  "example": "K4500.000.1234"
                 },
                 "counts": {
                   "type": "object",
