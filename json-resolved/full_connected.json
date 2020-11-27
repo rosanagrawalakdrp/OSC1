@@ -1206,6 +1206,11 @@
         "summary": "AlertList Detail output (grid)",
         "description": "AlertList",
         "operationId": "AlertList",
+         "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -1214,11 +1219,73 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "name": "CustomerAccountID",
+            "in": "query",
+            "description": "pass a Customer Accountid for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "SerialNumber",
+            "in": "query",
+            "description": "pass a Alert History id for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "AlertHistory",
+            "in": "query",
+            "description": "pass a Criticality string for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Criticality",
+            "in": "query",
+            "description": "pass a Criticality string for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "AlertCategory",
+            "in": "query",
+            "description": "pass a Alert Category string for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Resolution",
+            "in": "query",
+            "description": "pass a Resolutin string for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "AlertName",
             "in": "query",
-            "description": "pass an optional AlertName string for looking up alerts",
-            "required": false,
+            "description": "pass a AlertName string for looking up Alerts",
+            "required": true,
             "type": "string"
+          },
+          {
+            "name": "FromDate",
+            "in": "query",
+            "description": "pass a FromDate Date/Time for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "description": "pass a ToDate Date/Time for looking up Alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
           }
         ],
         "responses": {
