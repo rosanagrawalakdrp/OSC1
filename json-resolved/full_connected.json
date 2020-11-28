@@ -699,11 +699,12 @@
         }
       }
     },
-    "/BrewerDetailInstall/{serialNum}": {
+    "/BrewerDetailInstall/": {
       "get": {
         "tags": [
           "Install",
           "Brewer Management"
+          "getBrewerDetailInstall"
         ],
         "summary": "get Brewer Info during Install",
         "description": "This API is to be used during Installation for looking up Serial Number",
@@ -722,7 +723,7 @@
         "parameters": [
           {
             "name": "serialNum",
-            "in": "path",
+            "in": "query",
             "description": "pass a SerialNumber string for looking up user",
             "required": true,
             "type": "string"
@@ -738,10 +739,7 @@
           "200": {
             "description": "results for get brewer installation details list",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BrewerDetail"
-              }
+              "$ref": "#/definitions/BrewerDetail"
             }
           },
           "400": {
@@ -2277,9 +2275,9 @@
       "type": "object",
       "required": [
         "assetId",
-        "bewCount",
+        "brewCount",
         "brewerPartnerId",
-        "contactId",
+        "brewerContactId",
         "deviceType",
         "dataRecipeVer",
         "appUIVersion",
@@ -2376,7 +2374,7 @@
           "format": "uuid",
           "example": "d00000000123"
         },
-        "contactId": {
+        "brewercontactId": {
           "type": "string",
           "format": "uuid",
           "example": "c00000000123"
