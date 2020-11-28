@@ -1156,48 +1156,6 @@
         }
       }
     },
-    "/AlertNameFilter": {
-      "get": {
-        "tags": [
-          "Consumption and Alerts"
-        ],
-        "summary": "AlertNameFilter",
-        "description": "AlertNameFilter",
-        "operationId": "AlertNameFilter",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "AlertName",
-            "in": "query",
-            "description": "pass an optional AlertName string for looking up Alerts",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "results for get alert list",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Alerts"
-              }
-            }
-          },
-          "400": {
-            "description": "invalid input, object invalid"
-          },
-          "409": {
-            "description": "an existing item already exists"
-          }
-        }
-      }
-    },
     "/AlertList": {
       "get": {
         "tags": [
@@ -1292,10 +1250,7 @@
           "200": {
             "description": "results for get alert List",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Alerts"
-              }
+              "$ref": "#/definitions/AlertList"
             }
           },
           "400": {
@@ -2772,64 +2727,128 @@
         }
       }
     },
+    "AlertList": {
+      "type": "object",
+      "required": [
+        "Count",
+      ],
+      "properties": {
+        "Count": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3"
+        },
+       "ListOfAlerts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alerts"
+          }
+        }
+      }
+    },
     "Alerts": {
       "type": "object",
       "required": [
+        "AlertNumber",
         "AlertName",
         "AlertType",
         "BusinessAccount",
-        "Count",
-        "Date",
+        "Resolution",
+        "CreatedDate",
+        "ResolutionDate",
         "Description",
         "KADAccount",
         "SerialNumber",
-        "Severity"
+        "Brand_Variety",
+        "PlacementLocation",
+        "AlertCategory",
+        "Criticality"
       ],
       "properties": {
-        "AlertName": {
+        "KADAccountID": {
           "type": "string",
           "format": "uuid",
-          "example": "AlertName"
+          "example": "30001111"
         },
-        "AlertType": {
+        "KADAccountNum": {
           "type": "string",
           "format": "uuid",
-          "example": "AlertType"
+          "example": "FSN123"
         },
-        "Description": {
+        "KADAccountName": {
           "type": "string",
           "format": "uuid",
-          "example": "Description"
+          "example": "Staples"
         },
-        "Severity": {
+        "BusinessAccountID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3000123"
+        },
+        "BusinessAccountNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN144"
+        },
+        "BusinessAccountName": {
           "type": "string",
           "format": "uuid",
           "example": "Severity"
         },
-        "Date": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2016-08-29T09:12:33.001Z"
-        },
-        "KADAccount": {
+        "AlertNumber": {
           "type": "string",
           "format": "uuid",
-          "example": "KADAccount"
+          "example": "k4500.123.01"
         },
-        "BusinessAccount": {
+        "Description": {
+          "type": "string",
+          "format": "uuid",
+          "example": ".01 maeans ...."
+        },
+        "Criticality": {
           "type": "string",
           "format": "uuid",
           "example": "BusinessAccount"
         },
+        "Resolution": {
+          "type": "string",
+          "format": "uuid",
+          "example": "restart the brewer"
+        },
+        "BrandVariety": {
+          "type": "string",
+          "format": "uuid",
+          "example": ""
+        },
+        "CreatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2015-01-01 01:01.001"
+        },
+        "PlacementLocation": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3rd Floor"
+        },
         "SerialNumber": {
           "type": "string",
           "format": "uuid",
-          "example": "SerialNumber"
+          "example": "K4500.12.00.1.001"
         },
-        "Count": {
+        "AlertCategory": {
           "type": "string",
           "format": "uuid",
-          "example": "Count"
+          "example": "Cloud"
+        },
+        "AlertName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Lack of Connection"
+        },
+        "ResolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2015-01-01 01:01.001"
         }
       }
     },
