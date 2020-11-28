@@ -192,7 +192,7 @@
           "200": {
             "description": "search results matching criteria",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/UserDetails"
             }
           },
           "400": {
@@ -242,7 +242,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/UserDetails"
               }
             }
           },
@@ -968,10 +968,12 @@
         }
       }
     },
-    "/createUser": {
+    "/AMPUser": {
       "post": {
         "tags": [
-          "Install"
+          "Install",
+          "User Management",
+          "createUser"
         ],
         "summary": "createUser",
         "description": "createUser",
@@ -989,7 +991,7 @@
             "description": "create user  parameters",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/UserList"
+              "$ref": "#/definitions/UserDetails"
             }
           }
         ],
@@ -999,7 +1001,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UserList"
+                "$ref": "#/definitions/UserDetails"
               }
             }
           },
@@ -2526,16 +2528,72 @@
     "UserList": {
       "type": "object",
       "properties": {
-        "total": {
+        "Count": {
           "type": "integer",
           "format": "int64",
           "example": 2
         },
-        "Users": {
+        "UserList": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserDetails"
           }
+        }
+      }
+    },
+    "UserKAD": {
+      "type": "object",
+      "required": [
+        "partnerNumber",
+        "partnerId",
+        "PartnerName"
+      ],
+      "properties": {
+        "partnerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "30001111"
+        },
+        "partnerNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN123"
+        },
+        "partnerName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Staples"
+        },
+        "businessAccount": {
+          "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserBusinessAcct"
+          }
+        }
+      }
+    },
+    "UserBusinessAcct": {
+      "type": "object",
+      "required": [
+        "businessAccNumber",
+        "businessAccId",
+        "businessAccName"
+      ],
+      "properties": {
+        "businessAccId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "30001111"
+        },
+        "businessAccNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN123"
+        },
+        "businessAccName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Staples"
         }
       }
     },
@@ -2572,39 +2630,15 @@
               "example": "Status"
             },
             "PartnerNum": {
-              "type": "string",
-              "format": "uuid",
-              "example": 83
-            },
-            "businessAccNum": {
-              "type": "string",
-              "format": "uuid",
-              "example": "0-007796470"
-            },
-            "businessAccId": {
-              "type": "string",
-              "format": "uuid",
-              "example": "0-007796470"
-            },
-            "businessAccName": {
-              "type": "string",
-              "format": "uuid",
-              "example": "ABC Corp"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserKAD"
+          }
             },
             "role": {
               "type": "string",
               "format": "uuid",
               "example": "Technician"
-            },
-            "PartnerID": {
-              "type": "string",
-              "format": "uuid",
-              "example": "PartnerID"
-            },
-            "PartnerName": {
-              "type": "string",
-              "format": "uuid",
-              "example": "PartnerName"
             },
             "Address": {
               "type": "string",
