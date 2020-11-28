@@ -73,6 +73,13 @@
             "$ref": "#/parameters/requesterID"
           },
            {
+            "name": "requestedAccountType",
+            "in": "query",
+            "description": "pass type(Distributor or Business) Account to filter results on user",
+            "required": false,
+            "type": "string"
+          },
+           {
             "name": "userId",
             "in": "query",
             "description": "pass one or more optional userId string for looking up user",
