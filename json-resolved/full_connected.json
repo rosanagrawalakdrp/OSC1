@@ -79,6 +79,20 @@
             "required": false,
             "type": "string"
           },
+          {
+            "name": "KADAccountID",
+            "in": "query",
+            "description": "pass one or more optional userId string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "BusinessAccountID",
+            "in": "query",
+            "description": "pass one or more optional userId string for looking up user",
+            "required": false,
+            "type": "string"
+          },
            {
             "name": "userId",
             "in": "query",
@@ -717,7 +731,7 @@
       "get": {
         "tags": [
           "Install",
-          "Brewer Management"
+          "Brewer Management",
           "getBrewerDetailInstall"
         ],
         "summary": "get Brewer Info during Install",
