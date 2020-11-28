@@ -545,6 +545,13 @@
             "description": "pass the asset Id string",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "serialNumber",
+            "in": "query",
+            "description": "pass the SerialNumber string",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
