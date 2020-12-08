@@ -1663,9 +1663,10 @@
       }
     },
     "/brewerStatistics": {
-      "post": {
+      "get": {
         "tags": [
-          "Dashboard"
+          "Dashboard",
+          "getBrewerStatistics"
         ],
         "summary": "brewerStatistics",
         "description": "brewerStatistics",
@@ -1676,25 +1677,24 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
         "parameters": [
           {
-            "in": "body",
-            "name": "BrewerDetailsList",
-            "description": "getbrewerStatistics",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/BrewerDetailsList"
-            }
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
           }
         ],
         "responses": {
           "200": {
             "description": "results for getting brewer details statistic",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BrewerDetailsList"
-              }
+                "$ref": "#/definitions/BrewerStats"
             }
           },
           "400": {
@@ -2254,6 +2254,37 @@
           "type": "string",
           "format": "uuid",
           "example": "ContactId"
+        }
+      }
+    },
+    "BrewerStats": {
+      "type": "object",
+      "required": [
+        "totalCount",
+        "onlineCount",
+        "offlineCount",
+        "unknownCount"
+      ],
+      "properties": {
+        "totalCount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "SerialNumber"
+        },
+        "onlineCount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "DeviceType"
+        },
+        "offlineCount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "PlacementLocation"
+        },
+        "unknownCount": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Status"
         }
       }
     },
