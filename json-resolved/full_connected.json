@@ -1381,9 +1381,9 @@
         "tags": [
           "Media Management"
         ],
-        "summary": "Media Playlist Detail",
-        "description": "Media Playlist Detail",
-        "operationId": "MediaPLDetail",
+        "summary": "Media Item Detail",
+        "description": "Media Item Detail",
+        "operationId": "MediaItemDetail",
         "consumes": [
           "application/json"
         ],
@@ -1419,7 +1419,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/MediaDetails"
+                "$ref": "#/definitions/Medialist"
               }
             }
           },
@@ -1432,7 +1432,7 @@
         }
       }
     },
-    "/MediaPLList": {
+    "/MediaPlayList/{PlaylistId}": {
       "get": {
         "tags": [
           "Media Management"
@@ -1448,10 +1448,10 @@
         ],
         "parameters": [
           {
-            "name": "MediaId",
-            "in": "query",
-            "description": "pass an  MediaId string for looking up Media",
-            "required": false,
+            "name": "PlaylistId",
+            "in": "path",
+            "description": "pass an  Playlist string for looking up a playlist",
+            "required": true,
             "type": "string"
           },
           {
@@ -1475,7 +1475,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/MediaDetailsList"
+                "$ref": "#/definitions/MediaPlayListObject"
               }
             }
           },
@@ -1486,9 +1486,7 @@
             "description": "an existing item already exists"
           }
         }
-      }
-    },
-    "/createMediaPlayList": {
+      },
       "post": {
         "tags": [
           "Media Management"
@@ -1509,7 +1507,7 @@
             "description": "create Media playlist",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/createMediaPlayListRequest"
+              "$ref": "#/definitions/MediaPlayListObject"
             }
           }
         ],
@@ -1517,11 +1515,88 @@
           "200": {
             "description": "results for creation of media playlist",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/createMediaPlayListResponse"
-              }
+              "$ref": "#/definitions/MediaPlayListObject"
             }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "updateMediaPlaylist",
+        "description": "updateMediaPlayList",
+        "operationId": "updateMediaPlayList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "updateMediaPlayListRequest",
+            "description": "update Media playlist",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MediaPlayListObject"
+            }
+          },
+          {
+            "name": "PlaylistId",
+            "in": "path",
+            "description": "pass an  Playlist string for looking up a playlist",
+            "required": true,
+            "type": "string"
+          },
+        ],
+        "responses": {
+          "200": {
+            "description": "results for update of media playlist",
+            "schema": {
+              "$ref": "#/definitions/MediaPlayListObject"
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "deleteMediaPlaylist",
+        "description": "deleteMediaPlayList",
+        "operationId": "deleteMediaPlayList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "PlaylistId",
+            "in": "path",
+            "description": "pass an  Playlist string for looking up a playlist",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+             "description": "Playlist Removed"
           },
           "400": {
             "description": "invalid input, object invalid"
@@ -3213,7 +3288,7 @@
         }
       }
     },
-    "createMediaPlayListRequest": {
+    "MediaPlayListObject": {
       "type": "object",
       "required": [
         "PlayListName",
@@ -3293,37 +3368,42 @@
         "Type"
       ],
       "properties": {
-        "ImageName": {
+        "mediaName": {
           "type": "string",
           "format": "uuid",
           "example": "ImageName"
         },
-        "ImageURL": {
+        "mediaURL": {
           "type": "string",
           "format": "uuid",
           "example": "ImageURL"
         },
-        "Order": {
+        "order": {
           "type": "string",
           "format": "uuid",
           "example": "Order"
         },
-        "TransitionTime": {
+        "transitionTime": {
           "type": "string",
           "format": "uuid",
           "example": "TransitionTime"
         },
-        "MediaNumber": {
+        "mediaNumber": {
           "type": "string",
           "format": "date-time",
           "example": "MediaNumber"
         },
-        "LastModifiedAMPUserId": {
+        "lastModifiedAMPUserId": {
           "type": "string",
           "format": "uuid",
           "example": "LastModifiedAMPUserId"
         },
-        "Type": {
+        "status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "LastModifiedAMPUserId"
+        },
+        "type": {
           "type": "string",
           "format": "Type",
           "example": "Type"
@@ -3952,6 +4032,13 @@
       "type": "string",
       "required": true,
       "description": "pass the Partner Accpunt ID of the user as a path parameter"
+    },
+    "PlaylistId": {
+      "in": "path",
+      "name": "PlaylistId",
+      "type": "string",
+      "required": true,
+      "description": "pass the PlaylistId of the playlist as a path parameter"
     },
     "userId": {
       "in": "path",
