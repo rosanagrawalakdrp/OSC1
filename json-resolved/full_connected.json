@@ -156,15 +156,14 @@
         }
       }
     },
-    "/AMPUser/": {
+    "/AMPUser": {
       "get": {
         "tags": [
-          "User Management",
-          "getUserInfo"
+          "User Management"
         ],
-        "summary": "get User Info",
+        "summary": "get List of Users",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
-        "operationId": "UserInfo",
+        "operationId": "getUserList",
         "produces": [
           "application/json"
         ],
@@ -181,36 +180,84 @@
             "$ref": "#/parameters/requesterID"
           },
           {
-            "name": "userId",
+            "name": "accountId",
+            "in": "query",
+            "description": "pass the accountId of the Business Account or Partner Account to retrieve list of users",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterUserId",
+            "in": "query",
+            "description": "pass an optional userID string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterFN",
+            "in": "query",
+            "description": "pass one or more optional First Name string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterLN",
+            "in": "query",
+            "description": "pass one or more optional Last Name string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterRole",
+            "in": "query",
+            "description": "pass one or more optional Role string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterStatus",
             "in": "query",
             "description": "pass one or more optional Status string for looking up user",
             "required": false,
             "type": "string"
           },
+          {
+            "name": "filterCreatedFromDt",
+            "in": "query",
+            "description": "pass an optional From Date string for looking up user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterCreatedToDt",
+            "in": "query",
+            "description": "pass an optional To Date string for looking up user",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
             "description": "search results matching criteria",
             "schema": {
-              "$ref": "#/definitions/UserDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserList"
+              }
             }
           },
           "400": {
             "description": "bad input parameter"
-          },
-          "404": {
-            "description": "User Record Not found"
           }
         }
       },
-      "patch": {
+      "post": {
         "tags": [
-          "User Management",
-          "updateUser"
+          "User Management"
         ],
-        "summary": "Update User Info",
-        "description": "By passing in the appropriate options, you can update for\navailable user in the system\n",
-        "operationId": "updateUser",
+        "summary": "Create New AMP User",
+        "description": "This API is to create new AMP User\n",
+        "operationId": "createAMPUser",
         "produces": [
           "application/json"
         ],
@@ -228,11 +275,11 @@
           },
           {
             "in": "body",
-            "name": "UserDetails",
-            "description": "submit user deactivation request parameters",
+            "name": "AMPUser",
+            "description": "submit New AMP User Info",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserAccess"
+              "$ref": "#/definitions/NewUser"
             }
           }
         ],
@@ -242,15 +289,134 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UserDetails"
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/AMPUser/{userId}": {
+      "get": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "get User Info",
+        "description": "This API is to get User Details\n",
+        "operationId": "getUserInfo",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "pass userId to Look up user in OEC",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
               }
             }
           },
           "400": {
             "description": "bad input parameter"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "User Record Not found"
+          },
+          "500": {
+            "description": "Server Issue"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Update AMP User",
+        "description": "This API is to update an existing AMP User\n",
+        "operationId": "updateAMPUser",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "pass userId to update user in OEC",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "AMPUser",
+            "description": "submit AMP User Info to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
           }
         }
       }
@@ -307,11 +473,10 @@
         }
       }
     },
-    "/resetPassword": {
+    "/resetPassword/{oktaId}": {
       "post": {
         "tags": [
-          "User Management",
-          "resetPassword"
+          "User Management"
         ],
         "summary": "resetPassword",
         "description": "Reset password for user",
@@ -335,25 +500,31 @@
             "$ref": "#/parameters/requesterID"
           },
           {
-            "name": "email",
-            "in": "query",
-            "description": "pass the email address/username string of the user to reset password",
+            "name": "oktaId",
+            "in": "path",
+            "description": "pass the Okta Id of the User for whom to reset password",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "description": "pass the UserObject",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLite"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "results for reset password (success/failure)",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SuccessFailResponse"
-              }
-            }
+            "description": "OK"
           },
           "400": {
             "description": "invalid input, object invalid"
+          },
+          "404": {
+            "description": "User not found"
           },
           "409": {
             "description": "an existing item already exists"
@@ -361,11 +532,10 @@
         }
       }
     },
-    "/resendInvite": {
+    "/resendInvite/{userId}": {
       "post": {
         "tags": [
-          "User Management",
-          "resendInvite"
+          "User Management"
         ],
         "summary": "resend Invite for  User ",
         "description": "By passing in the appropriate options, you can search for\navailable user lsit in the system\n",
@@ -391,25 +561,25 @@
           {
             "in": "body",
             "name": "UserAccess",
-            "description": "submit user request parameters",
+            "description": "submit user deactivation request parameters",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserAccess"
+              "$ref": "#/definitions/UserLite"
             }
           }
         ],
         "responses": {
-           "200": {
-            "description": "results for reset password (success/failure)",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SuccessFailResponse"
-              }
-            }
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "bad input parameter"
+          },
+          "404": {
+            "description": "User Not Found"
+          },
+          "500": {
+            "description": "Server Issue"
           }
         }
       }
@@ -967,53 +1137,7 @@
           }
         }
       }
-    },
-    "/AMPUser": {
-      "post": {
-        "tags": [
-          "Install",
-          "User Management",
-          "createUser"
-        ],
-        "summary": "createUser",
-        "description": "createUser",
-        "operationId": "createUser",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "UserList",
-            "description": "create user  parameters",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/UserDetails"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "results for create user",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/UserDetails"
-              }
-            }
-          },
-          "400": {
-            "description": "invalid input, object invalid"
-          },
-          "409": {
-            "description": "an existing item already exists"
-          }
-        }
-      }
-    },
+    },    
     "/uninstallBrewer": {
       "post": {
         "tags": [
@@ -2634,15 +2758,104 @@
     "UserList": {
       "type": "object",
       "properties": {
-        "Count": {
+        "total": {
           "type": "integer",
           "format": "int64",
           "example": 2
         },
-        "UserList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserDetails"
+        "Users": {
+          "type": "object",
+          "properties": {
+            "FirstName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "FirstName"
+            },
+            "LastName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "LastName"
+            },
+            "UserId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "UserId"
+            },
+            "EmailAddress": {
+              "type": "string",
+              "format": "uuid",
+              "example": "EmailAddress"
+            },
+            "Status": {
+              "type": "string",
+              "format": "SUCCESS",
+              "example": "Status"
+            },
+            "PartnerNum": {
+              "type": "string",
+              "format": "uuid",
+              "example": 83
+            },
+            "businessAccNum": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0-007796470"
+            },
+            "businessAccId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0-007796470"
+            },
+            "businessAccName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "ABC Corp"
+            },
+            "role": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Technician"
+            },
+            "PartnerID": {
+              "type": "string",
+              "format": "uuid",
+              "example": "PartnerID"
+            },
+            "PartnerName": {
+              "type": "string",
+              "format": "uuid",
+              "example": "PartnerName"
+            },
+            "Address": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Address"
+            },
+            "CreatedDate": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2016-08-29T09:12:33.001Z"
+            },
+            "Role": {
+              "type": "string",
+              "format": "uuid",
+              "example": "Role"
+            },
+            "PhoneNumber": {
+              "type": "string",
+              "format": "uuid",
+              "example": "PhoneNumber"
+            },
+            "oktaId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "okta00000001"
+            },
+            "idcsId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "idcs0000001"
+            }
           }
         }
       }
@@ -3892,11 +4105,6 @@
         "primaryAccPartyNum": {
           "type": "string",
           "format": "uuid",
-          "example": "r0000000123"
-        },
-        "primaryAccPartyId": {
-          "type": "string",
-          "format": "uuid",
           "example": "0000000123"
         },
         "createdDate": {
@@ -3919,6 +4127,16 @@
           "format": "uuid",
           "example": "2016-08-29T09:12:33.001Z"
         },
+        "oktaId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "okta00000001"
+        },
+        "idcsId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "idcs0000001"
+        },
         "accountrel": {
           "type": "object",
           "description": "list of accounts associated with contact- constrained by requester's access",
@@ -3939,10 +4157,6 @@
                   "type": "string",
                   "format": "uuid"
                 },
-                "partyId": {
-                  "type": "string",
-                  "format": "uuid"
-                },
                 "dateAdded": {
                   "type": "string",
                   "format": "uuid"
@@ -3956,20 +4170,311 @@
                 {
                   "name": "KAD Account Number 1",
                   "partyNum": "p00908098a",
-                  "partyId": "123",
                   "dateAdded": "05/14/2019",
                   "status": "Primary"
                 },
                 {
                   "name": "KAD Account Number 2",
                   "partyNum": "p00908098b",
-                  "partyId": "134",
                   "dateAdded": "05/14/2019",
                   "status": null
                 }
               ]
             }
           }
+        },
+        "notifications": {
+          "type": "object",
+          "properties": {
+            "overHeated": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "reqDscale": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "binFull": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "noNetworkConn": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "disconnectedMajor": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "NewUser": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FirstName"
+        },
+        "lastName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "LastName"
+        },
+        "emailAddress": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc@test.com"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "888-888-8888"
+        },
+        "role": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Technician"
+        },
+        "primaryAccPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "0000000123"
+        },
+        "oktaId": {
+          "type": "string",
+          "format": "uuid",
+          "example": null
+        },
+        "idcsId": {
+          "type": "string",
+          "format": "uuid",
+          "example": null
+        },
+        "source": {
+          "type": "string",
+          "format": "uuid",
+          "example": "AMP"
+        },
+        "accountrel": {
+          "type": "object",
+          "description": "list of accounts associated with contact- constrained by requester's access",
+          "properties": {
+            "total": {
+              "type": "integer",
+              "format": "int64",
+              "example": 2
+            },
+            "accounts": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "partyNum": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "example": [
+                {
+                  "name": "KAD Account Number 1",
+                  "partyNum": "p00908098a"
+                },
+                {
+                  "name": "KAD Account Number 2",
+                  "partyNum": "p00908098b"
+                }
+              ]
+            }
+          }
+        },
+        "notifications": {
+          "type": "object",
+          "properties": {
+            "overHeated": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "reqDscale": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "binFull": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "noNetworkConn": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "disconnectedMajor": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "UpdateUser": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FirstName"
+        },
+        "lastName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "LastName"
+        },
+        "emailAddress": {
+          "type": "string",
+          "format": "uuid",
+          "example": "abc@test.com"
+        },
+        "userId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "UserId"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "format": "uuid",
+          "example": "888-888-8888"
+        },
+        "role": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Technician"
+        },
+        "primaryAccPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "0000000123"
+        },
+        "oktaId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "okta000001"
+        },
+        "idcsId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "idcs000001"
+        },
+        "source": {
+          "type": "string",
+          "format": "uuid",
+          "example": "AMP"
+        },
+        "accountrel": {
+          "type": "object",
+          "description": "list of accounts associated with contact- constrained by requester's access",
+          "properties": {
+            "total": {
+              "type": "integer",
+              "format": "int64",
+              "example": 2
+            },
+            "accounts": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "partyNum": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "example": [
+                {
+                  "name": "KAD Account Number 1",
+                  "partyNum": "p00908098a"
+                },
+                {
+                  "name": "KAD Account Number 2",
+                  "partyNum": "p00908098b"
+                }
+              ]
+            }
+          }
+        },
+        "notifications": {
+          "type": "object",
+          "properties": {
+            "overHeated": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "reqDscale": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "binFull": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "noNetworkConn": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            },
+            "disconnectedMajor": {
+              "type": "string",
+              "format": "uuid",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "UserLite": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "uuid",
+          "example": "test@test.com"
+        },
+        "userPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "u000003uu3u1"
+        },
+        "accountPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "a000003i3s"
+        },
+        "idcsId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "idcs0000001"
+        },
+        "oktaId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "okta0000001"
         }
       }
     },
