@@ -414,6 +414,288 @@
         }
       }
     },
+    "/MediaPL": {
+      "get": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "Display List of Media Play List",
+        "description": "API to etrieve list of media playlists for one or more account",
+        "operationId": "getMediaPLists",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "ownerAccountNum",
+            "in": "query",
+            "description": "pass one or more optional Owner Account Ids string separated by comma for query list of media",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get Media list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MediaPLList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "Create New PlayList",
+        "description": "API to create new PlayList",
+        "operationId": "createMediaPlayList",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "in": "body",
+            "name": "MediaPlayList",
+            "description": "submit New Playlist request parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MediaPLRequestNew"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MediaPL"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/MedialPL/{plId}": {
+      "get": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "Display details of a playlist",
+        "description": "API to retrieve details of a playlist",
+        "operationId": "getMediaPLDetail",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "plId",
+            "in": "path",
+            "description": "pass playlist number (unique key) to look up Playlist info",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get Media list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MediaPL"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "No Playlist Found with the Plauylist Id"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "Update a Playlist",
+        "description": "API to update playlist",
+        "operationId": "updatePlayList",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "plId",
+            "in": "path",
+            "description": "pass playlist number (unique key) to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "MediaPlayList",
+            "description": "submit Playlist request body to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MediaPLRequestUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MediaPL"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "No Playlist Found for the Playlist Id"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Media Management"
+        ],
+        "summary": "Delete an entire Playlist",
+        "description": "API to delete a playlist",
+        "operationId": "deletePlayList",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "plId",
+            "in": "path",
+            "description": "pass playlist number (unique key) to be updated",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Playlist Not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
     "/PlacementLocListFilter": {
       "get": {
         "tags": [
@@ -1492,8 +1774,8 @@
           "Media Management"
         ],
         "summary": "createMediaPlayList  -- put the post into the 'Media Playlist' portion  get + post",
-        "description": "createMediaPlayList",
-        "operationId": "createMediaPlayList",
+        "description": "createMediaPlayList_old",
+        "operationId": "createMediaPlayList_old",
         "consumes": [
           "application/json"
         ],
@@ -3229,62 +3511,546 @@
     },
     "MediaPLList": {
       "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 2
+        },
+        "medialist": {
+          "type": "object",
+          "properties": {
+            "playListNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "Title": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "status": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "plType": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "lastModified": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "lastModifiedByName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "lastModifiedBy": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "ownerAccountNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "ownerAccName": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "example": [
+            {
+              "playListNum": 1,
+              "Title": "Playlist 1",
+              "status": "Active",
+              "plType": "AMP Playlist",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c0001",
+              "lastModifiedByName": "John Smith",
+              "ownerAccountNum": "a76r4yd4h1001",
+              "ownerAccName": "Subway at Main St"
+            },
+            {
+              "playListNum": 2,
+              "Title": "Playlist 2",
+              "status": "Draft",
+              "plType": "AMP Playlist",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c0001",
+              "lastModifiedByName": "John Smith",
+              "ownerAccountNum": "a76r4yd4h1001",
+              "ownerAccName": "Subway at 1st St"
+            }
+          ]
+        }
+      }
+    },
+    "MediaPLRequestNew": {
+      "type": "object",
       "required": [
-        "BusinessAccountId",
-        "KADAccountId",
-        "MediaId",
-        "Image",
-        "Title",
-        "Type",
-        "Status",
-        "NumberOfBrewer",
-        "LastModified"
+        "title",
+        "status",
+        "pltype",
+        "lastModified",
+        "ownerAccNum",
+        "ownerAccountName"
       ],
       "properties": {
-        "Image": {
+        "title": {
           "type": "string",
           "format": "uuid",
-          "example": "Image"
+          "example": "My Playlist 1"
         },
-        "Title": {
+        "status": {
           "type": "string",
           "format": "uuid",
-          "example": "Title"
+          "example": "Draft"
         },
-        "Type": {
+        "pltype": {
           "type": "string",
           "format": "uuid",
-          "example": "Type"
+          "example": "Business Manager"
         },
-        "Status": {
+        "lastModified": {
           "type": "string",
           "format": "uuid",
-          "example": "Status"
-        },
-        "NumberofBrewer": {
-          "type": "string",
-          "format": "uuid",
-          "example": "NumberofBrewer"
-        },
-        "LastModified": {
-          "type": "string",
-          "format": "date-time",
           "example": "2016-08-29T09:12:33.001Z"
         },
-        "MediaId": {
+        "ownerAccNum": {
           "type": "string",
           "format": "uuid",
-          "example": "MediaId"
+          "example": "a65754691"
         },
-        "KADAccountId": {
+        "ownerAccountName": {
           "type": "string",
           "format": "uuid",
-          "example": "KADAccountId"
+          "example": "Subway at Main St"
         },
-        "BusinessAccountId": {
+        "mediaList": {
+          "type": "object",
+          "properties": {
+            "filename": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filepath": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filetype": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filesize": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "uploaded": {
+              "type": "string",
+              "format": "2016-08-29T09:12:33.001Z"
+            },
+            "uploadedBy": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "uploadedByName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "lastModified": {
+              "type": "string",
+              "format": "2016-08-29T09:12:33.001Z"
+            },
+            "lastModifiedBy": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "transitionTime": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "enabledFlg": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "order": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "example": [
+            {
+              "filename": "image_1",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_1.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 1
+            },
+            {
+              "filename": "image_2",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_2.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 2
+            },
+            {
+              "filename": "image_3",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_3.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 3
+            }
+          ]
+        }
+      }
+    },
+    "MediaPLRequestUpdate": {
+      "type": "object",
+      "required": [
+        "playListNum",
+        "title",
+        "status",
+        "pltype",
+        "lastModified",
+        "lastModifiedBy",
+        "lastModifiedByName",
+        "ownerAccNum",
+        "ownerAccountName"
+      ],
+      "properties": {
+        "playListNum": {
           "type": "string",
           "format": "uuid",
-          "example": "BusinessAccountId"
+          "example": "pl-00001"
+        },
+        "title": {
+          "type": "string",
+          "format": "uuid",
+          "example": "My Playlist 1"
+        },
+        "status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Draft"
+        },
+        "pltype": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Business Manager"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "uuid",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "format": "uuid",
+          "example": "c-000771"
+        },
+        "lastModifiedByName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Bryan Johnson"
+        },
+        "ownerAccNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "a65754691"
+        },
+        "ownerAccountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Subway at Main St"
+        },
+        "mediaList": {
+          "type": "object",
+          "properties": {
+            "mediaId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filename": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filepath": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filetype": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filesize": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "uploaded": {
+              "type": "string",
+              "format": "2016-08-29T09:12:33.001Z"
+            },
+            "uploadedBy": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "uploadedByName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "lastModified": {
+              "type": "string",
+              "format": "2016-08-29T09:12:33.001Z"
+            },
+            "lastModifiedBy": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "transitionTime": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "enabledFlg": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "order": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "example": [
+            {
+              "mediaId": "1-001",
+              "filename": "image_1",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_1.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 1
+            },
+            {
+              "mediaId": "1-002",
+              "filename": "image_2",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_2.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 2
+            },
+            {
+              "mediaId": null,
+              "filename": "image_3",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_3.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 3
+            }
+          ]
+        }
+      }
+    },
+    "MediaPL": {
+      "type": "object",
+      "required": [
+        "playListNum",
+        "title",
+        "status",
+        "pltype",
+        "lastModified",
+        "lastModifiedBy",
+        "lastModifiedByName",
+        "ownerAccNum",
+        "ownerAccountName"
+      ],
+      "properties": {
+        "playListNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "pl-00001"
+        },
+        "title": {
+          "type": "string",
+          "format": "uuid",
+          "example": "My Playlist 1"
+        },
+        "status": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Draft"
+        },
+        "pltype": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Business Manager"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "uuid",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "format": "uuid",
+          "example": "c-000771"
+        },
+        "lastModifiedByName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Bryan Johnson"
+        },
+        "ownerAccNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "a65754691"
+        },
+        "ownerAccountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Subway at Main St"
+        },
+        "mediaList": {
+          "type": "object",
+          "properties": {
+            "mediaId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filename": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filepath": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filetype": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "filesize": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "uploaded": {
+              "type": "string",
+              "format": "2016-08-29T09:12:33.001Z"
+            },
+            "uploadedBy": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "uploadedByName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "lastModified": {
+              "type": "string",
+              "format": "2016-08-29T09:12:33.001Z"
+            },
+            "lastModifiedBy": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "transitionTime": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "enabledFlg": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "order": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "example": [
+            {
+              "mediaId": "1-001",
+              "filename": "image_1",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_1.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 1
+            },
+            {
+              "mediaId": "1-002",
+              "filename": "image_2",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_2.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 2
+            },
+            {
+              "mediaId": "1-003",
+              "filename": "image_3",
+              "filepath": "https://www.fmexample.com/afhconn/im/image_3.jpg",
+              "filetype": "jpg",
+              "filesize": "1MB",
+              "uploaded": "2016-08-29T09:12:33.001Z",
+              "uploadedBy": "c-0001",
+              "uploadedByName": "John Smith",
+              "lastModified": "2016-08-29T09:12:33.001Z",
+              "lastModifiedBy": "c-0001",
+              "transitionTime": 5,
+              "enabledFlg": true,
+              "order": 3
+            }
+          ]
         }
       }
     },
