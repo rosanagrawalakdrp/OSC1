@@ -1774,8 +1774,8 @@
           "Media Management"
         ],
         "summary": "createMediaPlayList  -- put the post into the 'Media Playlist' portion  get + post",
-        "description": "createMediaPlayList",
-        "operationId": "createMediaPlayList",
+        "description": "createMediaPlayList_old",
+        "operationId": "createMediaPlayList_old",
         "consumes": [
           "application/json"
         ],
