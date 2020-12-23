@@ -451,11 +451,8 @@
         "responses": {
           "200": {
             "description": "results for get Media list",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MediaPLList"
-              }
+            "schema": {                            
+                "$ref": "#/definitions/MediaPLList"              
             }
           },
           "400": {
@@ -507,11 +504,8 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MediaPL"
-              }
+            "schema": {                            
+                "$ref": "#/definitions/MediaPL"              
             }
           },
           "400": {
@@ -563,11 +557,8 @@
         "responses": {
           "200": {
             "description": "results for get Media list",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MediaPL"
-              }
+            "schema": {                            
+                "$ref": "#/definitions/MediaPL"              
             }
           },
           "401": {
@@ -626,11 +617,8 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MediaPL"
-              }
+            "schema": {                            
+                "$ref": "#/definitions/MediaPL"              
             }
           },
           "400": {
