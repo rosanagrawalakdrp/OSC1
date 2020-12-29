@@ -417,7 +417,8 @@
     "/MediaPL": {
       "get": {
         "tags": [
-          "Media Management"
+          "Media Management",
+          "getMediaPLList"
         ],
         "summary": "Display List of Media Play List",
         "description": "API to etrieve list of media playlists for one or more account",
@@ -471,7 +472,8 @@
       },
       "post": {
         "tags": [
-          "Media Management"
+          "Media Management",
+          "createMediaPlayList"
         ],
         "summary": "Create New PlayList",
         "description": "API to create new PlayList",
@@ -529,7 +531,8 @@
     "/MedialPL/{plId}": {
       "get": {
         "tags": [
-          "Media Management"
+          "Media Management",
+          "getMediaPLList"
         ],
         "summary": "Display details of a playlist",
         "description": "API to retrieve details of a playlist",
