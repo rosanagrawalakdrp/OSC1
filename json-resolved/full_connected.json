@@ -1664,7 +1664,8 @@
     "/MediaPLDetail": {
       "get": {
         "tags": [
-          "Media Management"
+          "Media Management",
+          "getMediaPLDetail"
         ],
         "summary": "Media Item Detail",
         "description": "Media Item Detail",
@@ -1713,6 +1714,38 @@
           },
           "409": {
             "description": "an existing item already exists"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Media Management",
+          "getMediaPLDetail"
+        ],
+        "summary": "Media Item Detail delete",
+        "description": "Media Item Detail delete",
+        "operationId": "MediaItemDetaildel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "MediaId",
+            "in": "query",
+            "description": "pass an MediaId string for looking up Media",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Media Item Deleted",
+          },
+          "400": {
+            "description": "invalid input, object invalid"
           }
         }
       }
