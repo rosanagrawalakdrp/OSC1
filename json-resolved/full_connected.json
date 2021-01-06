@@ -2732,6 +2732,8 @@
         "serialNumber",
         "status",
         "warrantyEndDate",
+        "SrNum",
+        "SrID",
         "deviceId"
       ],
       "properties": {
@@ -2816,6 +2818,16 @@
           "type": "string",
           "format": "uuid",
           "example": "d00000000123"
+        },
+        "SrNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN122"
+        },
+        "SrID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3000111"
         },
         "brewercontactId": {
           "type": "string",
