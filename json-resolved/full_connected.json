@@ -640,7 +640,8 @@
       },
       "delete": {
         "tags": [
-          "Media Management"
+          "Media Management",
+          "deletePlaylist"
         ],
         "summary": "Delete an entire Playlist",
         "description": "API to delete a playlist",
