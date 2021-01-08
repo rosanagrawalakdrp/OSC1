@@ -414,6 +414,281 @@
         }
       }
     },
+    "/Account": {
+      "get": {
+        "tags": [
+          "Account Management"
+        ],
+        "summary": "Display List of Business or KAD Accounts",
+        "description": "API to retrieve list of Business or KAD Accounts for a User",
+        "operationId": "getAccountList",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "pass one or more optional userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "description": "pass logged in User's Role",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterpartnerAccName",
+            "in": "query",
+            "description": "pass optional Partner Account Name for filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterAccountName",
+            "in": "query",
+            "description": "pass optional Office Account Name for filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterCity",
+            "in": "query",
+            "description": "pass optional City for filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterState",
+            "in": "query",
+            "description": "pass optional State for filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filterZipcode",
+            "in": "query",
+            "description": "pass optional Zipcode for filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get Account list",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/AccountList"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Account Management"
+        ],
+        "summary": "Create New Business Account",
+        "description": "API to create new Business Account",
+        "operationId": "createBusinessAccount",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "in": "body",
+            "name": "BusinessAccount",
+            "description": "JSON for New Business Account",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountReqNew"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "accountPartyNum": {
+                  "type": "string",
+                  "description": "return the account Party Id/Num in response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/Account/{accountPartyNum}": {
+      "get": {
+        "tags": [
+          "Account Management"
+        ],
+        "summary": "Display Details of a Business Account or KAD Account",
+        "description": "API to update existing Business or KAD Account",
+        "operationId": "getAccountDetail",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "accountPartyNum",
+            "in": "path",
+            "description": "pass account Party Number to look up account in OEC",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "results for get Account Details",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Account Not Found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Account Management"
+        ],
+        "summary": "Update an Office Account or KAD Account",
+        "description": "API to update Office Account details (name, address, contact, permission) or to update primary contact on a KAD account",
+        "operationId": "updateAccount",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/header_partnerID"
+          },
+          {
+            "$ref": "#/parameters/requesterID"
+          },
+          {
+            "name": "accountPartyNum",
+            "in": "path",
+            "description": "pass account party number (unique key) to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Account",
+            "description": "submit Account request body to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountReqUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Account"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Account Not Found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
     "/MediaPL": {
       "get": {
         "tags": [
@@ -2947,6 +3222,337 @@
           "type": "string",
           "format": "uuid",
           "example": "ContactId"
+        }
+      }
+    },
+    "AccountList": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": 2
+        },
+        "accountList": {
+          "type": "object",
+          "properties": {
+            "accountPartyNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "accountName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "accountType": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "regStatus": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "regDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "city": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "state": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "zipcode": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "country": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "address": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "partnerAccPartyNum": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "partnerAccName": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "partnerAccNum": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "example": [
+            {
+              "accountPartyNum": "FSN2716820",
+              "accountName": "Railroad Station (Framingham, US)",
+              "accountType": "OfficeAccount",
+              "regStatus": "Active",
+              "regDate": "2016-08-29T09:12:33.001Z",
+              "city": "MIDDLESEX",
+              "state": "MA",
+              "zipcode": "01702",
+              "country": "USA",
+              "address": "417 Waverly St.",
+              "partnerAccPartyNum": "FSN185187",
+              "partnerAccName": "W.B. MASON FRAMINGHAM (SHIP TO)",
+              "partnerAccNum": 6000033773
+            },
+            {
+              "accountPartyNum": "FSN2716880",
+              "accountName": "Framingham State University",
+              "accountType": "OfficeAccount",
+              "regStatus": "Active",
+              "regDate": "2016-08-29T09:12:33.001Z",
+              "city": "MIDDLESEX",
+              "state": "MA",
+              "zipcode": "01701",
+              "country": "USA",
+              "address": "100 State St",
+              "partnerAccPartyNum": "FSN185187",
+              "partnerAccName": "W.B. MASON FRAMINGHAM (SHIP TO)",
+              "partnerAccNum": 6000033773
+            }
+          ]
+        }
+      }
+    },
+    "Account": {
+      "type": "object",
+      "properties": {
+        "accountPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN2716880"
+        },
+        "accountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Framingham State University"
+        },
+        "accountType": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Indirect Customer Account"
+        },
+        "regStatus": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Active"
+        },
+        "regDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-08-29T09:12:33.001Z"
+        },
+        "city": {
+          "type": "string",
+          "format": "uuid",
+          "example": "MIDDLESEX"
+        },
+        "state": {
+          "type": "string",
+          "format": "uuid",
+          "example": "MA"
+        },
+        "zipcode": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01701"
+        },
+        "country": {
+          "type": "string",
+          "format": "uuid",
+          "example": "USA"
+        },
+        "address": {
+          "type": "string",
+          "format": "uuid",
+          "example": "100 State St"
+        },
+        "partnerAccPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN185187"
+        },
+        "partnerAccName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "W.B. MASON FRAMINGHAM (SHIP TO)"
+        },
+        "partnerAccNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": 6000033773
+        },
+        "primaryContactPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSNC185187"
+        },
+        "primaryContactName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "John Smith"
+        },
+        "primaryContactPhone": {
+          "type": "string",
+          "format": "uuid",
+          "example": "888-888-8888"
+        },
+        "primaryContactEmail": {
+          "type": "string",
+          "format": "uuid",
+          "example": "test1.test1@test.com"
+        },
+        "permissionFlgMedia": {
+          "type": "string",
+          "format": "uuid",
+          "example": true
+        }
+      }
+    },
+    "AccountReqNew": {
+      "type": "object",
+      "required": [
+        "accountName",
+        "address1",
+        "address2",
+        "city",
+        "state",
+        "province",
+        "zipcode",
+        "country",
+        "partnerAccPartyNum",
+        "primaryContactPartyNum"
+      ],
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Framingham State University"
+        },
+        "address1": {
+          "type": "string",
+          "format": "uuid",
+          "example": "100 State St"
+        },
+        "address2": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Suite 100"
+        },
+        "city": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Framingham"
+        },
+        "state": {
+          "type": "string",
+          "format": "uuid",
+          "example": "MA"
+        },
+        "province": {
+          "type": "string",
+          "format": "uuid",
+          "example": ""
+        },
+        "zipcode": {
+          "type": "string",
+          "format": "uuid",
+          "example": 961
+        },
+        "country": {
+          "type": "string",
+          "format": "uuid",
+          "example": "USA"
+        },
+        "partnerAccPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN185187"
+        },
+        "primaryContactPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSNC185187"
+        }
+      }
+    },
+    "AccountReqUpdate": {
+      "type": "object",
+      "required": [
+        "accountName",
+        "partnerAccPartyNum",
+        "accountType"
+      ],
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Framingham State University"
+        },
+        "accountType": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Indirect Customer Account"
+        },
+        "address1": {
+          "type": "string",
+          "format": "uuid",
+          "example": "100 State St"
+        },
+        "address2": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Suite 100"
+        },
+        "city": {
+          "type": "string",
+          "format": "uuid",
+          "example": "Framingham"
+        },
+        "state": {
+          "type": "string",
+          "format": "uuid",
+          "example": "MA"
+        },
+        "province": {
+          "type": "string",
+          "format": "uuid",
+          "example": ""
+        },
+        "zipcode": {
+          "type": "string",
+          "format": "uuid",
+          "example": 961
+        },
+        "country": {
+          "type": "string",
+          "format": "uuid",
+          "example": "USA"
+        },
+        "partnerAccPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSN185187"
+        },
+        "primaryContactPartyNum": {
+          "type": "string",
+          "format": "uuid",
+          "example": "FSNC185187"
+        },
+        "permissionFlgMedia": {
+          "type": "string",
+          "format": "uuid",
+          "example": true
         }
       }
     },
