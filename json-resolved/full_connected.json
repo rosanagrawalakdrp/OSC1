@@ -3751,32 +3751,6 @@
             }
       }
     },
-    "AccountList": {
-      "type": "object",
-      "required": [
-        "KADAccountId",
-        "KADAccountName",
-       
-      ],
-      "properties": {
-          "KADAccountName": {
-          "type": "string",
-          "format": "uuid",
-          "example": "KADAccountName"
-        },
-         "KADAccountId": {
-          "type": "string",
-          "format": "uuid",
-          "example": "KADAccountId"
-        },
-       "ListOfContact": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ListOfContact"
-          }
-        }
-      }
-    },
     "AccountsByConsumptionObject": {
       "type": "object",
       "required": [
